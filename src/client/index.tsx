@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+
 import MobilePhoneScreen from './MobilePhoneScreen';
-import Memeno from './Memeno';
+import MainPageRouter from './MainPageRouter';
 
 ReactDOM.render(
     <React.StrictMode>
         <MobilePhoneScreen>
-            <Memeno />
+            <MainPageRouter />
         </MobilePhoneScreen>
     </React.StrictMode>,
     document.getElementById('root')

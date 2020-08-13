@@ -1,5 +1,5 @@
 .menu-button {
-    background-image: url('resources/icons8-menu.svg');
+    background-image: url('./resources/icons8-menu.svg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

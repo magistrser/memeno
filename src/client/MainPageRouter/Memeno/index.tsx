@@ -13,7 +13,7 @@ import memProvider from './business-logic/mem-provider/FolderMemProvider';
 
 import reducer, { initState } from './reducer';
 
-const Index: React.FC = (props) => {
+const Index: React.FC = () => {
     const [state, dispatch] = useReducer(reducer, initState);
 
     const updateMems = (rating: Rating) => {

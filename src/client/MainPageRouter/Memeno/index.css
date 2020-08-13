@@ -3,6 +3,7 @@
     grid-template-rows: [header-row] 0.12fr [content-row] 0.76fr [footer-row] 0.12fr [end-row];
     justify-content: stretch;
     align-content: stretch;
+    height: 100%;
 }
 
 /* Common structure */
