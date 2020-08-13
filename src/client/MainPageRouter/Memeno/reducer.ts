@@ -1,6 +1,6 @@
-import Mem from './business-logic/mem-provider/mem-iface';
-import Rating from './business-logic/mem-provider/rating';
-import memProvider from './business-logic/mem-provider/FolderMemProvider';
+import Mem from '../../business-logic/mem-provider/mem-iface';
+import Rating from '../../business-logic/mem-provider/rating';
+import memProvider from '../../business-logic/mem-provider/FolderMemProvider';
 import { Action } from './actions';
 
 type StateType = {

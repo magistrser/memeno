@@ -1,5 +1,5 @@
-import Mem from './business-logic/mem-provider/mem-iface';
-import Rating from './business-logic/mem-provider/rating';
+import Mem from '../../business-logic/mem-provider/mem-iface';
+import Rating from '../../business-logic/mem-provider/rating';
 
 type SwipeMemsAction = {
     type: 'swipe-mems';

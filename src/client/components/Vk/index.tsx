@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import routes from '../../../../../routes';
+import routes from "../../../routes";
 
 const Index: React.FC = (props) => {
     return (

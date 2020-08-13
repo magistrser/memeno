@@ -1,15 +1,15 @@
 import React, { useReducer } from 'react';
 import './index.css';
 
-import MenuButton from './components/MenuButton';
-import Header from './components/Header';
-import AvatarButton from './components/AvatarButton';
-import StaticMem from './components/StaticMem';
-import DislikeButton from './components/DislikeButton';
-import LikeButton from './components/LikeButton';
+import MenuButton from '../../components/MenuButton';
+import Header from '../../components/Header';
+import AvatarButton from '../../components/AvatarButton';
+import StaticMem from '../../components/StaticMem';
+import DislikeButton from '../../components/DislikeButton';
+import LikeButton from '../../components/LikeButton';
 
-import Rating from './business-logic/mem-provider/rating';
-import memProvider from './business-logic/mem-provider/FolderMemProvider';
+import Rating from '../../business-logic/mem-provider/rating';
+import memProvider from '../../business-logic/mem-provider/FolderMemProvider';
 
 import reducer, { initState } from './reducer';
 
@@ -56,7 +56,7 @@ const Index: React.FC = () => {
                 </div>
                 <div className="memeno-avatar-button">
                     <AvatarButton
-                        img={require('./resources/avatar-example.jpg')}
+                        img={require('../../resources/avatar-example.jpg')}
                     />
                 </div>
             </div>
