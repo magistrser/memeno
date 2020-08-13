@@ -25,8 +25,6 @@ const Index: React.FC = (props) => {
     const maxPhoneHeight = windowHeight;
     const maxPhoneWidth = windowHeight / SideAttitude;
 
-    console.log(`width: ${windowWidth}, height: ${windowHeight}`);
-
     return (
         <div
             className="MobilePhoneScreen"

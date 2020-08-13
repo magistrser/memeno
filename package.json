@@ -4,11 +4,10 @@
     "description": "An Express, React with Typescript and Less boilerplate",
     "main": "src/server/index.js",
     "scripts": {
-        "build-server": "tsc --build tsconfig-server.json",
-        "build": "webpack --mode production && npm run build-server",
-        "start": "npm run build && node dist-server/index.js",
+        "build": "webpack --mode production",
+        "start": "npm run build && npm run server",
         "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-        "server": "nodemon dist-server/index.js",
+        "server": "nodemon",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "prettier": "prettier --write .",
         "eslint": "eslint \"src/**\""
@@ -18,14 +17,17 @@
     "dependencies": {
         "@types/react": "^16.8.16",
         "@types/react-dom": "^16.8.4",
+        "axios": "^0.19.2",
         "babel-polyfill": "^6.26.0",
         "body-parser": "^1.19.0",
         "express": "^4.16.3",
+        "passport": "^0.4.1",
+        "passport-vkontakte": "^0.3.3",
         "react": "^16.5.2",
         "react-dom": "^16.5.2",
+        "react-router-dom": "^5.2.0",
         "react-swipeable": "^5.5.1",
-        "sqlite3": "^5.0.0",
-        "swiper": "^6.1.1"
+        "sqlite3": "^5.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0",

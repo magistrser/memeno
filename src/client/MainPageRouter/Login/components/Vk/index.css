@@ -1,0 +1,25 @@
+.vk-auth {
+    width: 100%;
+    padding: 5% 0;
+    background-color: #4a76a8;
+    text-align: center;
+}
+.vk-auth .button-content {
+    display: inline-block;
+}
+.vk-auth .button-content:before {
+    display: inline-block;
+    content: 'VK';
+    color: white;
+    font-size: 200%;
+}
+.vk-auth .button-content-login {
+    display: inline-block;
+}
+.vk-auth .button-content-login:before {
+    display: inline-block;
+    margin-left: 20%;
+    content: 'login';
+    color: white;
+    font-size: 150%;
+}

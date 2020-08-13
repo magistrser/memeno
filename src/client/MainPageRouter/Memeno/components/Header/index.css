@@ -1,8 +1,6 @@
 @font-face {
     font-family: 'RobotoLight';
-    src: local('RobotoLight'),
-        url('./resources/roboto.light.ttf')
-            format('ttf');
+    src: local('RobotoLight'), url('./resources/roboto.light.ttf') format('ttf');
 }
 .memeno-header {
     color: #ffed2b;
