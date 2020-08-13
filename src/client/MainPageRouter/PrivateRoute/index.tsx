@@ -1,8 +1,10 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import reducer, { initState } from './reducer';
 import axios from 'axios';
-import config from '../../../config';
+import './index.css';
+
+import routes from '../../../routes';
 
 interface IsAuth {
     isAuth: boolean;
@@ -11,23 +13,24 @@ interface IsAuth {
 const Index = ({ children, ...rest }) => {
     const [state, dispatch] = useReducer(reducer, initState);
     useEffect(() => {
-        axios
-            .get<IsAuth>(`http://${config.server.address}/auth/is-auth`)
-            .then((res) => {
-                dispatch({
-                    type: 'set-auth',
-                    payload: {
-                        isAuth: res.data.isAuth,
-                    },
-                });
+        dispatch({ type: 'start-waiting' });
+        axios.get<IsAuth>(routes.server.auth.isAuth).then((res) => {
+            dispatch({
+                type: 'stop-waiting',
+                payload: {
+                    isAuth: res.data.isAuth,
+                },
             });
+        });
     }, []);
 
     return (
         <Route
             {...rest}
-            isAuth
             render={({ location }) =>
+                state.isWaiting && !state.isAuth ?
+                    <div className='waiting'>memeno</div>
+                       :
                 state.isAuth ? (
                     children
                 ) : (

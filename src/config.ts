@@ -2,6 +2,7 @@ const serverIp = 'localhost';
 const serverPort = 8050;
 
 export default {
+    requestType: 'http://',
     server: {
         ip: serverIp,
         port: serverPort,

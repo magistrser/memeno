@@ -3,7 +3,7 @@
  */
 
 import config from '../config';
-import routes from "../routes";
+import routes from '../routes';
 import { Strategy as VKontakteStrategy } from 'passport-vkontakte';
 
 type User = {
@@ -32,29 +32,22 @@ const DBStub = (() => {
 export default (passport) => {
     passport.use(
         new VKontakteStrategy(
-            // options
             {
                 clientID: config.vk.appID,
                 clientSecret: config.vk.secretKey,
-                callbackURL: `${config.server.address}/${routes.server.auth.vk.callback}`,
+                callbackURL: `${config.requestType}${config.server.address}${routes.server.auth.vk.callback}`,
                 scope: ['email', 'photos'],
                 profileFields: ['email'],
             },
-            // verify
             async (accessToken, refreshToken, params, profile, done) => {
-                console.log('VkontakteStrategy middleware triggered...');
-
-                // TODO: Probably we should verify token
-
                 try {
                     let user = await DBStub.getUserById(profile.id);
                     if (!user) {
-                        // User does not exist
                         user = {
                             id: profile.id,
                             email: params.email,
                             fullName: profile.displayName,
-                            photoUrl: profile.photos[0].value, // Save img url from vk storage for now
+                            photoUrl: profile.photos[0].value,
                             vkProfileUrl: profile.profileUrl,
                         };
                         DBStub.insertUser(user);

@@ -1,6 +1,9 @@
 {
-    "watch": ["src/server/"],
-    "ext": "ts",
+    "watch": ["src/"],
+    "ext": "*",
     "ignore": ["src/server/**/*.spec.ts"],
-    "exec": "npx ts-node ./src/server/index.ts"
+    "exec": "npx ts-node ./src/server/index.ts",
+    "events": {
+        "restart": "webpack --mode development --devtool inline-source-map"
+    }
 }

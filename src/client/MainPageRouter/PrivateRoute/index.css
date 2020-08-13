@@ -1,0 +1,20 @@
+element {
+    --zoom-font-start-size: 150%;
+}
+
+@keyframes zoomIn {
+    from { font-size: var(--zoom-font-start-size) }
+    50% {font-size: 250%}
+    to {font-size: var(--zoom-font-start-size) }
+}
+
+.waiting {
+    margin: auto;
+
+    font-size: var(--zoom-font-start-size);
+    color: #ffed2b;
+
+    animation-name: zoomIn;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}

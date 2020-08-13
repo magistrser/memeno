@@ -5,7 +5,7 @@ import routes from '../../routes';
 
 const router = express.Router();
 
-router.get(routes.server.auth.vk, passport.authenticate('vkontakte'));
+router.get(routes.server.auth.vk.login, passport.authenticate('vkontakte'));
 router.get(
     routes.server.auth.vk.callback,
     passport.authenticate('vkontakte', {

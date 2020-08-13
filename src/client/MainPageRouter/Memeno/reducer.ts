@@ -26,4 +26,6 @@ export default (state: StateType, action: Action): StateType => {
             return { ...state, isSwipeEnd: true };
         }
     }
+
+    return state;
 };

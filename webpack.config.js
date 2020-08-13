@@ -73,13 +73,6 @@ module.exports = {
     resolve: {
         extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.json', '.less'],
     },
-    devServer: {
-        port: 3000,
-        open: true,
-        proxy: {
-            '/api': 'http://localhost:8050',
-        },
-    },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
