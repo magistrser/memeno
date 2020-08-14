@@ -1,7 +1,11 @@
 .vscode
 .idea
+
+yarn.lock
 node_modules
 dist
 dist-server
+
 *.log
-yarn.lock
+
+pg-docker-server/db/
