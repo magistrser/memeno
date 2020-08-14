@@ -1,8 +1,8 @@
-type StartWaitingAction = {
+export type StartWaitingAction = {
     type: 'start-waiting';
 };
 
-type StopWaitingAction = {
+export type StopWaitingAction = {
     type: 'stop-waiting';
     payload: {
         isAuth: boolean;
