@@ -5,12 +5,8 @@ import axios from 'axios';
 import './index.css';
 
 import * as Action from './actionUtils';
-
+import { IsAuth } from '../../../api/responses';
 import routes from '../../../routes';
-
-interface IsAuth {
-    isAuth: boolean;
-}
 
 const Index = ({ children, ...rest }) => {
     const [state, dispatch] = useReducer(reducer, initState);
