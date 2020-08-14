@@ -11,10 +11,10 @@ const Index: React.FC = () => {
     return (
         <Router>
             <Switch>
-                <Route path={routes.react.login}>
+                <Route path={routes.login}>
                     <Login />
                 </Route>
-                <PrivateRoute path={routes.react.root}>
+                <PrivateRoute path={routes.root}>
                     <Memeno />
                 </PrivateRoute>
             </Switch>

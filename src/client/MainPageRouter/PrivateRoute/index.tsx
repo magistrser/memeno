@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import reducer, { initState } from './reducer';
 import axios from 'axios';
@@ -14,29 +14,42 @@ const Index = ({ children, ...rest }) => {
     const [state, dispatch] = useReducer(reducer, initState);
     useEffect(() => {
         dispatch({ type: 'start-waiting' });
-        axios.get<IsAuth>(routes.server.auth.isAuth).then((res) => {
-            dispatch({
-                type: 'stop-waiting',
-                payload: {
-                    isAuth: res.data.isAuth,
-                },
+        axios
+            .get<IsAuth>(routes.server.auth.isAuth)
+            .then((res) => {
+                dispatch({
+                    type: 'stop-waiting',
+                    payload: {
+                        isAuth: res.data.isAuth,
+                        isError: false,
+                    },
+                });
+            })
+            .catch(() => {
+                dispatch({
+                    type: 'stop-waiting',
+                    payload: {
+                        isAuth: false,
+                        isError: true,
+                    },
+                });
             });
-        });
     }, []);
 
     return (
         <Route
             {...rest}
             render={({ location }) =>
-                state.isWaiting && !state.isAuth ?
-                    <div className='waiting'>memeno</div>
-                       :
-                state.isAuth ? (
+                state.isWaiting && !state.isAuth ? (
+                    <div className="waiting">memeno</div>
+                ) : state.isAuth ? (
                     children
                 ) : (
                     <Redirect
                         to={{
-                            pathname: '/login',
+                            pathname: state.isError
+                                ? routes.react.login.serverErrorResponse
+                                : routes.react.login.noFail,
                             state: { from: location },
                         }}
                     />

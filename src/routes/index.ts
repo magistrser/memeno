@@ -1,7 +1,15 @@
+import { LoginResult } from './LoginResult';
+
 const routes = {
+    root: '/',
+    login: '/login/:fail',
     react: {
         root: '/',
-        login: '/login',
+        login: {
+            noFail: `/login/${LoginResult.noFail}`,
+            fail: `/login/${LoginResult.fail}`,
+            serverErrorResponse: `/login/${LoginResult.serverErrorResponse}`,
+        },
     },
     server: {
         auth: {

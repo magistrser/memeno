@@ -30,12 +30,13 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '../../dist')));
+app.use(routes.root, express.static(path.join(__dirname, '../../dist')));
+app.use(routes.login, express.static(path.join(__dirname, '../../dist')));
 
 // routers/auth
 app.use(auth);
 
-app.get('*', function (req, res) {
+app.use('*', (req, res) => {
     res.redirect(routes.react.root);
 });
 

@@ -7,6 +7,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const CopyPlugin = require('copy-webpack-plugin');
 
 const outputDirectory = 'dist';

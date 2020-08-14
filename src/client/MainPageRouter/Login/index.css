@@ -1,7 +1,14 @@
 .login {
+    position: relative;
     display: grid;
     justify-items: center;
     align-items: center;
     margin: 0 10%;
     height: 100%;
+}
+
+.error {
+    position: absolute;
+    color: red;
+    bottom: 0;
 }

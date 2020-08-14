@@ -3,9 +3,15 @@ element {
 }
 
 @keyframes zoomIn {
-    from { font-size: var(--zoom-font-start-size) }
-    50% {font-size: 250%}
-    to {font-size: var(--zoom-font-start-size) }
+    from {
+        font-size: var(--zoom-font-start-size);
+    }
+    50% {
+        font-size: 250%;
+    }
+    to {
+        font-size: var(--zoom-font-start-size);
+    }
 }
 
 .waiting {

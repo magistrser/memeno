@@ -18,7 +18,7 @@ router.get(routes.server.auth.success, (req, res) => {
     res.redirect(routes.react.root);
 });
 router.get(routes.server.auth.fail, (req, res) => {
-    res.redirect(routes.react.root);
+    res.redirect(routes.react.login.fail);
 });
 router.get(routes.server.auth.isAuth, (req, res) => {
     const isAuth = req.isAuthenticated();
