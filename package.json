@@ -4,6 +4,7 @@
     "description": "An Express, React with Typescript and Less boilerplate",
     "main": "src/server/index.js",
     "scripts": {
+        "pg": "cd pg-docker-server && ./run.sh && cd ..",
         "start": "webpack --mode production && nodemon",
         "dev": "webpack --mode development --devtool inline-source-map && nodemon",
         "prettier": "prettier --write .",
