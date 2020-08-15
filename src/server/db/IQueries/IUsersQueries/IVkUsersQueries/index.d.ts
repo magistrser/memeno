@@ -1,13 +1,17 @@
 import { VkUser, VkUserId } from './VkUser';
 
 export type AddVkUserToVkUsers = VkUser;
-export type GetVkUserIfExist = {
+export type GetVkUserByVkId = {
     vk_id: VkUserId;
 };
-export type RemoveVkUser = GetVkUserIfExist;
+export type GetVkUserByUserId = {
+    user_id: VkUserId;
+};
+export type RemoveVkUser = GetVkUserByVkId;
 
 interface IVkUsersQueries {
     addVkUserToVkUsers: (req: AddVkUserToVkUsers) => Promise<void>;
-    getVkUserIfExist: (req: GetVkUserIfExist) => Promise<VkUser | void>;
+    getVkUserByVkId: (req: GetVkUserByVkId) => Promise<VkUser>;
+    getVkUserByUserId: (req: GetVkUserByUserId) => Promise<VkUser>;
     removeVkUser: (req: RemoveVkUser) => Promise<void>;
 }

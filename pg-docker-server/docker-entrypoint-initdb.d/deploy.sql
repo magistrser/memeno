@@ -103,7 +103,7 @@ CREATE TABLE users_watched_memes (
 CREATE TABLE users_users_rating (
   user_id INTEGER NOT NULL,
   second_user_id INTEGER NOT NULL,
-  rating BIGINT NOT NULL,
+  rating BIGINT NOT NULL DEFAULT 0,
   rating_update_time BIGINT NOT NULL,
   PRIMARY KEY(user_id, second_user_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
