@@ -1,8 +1,16 @@
 const serverIp = 'localhost';
 const serverPort = 8050;
 
+const dbIp = 'localhost';
+const dpPort = 5432;
+
 export default {
     requestType: 'http://',
+    db: {
+        ip: dbIp,
+        port: dpPort,
+        address: `${dbIp}:${dpPort}`,
+    },
     server: {
         ip: serverIp,
         port: serverPort,

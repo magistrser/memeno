@@ -1,7 +1,7 @@
 {
-    "name": "express-react-typescript",
-    "version": "2.1.1",
-    "description": "An Express, React with Typescript and Less boilerplate",
+    "name": "memeno",
+    "version": "0.0.1",
+    "description": "Memeno project. Enjoy memes with swipe mechanics.",
     "main": "src/server/index.js",
     "scripts": {
         "pg": "cd pg-docker-server && ./run.sh && cd ..",
@@ -10,8 +10,8 @@
         "prettier": "prettier --write .",
         "eslint": "eslint \"src/**\""
     },
-    "author": "Elias Rahmani",
-    "license": "ISC",
+    "author": "Sergey Frantsishkov",
+    "license": "MIT",
     "dependencies": {
         "axios": "^0.19.2",
         "babel-polyfill": "^6.26.0",
@@ -20,11 +20,11 @@
         "express-session": "^1.17.1",
         "passport": "^0.4.1",
         "passport-vkontakte": "^0.3.3",
+        "pg-promise": "^10.5.8",
         "react": "^16.5.2",
         "react-dom": "^16.5.2",
         "react-router-dom": "^5.2.0",
-        "react-swipeable": "^5.5.1",
-        "sqlite3": "^5.0.0"
+        "react-swipeable": "^5.5.1"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0",
