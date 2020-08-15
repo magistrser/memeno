@@ -15,10 +15,10 @@ DROP TABLE IF EXISTS users_tags_rating;
     * auth-type - vk/google/..
  */
 CREATE TABLE users (
-  user_id INTEGER NOT NULL PRIMARY KEY,
+  user_id SERIAL NOT NULL PRIMARY KEY,
   auth_type TEXT NOT NULL, 
-  rating INTEGER DEFAULT 0,
-  rating_update_time INTEGER NOT NULL
+  rating BIGINT DEFAULT 0,
+  rating_update_time BIGINT NOT NULL
 );
 
 /*
@@ -40,20 +40,20 @@ CREATE TABLE vk_users (
  */
 CREATE table tags (
   tag TEXT NOT NULL PRIMARY KEY,
-  rating INTEGER NOT NULL DEFAULT 0,
-  rating_update_time INTEGER NOT NULL
+  rating BIGINT NOT NULL DEFAULT 0,
+  rating_update_time BIGINT NOT NULL
 );
 
 /*
     ### All memes in app
  */
 create table memes (
-  mem_id INTEGER NOT NULL PRIMARY KEY,
+  mem_id SERIAL NOT NULL PRIMARY KEY,
   mem_data BYTEA NOT NULL,
-  creation_date INTEGER NOT NULL,
+  creation_date BIGINT NOT NULL,
   user_id INTEGER NOT NULL,
-  rating INTEGER NOT NULL DEFAULT 0,
-  rating_update_time INTEGER NOT NULL,
+  rating BIGINT NOT NULL DEFAULT 0,
+  rating_update_time BIGINT NOT NULL,
   FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
@@ -103,8 +103,8 @@ CREATE TABLE users_watched_memes (
 CREATE TABLE users_users_rating (
   user_id INTEGER NOT NULL,
   second_user_id INTEGER NOT NULL,
-  rating INTEGER NOT NULL,
-  rating_update_time INTEGER NOT NULL,
+  rating BIGINT NOT NULL,
+  rating_update_time BIGINT NOT NULL,
   PRIMARY KEY(user_id, second_user_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
   FOREIGN KEY(second_user_id) REFERENCES users(user_id)
@@ -118,8 +118,8 @@ CREATE TABLE users_users_rating (
 CREATE TABLE users_tags_rating (
   user_id INTEGER NOT NULL,
   tag TEXT NOT NULL,
-  rating INTEGER NOT NULL,
-  rating_update_time INTEGER NOT NULL,
+  rating BIGINT NOT NULL,
+  rating_update_time BIGINT NOT NULL,
   PRIMARY KEY(user_id, tag),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
   FOREIGN KEY(tag) REFERENCES tags(tag)

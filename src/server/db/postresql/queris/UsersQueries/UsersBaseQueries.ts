@@ -15,7 +15,11 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
     constructor(private db: IDatabase<IExtensions>) {}
 
     createNewUser(req: CreateNewUser): Promise<UserId> {
-        return new Promise((res, reg) => res(0));
+        return this.db.one(
+            'INSERT INTO users(auth_type, rating_update_time) VALUES($1, $2) RETURNING user_id',
+            [req.auth_type, new Date().getTime()],
+            (res) => res.user_id
+        );
     }
     updateUserRating(req: UpdateUserRating): Promise<void> {
         return new Promise((res, reg) => res());

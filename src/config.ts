@@ -1,6 +1,9 @@
 const serverIp = 'localhost';
 const serverPort = 8050;
 
+const dbUser = 'postgres';
+const dbPassword = 'mysecretpassword';
+const dbName = 'memeno';
 const dbIp = 'localhost';
 const dpPort = 5432;
 
@@ -9,7 +12,7 @@ export default {
     db: {
         ip: dbIp,
         port: dpPort,
-        address: `${dbIp}:${dpPort}`,
+        address: `postgresql://${dbUser}:${dbPassword}@${dbIp}:${dpPort}/${dbName}`,
     },
     server: {
         ip: serverIp,
