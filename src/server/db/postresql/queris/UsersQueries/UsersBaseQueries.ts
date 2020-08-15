@@ -23,8 +23,8 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
     }
     updateUserRating(req: UpdateUserRating): Promise<void> {
         return this.db.none(
-            'UPDATE users SET rating = rating + $1 WHERE user_id = $2',
-            [req.like ? 1 : -1, req.user_id]
+            'UPDATE users SET rating = rating + $1, rating_update_time = $2 WHERE user_id = $3',
+            [req.like ? 1 : -1, new Date().getTime(), req.user_id]
         );
     }
     getUser(req: GetUser): Promise<User | void> {

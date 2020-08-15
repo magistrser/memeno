@@ -28,16 +28,16 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
     }
     updateMemRating(req: UpdateMemRating): Promise<void> {
         return this.db.none(
-            'UPDATE memes SET rating = rating + $1 WHERE mem_id = $2',
-            [req.like ? 1 : -1, req.mem_id]
+            'UPDATE memes SET rating = rating + $1, rating_update_time = $2 WHERE mem_id = $3',
+            [req.like ? 1 : -1, new Date().getTime(), req.mem_id]
         );
     }
     getMem(req: GetMem): Promise<Mem> {
         return this.db.oneOrNone(
             'SELECT * FROM memes WHERE mem_id = $1',
             [req.mem_id],
-            mem => {
-                if(!mem) {
+            (mem) => {
+                if (!mem) {
                     return mem;
                 }
 
@@ -46,7 +46,7 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
                     creation_date: parseInt(mem.creation_date),
                     rating: parseInt(mem.rating),
                     rating_update_time: parseInt(mem.rating_update_time),
-                }
+                };
             }
         );
     }
@@ -56,9 +56,14 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
         ]);
     }
     removeFromUsersMemes(req: RemoveMem): Promise<void> {
-        return new Promise((res, reg) => res());
+        return this.db.none('DELETE FROM users_memes WHERE mem_id = $1', [
+            req.mem_id,
+        ]);
     }
-    removeFromUsersMemesRating(req: RemoveMem): Promise<void> {
-        return new Promise((res, reg) => res());
+    removeFromUsersWatchedMemes(req: RemoveMem): Promise<void> {
+        return this.db.none(
+            'DELETE FROM users_watched_memes WHERE mem_id = $1',
+            [req.mem_id]
+        );
     }
 }

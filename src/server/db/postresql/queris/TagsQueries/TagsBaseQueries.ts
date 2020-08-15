@@ -15,13 +15,13 @@ export default class TagsBaseQueries implements ITagsBaseQueries {
     addTag(req: AddTag): Promise<void> {
         return this.db.none(
             'INSERT INTO tags(tag, rating_update_time) VALUES($1, $2) ON CONFLICT (tag) DO NOTHING',
-            [req.tag, new Date().getTime()],
+            [req.tag, new Date().getTime()]
         );
     }
     updateTagRating(req: UpdateTagRating): Promise<void> {
         return this.db.none(
-            'UPDATE tags SET rating = rating + $1 WHERE tag = $2',
-            [req.like ? 1 : -1, req.tag]
+            'UPDATE tags SET rating = rating + $1, rating_update_time = $2 WHERE tag = $3',
+            [req.like ? 1 : -1, new Date().getTime(), req.tag]
         );
     }
     getTag(req: GetTag): Promise<Tag> {
@@ -41,14 +41,14 @@ export default class TagsBaseQueries implements ITagsBaseQueries {
         );
     }
     removeTag(req: RemoveTag): Promise<void> {
-        return this.db.none('DELETE FROM tags WHERE tag = $1', [
-            req.tag,
-        ]);
+        return this.db.none('DELETE FROM tags WHERE tag = $1', [req.tag]);
     }
     removeTagFromMemesTags(req: RemoveTag): Promise<void> {
-        return new Promise((res, reg) => res());
+        return this.db.none('DELETE FROM memes_tags WHERE tag = $1', [req.tag]);
     }
     removeTagFromUsersTagsRating(req: RemoveTag): Promise<void> {
-        return new Promise((res, reg) => res());
+        return this.db.none('DELETE FROM users_tags_rating WHERE tag = $1', [
+            req.tag,
+        ]);
     }
 }

@@ -20,5 +20,5 @@ export default interface IMemesBaseQueries {
     getMem: (req: GetMem) => Promise<Mem>;
     removeMem: (req: RemoveMem) => Promise<void>;
     removeFromUsersMemes: (req: RemoveMem) => Promise<void>;
-    removeFromUsersMemesRating: (req: RemoveMem) => Promise<void>;
+    removeFromUsersWatchedMemes: (req: RemoveMem) => Promise<void>;
 }

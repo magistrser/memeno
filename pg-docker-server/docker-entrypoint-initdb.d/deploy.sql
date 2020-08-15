@@ -89,7 +89,7 @@ CREATE TABLE users_watched_memes (
   user_id INTEGER NOT NULL,
   mem_id INTEGER NOT NULL,
   is_like INTEGER NOT NULL,
-  watched_time INTEGER NOT NULL,
+  watched_time BIGINT NOT NULL,
   PRIMARY KEY(user_id, mem_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
   FOREIGN KEY(mem_id) REFERENCES memes(mem_id)
@@ -118,7 +118,7 @@ CREATE TABLE users_users_rating (
 CREATE TABLE users_tags_rating (
   user_id INTEGER NOT NULL,
   tag TEXT NOT NULL,
-  rating BIGINT NOT NULL,
+  rating BIGINT NOT NULL DEFAULT 0,
   rating_update_time BIGINT NOT NULL,
   PRIMARY KEY(user_id, tag),
   FOREIGN KEY(user_id) REFERENCES users(user_id),

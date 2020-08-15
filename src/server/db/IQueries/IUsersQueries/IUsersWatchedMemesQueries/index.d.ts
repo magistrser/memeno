@@ -4,7 +4,7 @@ import { MemId } from '../../IMemesQueries/IMemesBaseQueries/Mem';
 export type AddUserWatchedMem = {
     user_id: UserId;
     mem_id: MemId;
-    is_like: number;
+    like: number;
 };
 export type GetUserWatchedMemIds = {
     user_id: UserId;

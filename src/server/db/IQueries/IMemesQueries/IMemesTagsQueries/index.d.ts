@@ -1,9 +1,9 @@
 import { MemId } from '../IMemesBaseQueries/Mem';
 import { TagId } from '../../ITagsQueries/ITagsBaseQueries/Tag';
 
-export type AddMemTags = {
+export type AddMemTag = {
     mem_id: MemId;
-    tags: TagId[];
+    tag: TagId;
 };
 export type GetMemTags = {
     mem_id: MemId;
@@ -11,7 +11,7 @@ export type GetMemTags = {
 export type RemoveMemTags = GetMemTags;
 
 export default interface IMemesTagsQueries {
-    addMemTags: (req: AddMemTags) => Promise<void>;
+    addMemTag: (req: AddMemTag) => Promise<void>;
     getMemTags: (req: GetMemTags) => Promise<TagId[]>;
     removeMemTags: (req: RemoveMemTags) => Promise<void>;
 }
