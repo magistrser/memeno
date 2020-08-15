@@ -3,8 +3,10 @@ import { LoginResult } from './LoginResult';
 const routes = {
     root: '/',
     login: '/login/:fail',
+    waiting: '/waiting',
     react: {
         root: '/',
+        waiting: '/waiting',
         login: {
             noFail: `/login/${LoginResult.noFail}`,
             fail: `/login/${LoginResult.fail}`,

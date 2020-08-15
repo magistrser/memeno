@@ -2,7 +2,7 @@ import express from 'express';
 import passport from 'passport';
 
 import { IsAuth } from '../../api/responses';
-import {IGetUserAuthInfoRequest} from "../../api/requests";
+import { IGetUserAuthInfoRequest } from '../../api/requests';
 import routes from '../../routes';
 
 const router = express.Router();
