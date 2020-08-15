@@ -22,12 +22,30 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
         );
     }
     updateUserRating(req: UpdateUserRating): Promise<void> {
-        return new Promise((res, reg) => res());
+        return this.db.none(
+            'UPDATE users SET rating = rating + $1 WHERE user_id = $2',
+            [req.like ? 1 : -1, req.user_id]
+        );
     }
     getUser(req: GetUser): Promise<User | void> {
-        return new Promise((res, reg) => res());
+        return this.db.oneOrNone(
+            'SELECT * FROM users WHERE user_id = $1',
+            [req.user_id],
+            (user) => {
+                if (!user) {
+                    return user;
+                }
+                return {
+                    ...user,
+                    rating: parseInt(user.rating),
+                    rating_update_time: parseInt(user.rating_update_time),
+                };
+            }
+        );
     }
     removeUser(req: RemoveUser): Promise<void> {
-        return new Promise((res, reg) => res());
+        return this.db.none('DELETE FROM users WHERE user_id = $1', [
+            req.user_id,
+        ]);
     }
 }

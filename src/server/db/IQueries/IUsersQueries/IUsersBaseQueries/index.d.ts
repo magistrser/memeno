@@ -1,5 +1,5 @@
 import { AuthType } from './AuthType';
-import { UserId } from './User';
+import { User, UserId } from './User';
 
 export type CreateNewUser = {
     auth_type: AuthType;

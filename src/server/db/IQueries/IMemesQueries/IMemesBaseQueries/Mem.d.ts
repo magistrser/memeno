@@ -4,7 +4,7 @@ export type MemId = number;
 
 export type Mem = {
     mem_id: MemId;
-    mem_data: byte[];
+    mem_data: Buffer;
     creation_date: number;
     user_id: UserId;
     rating: number;

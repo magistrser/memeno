@@ -12,12 +12,21 @@ export default class UsersMemesQueries implements IUsersMemesQueries {
     constructor(private db: IDatabase<IExtensions>) {}
 
     addUserMem(req: AddUserMem): Promise<void> {
-        return new Promise((res, reg) => res());
+        return this.db.none(
+            'INSERT INTO users_memes(user_id, mem_id) VALUES ($1, $2)',
+            [req.user_id, req.mem_id]
+        );
     }
     getUserMemIds(req: GetUserMemIds): Promise<MemId[]> {
-        return new Promise((res, reg) => res([]));
+        return this.db.map(
+            'SELECT mem_id FROM users_memes WHERE user_id = $1',
+            [req.user_id],
+            (obj) => obj.mem_id
+        );
     }
     removeFromUsersMemes(req: RemoveFromUsersMemes): Promise<void> {
-        return new Promise((res, reg) => res());
+        return this.db.none('DELETE FROM users_memes WHERE user_id = $1', [
+            req.user_id,
+        ]);
     }
 }

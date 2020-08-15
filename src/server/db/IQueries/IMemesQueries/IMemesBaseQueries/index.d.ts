@@ -1,10 +1,9 @@
-import { MemId } from './Mem';
+import { Mem, MemId } from './Mem';
 import { TagId } from '../../ITagsQueries/ITagsBaseQueries/Tag';
 
 export type AddNewMem = {
-    mem_data: byte[];
+    mem_data: Buffer;
     user_id: user_id;
-    tags: TagId[];
 };
 export type UpdateMemRating = {
     mem_id: MemId;
