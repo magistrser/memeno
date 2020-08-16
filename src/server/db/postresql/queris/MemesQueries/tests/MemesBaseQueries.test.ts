@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 
 import { db, pgp } from '../../../index';
-import { AuthType } from '../../../../IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import UsersQueriesUtils from '../../UsersQueries/tests/utils';
 import MemesQueriesUtils from './utils';
 

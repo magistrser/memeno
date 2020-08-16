@@ -18,6 +18,8 @@ import MemesTagsQueries from './queris/MemesQueries/MemesTagsQueries';
 import { ITagsBaseQueries } from '../IQueries/ITagsQueries/ITagsBaseQueries';
 import TagsBaseQueries from './queris/TagsQueries/TagsBaseQueries';
 import config from '../../../config';
+import ISelectionMemesQueries from "../IQueries/ISelectionMemesQueries/ISelectionMemesBaseQueries";
+import SelectionMemesBaseQueries from "./queris/SelectionMemesQueries/SelectionMemesBaseQueries";
 
 export interface IExtensions {
     users: {
@@ -34,6 +36,9 @@ export interface IExtensions {
     };
     tags: {
         tagsBaseQueries: ITagsBaseQueries;
+    };
+    selectMemes: {
+        selectionMemesBaseQueries: ISelectionMemesQueries
     };
 }
 
@@ -55,6 +60,9 @@ const initOptions: IInitOptions<IExtensions> = {
         obj.tags = {
             tagsBaseQueries: new TagsBaseQueries(obj),
         };
+        obj.selectMemes = {
+            selectionMemesBaseQueries: new SelectionMemesBaseQueries(obj),
+        }
     },
 };
 

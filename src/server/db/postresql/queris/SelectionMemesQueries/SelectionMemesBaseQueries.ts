@@ -1,7 +1,6 @@
 import ISelectionMemesQueries, {
     GetAverageTopRating,
-    GetMemesToShowForUser,
-    GetMemesToShowForUserMem, GetNew, GetTagTop, GetTop, MemForClient
+    GetNew, GetTagTop, GetTop, MemForClient
 } from "../../../IQueries/ISelectionMemesQueries/ISelectionMemesBaseQueries";
 import {IDatabase} from "pg-promise";
 import {IExtensions} from "../../index";
@@ -14,6 +13,7 @@ export default class SelectionMemesBaseQueries implements ISelectionMemesQueries
         return this.db.one(
             'SELECT AVG(Q.rating) FROM ( SELECT rating FROM memes WHERE creation_date > ${createdAfterDate} ORDER BY rating DESC FETCH FIRST ${count} ROWS ONLY) Q',
             req,
+            rating => parseInt(rating.avg)
         );
     }
     getTop(req: GetTop): Promise<MemForClient[]> {
@@ -22,7 +22,7 @@ export default class SelectionMemesBaseQueries implements ISelectionMemesQueries
             req,
             (mem) => {
                 return {
-                    mem_id: mem.mem_data,
+                    mem_id: mem.mem_id,
                     data: mem.mem_data
                 };
             }
