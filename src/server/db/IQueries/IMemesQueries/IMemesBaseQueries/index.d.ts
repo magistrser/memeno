@@ -1,5 +1,4 @@
 import { Mem, MemId } from './Mem';
-import { TagId } from '../../ITagsQueries/ITagsBaseQueries/Tag';
 
 export type AddNewMem = {
     mem_data: Buffer;
