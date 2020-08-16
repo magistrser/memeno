@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Route, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-import { IsAuth } from '../../../api/responses';
 import routes from '../../../routes';
 
 import Waiting from '../../MainPageRouter/Waiting';
+import { IsAuthRes } from '../../../api/auth/response';
 
 const Index = ({ children, authPath, errorPath, path, ...rest }) => {
     const [isAuth, setAuth] = useState(false);
@@ -16,14 +16,14 @@ const Index = ({ children, authPath, errorPath, path, ...rest }) => {
     useEffect(() => {
         setAuth(false);
         axios
-            .get<IsAuth>(routes.server.auth.isAuth)
+            .get<IsAuthRes>(routes.server.auth.isAuth)
             .then((res) => {
                 const { from } =
-                    location.state || res.data.isAuth
+                    location.state || res.data
                         ? { from: { pathname: path } }
                         : { from: { pathname: authPath } };
 
-                setAuth(res.data.isAuth);
+                setAuth(res.data);
                 history.replace(from);
             })
             .catch(() => {

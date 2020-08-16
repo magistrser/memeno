@@ -1,31 +1,37 @@
 import Rating from './rating';
 import IMemProvider from './iface';
-
-import Mems, { EndMem } from './resources-folder-mem-provider/mems';
+import axios from 'axios';
+import { EndMem } from './resources-folder-mem-provider/mems';
+import routes from '../../../routes';
+import { MemClient } from '../../../api/responses';
+import { GetTopRes } from '../../../api/engine/selectMemesEngine/responses';
 
 class FolderMemProvider implements IMemProvider {
-    private mems: typeof Mems;
+    private memes: MemClient[];
 
     constructor() {
-        this.mems = Mems;
+        this.memes = [];
+        axios.get<GetTopRes>(routes.server.engine.select.top).then((res) => {
+            this.memes = res.data;
+        });
     }
 
     getCurrentMem() {
-        if (this.mems.length > 0) {
-            return this.mems[0];
+        if (this.memes.length > 0) {
+            return this.memes[0];
         }
         return EndMem;
     }
     getNextMem() {
-        if (this.mems.length > 1) {
-            return this.mems[1];
+        if (this.memes.length > 1) {
+            return this.memes[1];
         }
         return EndMem;
     }
     swapMem(type: Rating) {
-        const mem = this.mems.shift();
+        const mem = this.memes.shift();
         if (mem) {
-            this.mems.push(mem);
+            this.memes.push(mem);
         }
     }
 }

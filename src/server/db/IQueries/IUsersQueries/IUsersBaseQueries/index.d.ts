@@ -18,6 +18,6 @@ export type RemoveUser = {
 export default interface IUsersBaseQueries {
     createNewUser: (req: CreateNewUser) => Promise<UserId>;
     updateUserRating: (req: UpdateUserRating) => Promise<void>;
-    getUser: (req: GetUser) => Promise<User | void>;
+    getUser: (req: GetUser) => Promise<User>;
     removeUser: (req: RemoveUser) => Promise<void>;
 }

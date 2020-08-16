@@ -9,6 +9,7 @@ import configurePassport from './passport';
 import config from '../config';
 import routes from '../routes';
 import auth from './routers/auth';
+import engine from './routers/engine';
 
 const port = process.env.PORT || config.server.port;
 const app = express();
@@ -27,14 +28,16 @@ configurePassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(routes.root, express.static(path.join(__dirname, '../../dist')));
 app.use(routes.login, express.static(path.join(__dirname, '../../dist')));
 
 // routers/auth
 app.use(auth);
+// routers/engine;
+app.use(engine);
 
 app.use('*', (req, res) => {
     res.redirect(routes.react.root);

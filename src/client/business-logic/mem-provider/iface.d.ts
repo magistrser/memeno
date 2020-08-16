@@ -1,9 +1,9 @@
 import Rating from './rating';
-import Mem from './mem-iface';
+import { MemClient } from '../../../api/responses';
 
 interface IMemProvider {
-    getCurrentMem: () => Mem;
-    getNextMem: () => Mem;
+    getCurrentMem: () => MemClient;
+    getNextMem: () => MemClient;
     swapMem: (type: Rating) => void;
 }
 

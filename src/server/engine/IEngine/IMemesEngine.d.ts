@@ -1,7 +1,6 @@
-import {TagId} from "../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag";
-import {UserId} from "../../db/IQueries/IUsersQueries/IUsersBaseQueries/User";
-import {MemId} from "../../db/IQueries/IMemesQueries/IMemesBaseQueries/Mem";
-import {GetMemesToShowForUserMem} from "../IEngine";
+import { TagId } from '../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag';
+import { UserId } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/User';
+import { MemId } from '../../db/IQueries/IMemesQueries/IMemesBaseQueries/Mem';
 
 export type AddMem = {
     data: Buffer;
@@ -16,19 +15,9 @@ export type RateMem = {
     mem_id: MemId;
     like: boolean;
 };
-export type GetMemesToShowForUser = {
-    user_id: UserId;
-};
-export type GetMemesToShowForUserMem = {
-    mem_id: MemId;
-    data: Buffer;
-};
 
 export default interface IMemesEngine {
     addMem(req: AddMem): Promise<MemId>;
     removeMem(req: RemoveMem): Promise<void>;
     rateMem(req: RateMem): Promise<void>;
-    getMemesToShowForUser(
-        req: GetMemesToShowForUser
-    ): Promise<GetMemesToShowForUserMem[]>;
 }

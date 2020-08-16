@@ -27,7 +27,7 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
             [req.like ? 1 : -1, new Date().getTime(), req.user_id]
         );
     }
-    getUser(req: GetUser): Promise<User | void> {
+    getUser(req: GetUser): Promise<User> {
         return this.db.oneOrNone(
             'SELECT * FROM users WHERE user_id = $1',
             [req.user_id],

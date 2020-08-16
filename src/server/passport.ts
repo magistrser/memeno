@@ -5,29 +5,7 @@
 import config from '../config';
 import routes from '../routes';
 import { Strategy as VKontakteStrategy } from 'passport-vkontakte';
-
-type User = {
-    id: string;
-    email: string;
-    fullName: string;
-    photoUrl: string;
-    vkProfileUrl: string;
-};
-
-const DBStub = (() => {
-    const users: User[] = [];
-    const getUserById = (id) => {
-        return users.find((user) => user.id === id);
-    };
-    const insertUser = (user) => {
-        users.push(user);
-    };
-
-    return {
-        getUserById,
-        insertUser,
-    };
-})();
+import UsersEngine from './engine/postresql/UsersEngine';
 
 export default (passport) => {
     passport.use(
@@ -41,17 +19,28 @@ export default (passport) => {
             },
             async (accessToken, refreshToken, params, profile, done) => {
                 try {
-                    let user = await DBStub.getUserById(profile.id);
-                    if (!user) {
-                        user = {
-                            id: profile.id,
+                    let vkUser = await UsersEngine.getVkUserByVkId({
+                        vk_id: profile.id,
+                    });
+                    if (!vkUser) {
+                        const AddVkUserReq = {
+                            vk_id: profile.id,
                             email: params.email,
-                            fullName: profile.displayName,
-                            photoUrl: profile.photos[0].value,
-                            vkProfileUrl: profile.profileUrl,
+                            full_name: profile.displayName,
+                            photo_url: profile.photos[0].value,
+                            url: profile.profileUrl,
                         };
-                        DBStub.insertUser(user);
+                        const user_id = await UsersEngine.addVkUser(
+                            AddVkUserReq
+                        );
+                        vkUser = await UsersEngine.getVkUserByUserId({
+                            user_id,
+                        });
                     }
+
+                    const user = await UsersEngine.getUser({
+                        user_id: vkUser.user_id,
+                    });
                     return done(null, user);
                 } catch (err) {
                     return done(err);
@@ -59,19 +48,15 @@ export default (passport) => {
             }
         )
     );
-    /* To support persistent login sessions, Passport needs to be able to
-     * serialize users into and deserialize users out of the session.  Typically,
-     * this will be as simple as storing the user ID when serializing, and finding
-     * the user by ID when deserializing.
-     */
+
     passport.serializeUser((user, done) => {
-        done(null, user.id); // second arg is what is in req.session.user
+        done(null, user.user_id);
     });
 
-    passport.deserializeUser(async (id, done) => {
+    passport.deserializeUser(async (user_id, done) => {
         try {
-            const user = await DBStub.getUserById(id);
-            return done(null, user ? user : false); // second arg here is what is in req.user
+            const user = await UsersEngine.getUser({ user_id });
+            return done(null, user ? user : false);
         } catch (err) {
             return done(err);
         }

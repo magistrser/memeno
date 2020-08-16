@@ -1,6 +1,13 @@
-import {VkUser, VkUserId} from "../../db/IQueries/IUsersQueries/IVkUsersQueries/VkUser";
-import {UserId} from "../../db/IQueries/IUsersQueries/IUsersBaseQueries/User";
-import {TagId} from "../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag";
+import {
+    VkUser,
+    VkUserId,
+} from '../../db/IQueries/IUsersQueries/IVkUsersQueries/VkUser';
+import {
+    User,
+    UserId,
+} from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/User';
+import { TagId } from '../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag';
+import { AuthType } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 
 export type AddVkUser = {
     vk_id: VkUserId;
@@ -9,25 +16,33 @@ export type AddVkUser = {
     photo_url?: string;
     url: string;
 };
-export type GetVkUserBiVkId = {
+export type GetVkUserByVkId = {
     vk_id: VkUserId;
-}
-export type GetVkUserBiUserId = {
+};
+export type GetVkUserByUserId = {
     user_id: UserId;
-}
+};
+export type CreateNewUser = {
+    auth_type: AuthType;
+};
+export type GetUser = {
+    user_id: UserId;
+};
 export type RateTags = {
     user_id: UserId;
     tags: TagId[];
     like: boolean;
-}
+};
 export type RemoveUser = {
     user_id: UserId;
 };
 
 export default interface IUsersEngine {
     addVkUser(req: AddVkUser): Promise<UserId>;
-    getVkUserByVkId(req: GetVkUserBiVkId): Promise<VkUser>;
-    getVkUserByUserId(req: GetVkUserBiUserId): Promise<VkUser>;
+    getVkUserByVkId(req: GetVkUserByVkId): Promise<VkUser>;
+    getVkUserByUserId(req: GetVkUserByUserId): Promise<VkUser>;
+    createNewUser(req: CreateNewUser): Promise<UserId>;
+    getUser(req: GetUser): Promise<User>;
     rateTags(req: RateTags): Promise<void>;
     removeUser(req: RemoveUser): Promise<void>;
 }

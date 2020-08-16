@@ -1,4 +1,4 @@
-import {TagId} from "../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag";
+import { TagId } from '../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag';
 
 export type AddTags = {
     tags: TagId[];
