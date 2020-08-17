@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
-
 import MenuButton from '../../components/MenuButton';
 import Header from '../../components/Header';
 import AvatarButton from '../../components/AvatarButton';
@@ -8,20 +7,15 @@ import StaticMem from '../../components/StaticMem';
 import DislikeButton from '../../components/DislikeButton';
 import LikeButton from '../../components/LikeButton';
 import Waiting from '../Waiting';
-
 import Rating from '../../business-logic/mem-provider/rating';
 import memProvider from '../../business-logic/mem-provider/ServerMemProvider';
-
-import { initMemes, swipeMemes, swipeEnd } from './actions';
 import { GlobalState } from '../../store/initialState';
 import { connect, ConnectedProps } from 'react-redux';
+import actions from './actions';
 
-function mapStateToProps(state: GlobalState) {
-    return { ...state.memes };
-}
-const mapDispatchToProps = { initMemes, swipeMemes, swipeEnd };
+const selector = (state: GlobalState) => ({ ...state.memes });
+const connector = connect(selector, actions);
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 

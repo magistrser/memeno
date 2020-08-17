@@ -1,12 +1,10 @@
 import Rating from '../../business-logic/mem-provider/Rating';
-import {
-    Action,
-    INIT_MEMES_ACTION,
-    SWIPE_END_ACTION,
-    SWIPE_MEMES_ACTION,
-} from './actions';
-import { MemClient } from '../../../api/responses';
-import { SpecialMemes } from '../../business-logic/mem-provider/resources-folder-mem-provider/SpecialMemes';
+import {MemClient} from '../../../api/responses';
+import {SpecialMemes} from '../../business-logic/mem-provider/resources-folder-mem-provider/SpecialMemes';
+import {Actions} from "./actions";
+import {INIT_MEMES_ACTION} from "./actions/InitMemes";
+import {SWIPE_MEMES_ACTION} from "./actions/SwipeEnd";
+import {SWIPE_END_ACTION} from "./actions/SwipeMemes";
 
 export type StateType = {
     currentMem: MemClient;
@@ -24,10 +22,9 @@ export const initState: StateType = {
     updatingTriggerCounter: 0,
 };
 
-export default (state: StateType = initState, action: Action): StateType => {
+export default (state: StateType = initState, action: Actions): StateType => {
     switch (action.type) {
         case INIT_MEMES_ACTION:
-            console.log('reducer: INIT_MEMES_ACTION');
             return { ...state, ...action.payload, isSwipeEnd: true };
 
         case SWIPE_MEMES_ACTION:
