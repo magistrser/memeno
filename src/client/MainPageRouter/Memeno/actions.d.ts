@@ -6,8 +6,8 @@ type InitMemes = {
     payload: {
         currentMem: MemClient;
         prevMem: MemClient;
-    }
-}
+    };
+};
 type SwipeMemesAction = {
     type: 'swipe-memes';
     payload: {

@@ -1,4 +1,4 @@
-import React, {useReducer, useState, useEffect} from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import './index.css';
 
 import MenuButton from '../../components/MenuButton';
@@ -7,7 +7,7 @@ import AvatarButton from '../../components/AvatarButton';
 import StaticMem from '../../components/StaticMem';
 import DislikeButton from '../../components/DislikeButton';
 import LikeButton from '../../components/LikeButton';
-import Waiting from '../Waiting'
+import Waiting from '../Waiting';
 
 import Rating from '../../business-logic/mem-provider/rating';
 import memProvider from '../../business-logic/mem-provider/ServerMemProvider';
@@ -20,7 +20,7 @@ const Index: React.FC = () => {
 
     const handleOnWait = () => {
         setWaiting(true);
-    }
+    };
     const handleOnLoad = (currentMem) => {
         if (currentMem) {
             dispatch({
@@ -32,7 +32,7 @@ const Index: React.FC = () => {
             });
         }
         setWaiting(false);
-    }
+    };
 
     useEffect(() => {
         memProvider.init(handleOnWait, handleOnLoad);
@@ -83,18 +83,20 @@ const Index: React.FC = () => {
                 </div>
             </div>
             <div className="content">
-                { isWaiting ? <Waiting /> :
-                <StaticMem
-                    currentMem={state.currentMem}
-                    prevMem={state.prevMem}
-                    rating={state.rating}
-                    isSwipeEnd={state.isSwipeEnd}
-                    onDislikeClick={onDislikeClick}
-                    onLikeClick={onLikeClick}
-                    onSwipeEnd={onSwipeEnd}
-                    updatingTriggerCounter={state.updatingTriggerCounter}
-                />
-                }
+                {isWaiting ? (
+                    <Waiting />
+                ) : (
+                    <StaticMem
+                        currentMem={state.currentMem}
+                        prevMem={state.prevMem}
+                        rating={state.rating}
+                        isSwipeEnd={state.isSwipeEnd}
+                        onDislikeClick={onDislikeClick}
+                        onLikeClick={onLikeClick}
+                        onSwipeEnd={onSwipeEnd}
+                        updatingTriggerCounter={state.updatingTriggerCounter}
+                    />
+                )}
             </div>
             <div className="footer">
                 <DislikeButton onClick={onDislikeClick} />

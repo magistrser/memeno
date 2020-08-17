@@ -1,11 +1,11 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 import './index.css';
 import './swipe.css';
 
 import Rating from '../../business-logic/mem-provider/rating';
-import {MemClient} from "../../../api/responses";
+import { MemClient } from '../../../api/responses';
 
 interface IStaticMem {
     updatingTriggerCounter: number;
