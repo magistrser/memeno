@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from '../../routes';
 
 import AuthRoute from '../components/AuthRoute';
-import Memeno from './Memeno';
+import Memeno from './Memes';
 import Login from './Login';
 
 const Index: React.FC = () => {

@@ -19,7 +19,7 @@ export const initState: StateType = {
     updatingTriggerCounter: 0,
 };
 
-export default (state: StateType, action: Action): StateType => {
+export default (state: StateType = initState, action: Action): StateType => {
     switch (action.type) {
         case 'init-memes':
             return { ...state, ...action.payload, isSwipeEnd: true };
