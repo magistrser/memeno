@@ -1,27 +1,31 @@
-import Mem from '../../business-logic/mem-provider/mem-iface';
 import Rating from '../../business-logic/mem-provider/rating';
-import memProvider from '../../business-logic/mem-provider/FolderMemProvider';
 import { Action } from './actions';
 import { MemClient } from '../../../api/responses';
+import {SpecialMemes} from "../../business-logic/mem-provider/resources-folder-mem-provider/SpecialMemes";
 
 type StateType = {
     currentMem: MemClient;
     prevMem: MemClient;
     rating: Rating;
     isSwipeEnd: boolean;
+    updatingTriggerCounter: number;
 };
 
 export const initState: StateType = {
-    currentMem: memProvider.getCurrentMem(),
-    prevMem: memProvider.getCurrentMem(),
+    currentMem: SpecialMemes.EndMem,
+    prevMem: SpecialMemes.EndMem,
     rating: Rating.Like,
     isSwipeEnd: true,
+    updatingTriggerCounter: 0
 };
 
 export default (state: StateType, action: Action): StateType => {
     switch (action.type) {
-        case 'swipe-mems':
-            return { ...state, ...action.payload, isSwipeEnd: false };
+        case 'init-memes':
+            return {...state, ...action.payload, isSwipeEnd: true};
+
+        case 'swipe-memes':
+            return { ...state, ...action.payload, isSwipeEnd: false, updatingTriggerCounter: state.updatingTriggerCounter + 1 };
 
         case 'swipe-end': {
             return { ...state, isSwipeEnd: true };

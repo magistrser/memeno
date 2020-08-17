@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 import './index.css';
 import './swipe.css';
 
-import Mem from '../../business-logic/mem-provider/mem-iface';
 import Rating from '../../business-logic/mem-provider/rating';
+import {MemClient} from "../../../api/responses";
 
 interface IStaticMem {
-    prevMem: Mem;
-    currentMem: Mem;
+    updatingTriggerCounter: number;
+    prevMem: MemClient;
+    currentMem: MemClient;
     rating: Rating;
     isSwipeEnd: boolean;
     onDislikeClick: () => void;
@@ -32,6 +33,7 @@ const Index: React.FC<IStaticMem> = (props) => {
     const [currentStaticMemStyle, setCurrentStaticMemStyle] = useState(
         CURRENT_ANIMATION_STOP_NAME
     );
+    const [isStart, setStart] = useState(true);
 
     const [currentMem, setCurrentMem] = useState(props.currentMem);
     const [prevMem, setPrevMem] = useState(props.prevMem);
@@ -75,12 +77,13 @@ const Index: React.FC<IStaticMem> = (props) => {
     };
 
     useEffect(() => {
-        if (props.currentMem !== props.prevMem) {
+        if (!isStart) {
             setCurrentMem(props.currentMem);
             setPrevMem(props.prevMem);
             handleRunSwipe(props.rating);
         }
-    }, [props.currentMem]);
+        setStart(false);
+    }, [props.updatingTriggerCounter]);
 
     const onCurrentAnimationEnd = () => {
         handleFinalizeSwipe();

@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, {useReducer, useState, useEffect} from 'react';
 import './index.css';
 
 import MenuButton from '../../components/MenuButton';
@@ -7,18 +7,40 @@ import AvatarButton from '../../components/AvatarButton';
 import StaticMem from '../../components/StaticMem';
 import DislikeButton from '../../components/DislikeButton';
 import LikeButton from '../../components/LikeButton';
+import Waiting from '../Waiting'
 
 import Rating from '../../business-logic/mem-provider/rating';
-import memProvider from '../../business-logic/mem-provider/FolderMemProvider';
+import memProvider from '../../business-logic/mem-provider/ServerMemProvider';
 
 import reducer, { initState } from './reducer';
 
 const Index: React.FC = () => {
+    const [isWaiting, setWaiting] = useState(true);
     const [state, dispatch] = useReducer(reducer, initState);
 
-    const updateMems = (rating: Rating) => {
+    const handleOnWait = () => {
+        setWaiting(true);
+    }
+    const handleOnLoad = (currentMem) => {
+        if (currentMem) {
+            dispatch({
+                type: 'init-memes',
+                payload: {
+                    prevMem: currentMem,
+                    currentMem: currentMem,
+                },
+            });
+        }
+        setWaiting(false);
+    }
+
+    useEffect(() => {
+        memProvider.init(handleOnWait, handleOnLoad);
+    }, []);
+
+    const updateMemes = (rating: Rating) => {
         dispatch({
-            type: 'swipe-mems',
+            type: 'swipe-memes',
             payload: {
                 rating: rating,
                 prevMem: state.currentMem,
@@ -30,14 +52,14 @@ const Index: React.FC = () => {
     const onLikeClick = () => {
         if (state.isSwipeEnd) {
             memProvider.swapMem(Rating.Like);
-            updateMems(Rating.Like);
+            updateMemes(Rating.Like);
         }
     };
 
     const onDislikeClick = () => {
         if (state.isSwipeEnd) {
             memProvider.swapMem(Rating.Dislike);
-            updateMems(Rating.Dislike);
+            updateMemes(Rating.Dislike);
         }
     };
 
@@ -61,6 +83,7 @@ const Index: React.FC = () => {
                 </div>
             </div>
             <div className="content">
+                { isWaiting ? <Waiting /> :
                 <StaticMem
                     currentMem={state.currentMem}
                     prevMem={state.prevMem}
@@ -69,7 +92,9 @@ const Index: React.FC = () => {
                     onDislikeClick={onDislikeClick}
                     onLikeClick={onLikeClick}
                     onSwipeEnd={onSwipeEnd}
+                    updatingTriggerCounter={state.updatingTriggerCounter}
                 />
+                }
             </div>
             <div className="footer">
                 <DislikeButton onClick={onDislikeClick} />
