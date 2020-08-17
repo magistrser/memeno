@@ -10,6 +10,7 @@ import {
     Mem,
     MemId,
 } from '../../../IQueries/IMemesQueries/IMemesBaseQueries/Mem';
+import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
 
 export default class MemesBaseQueries implements IMemesBaseQueries {
     constructor(private db: IDatabase<IExtensions>) {}
@@ -29,7 +30,11 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
     updateMemRating(req: UpdateMemRating): Promise<void> {
         return this.db.none(
             'UPDATE memes SET rating = rating + $1, rating_update_time = $2 WHERE mem_id = $3',
-            [req.like, new Date().getTime(), req.mem_id]
+            [
+                boolRatingToNumForQuery(req.like),
+                new Date().getTime(),
+                req.mem_id,
+            ]
         );
     }
     getMem(req: GetMem): Promise<Mem> {

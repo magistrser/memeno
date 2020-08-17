@@ -1,7 +1,7 @@
 import ITagsEngine, {
     AddTags,
     RateTags,
-    RemoveTag,
+    RemoveTags,
 } from '../IEngine/ITagsEngine';
 import { db } from '../../db/postresql';
 
@@ -26,13 +26,19 @@ const TagsEngine: ITagsEngine = class {
             }
         });
     }
-    static removeTag(req: RemoveTag): Promise<void> {
+    static removeTags(req: RemoveTags): Promise<void> {
         return db.tx(async (transaction) => {
-            await transaction.tags.tagsBaseQueries.removeTagFromMemesTags(req);
-            await transaction.tags.tagsBaseQueries.removeTagFromUsersTagsRating(
-                req
-            );
-            await transaction.tags.tagsBaseQueries.removeTag(req);
+            for (let i = 0; i < req.tags.length; ++i) {
+                const removeTagReq = { tag: req.tags[i] };
+
+                await transaction.tags.tagsBaseQueries.removeTagFromMemesTags(
+                    removeTagReq
+                );
+                await transaction.tags.tagsBaseQueries.removeTagFromUsersTagsRating(
+                    removeTagReq
+                );
+                await transaction.tags.tagsBaseQueries.removeTag(removeTagReq);
+            }
         });
     }
 };

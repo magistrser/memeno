@@ -68,6 +68,11 @@ const MemesEngine: IMemesEngine = class {
             });
 
             const mem = await transaction.memes.memesBaseQueries.getMem(req);
+
+            await transaction.users.usersUsersRatingQueries.addUserUserRating({
+                user_id: req.user_id,
+                second_user_id: mem.user_id,
+            });
             await transaction.users.usersUsersRatingQueries.updateUserUserRating(
                 { user_id: req.user_id, second_user_id: mem.user_id, like }
             );

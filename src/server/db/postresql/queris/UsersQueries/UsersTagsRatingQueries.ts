@@ -8,6 +8,7 @@ import {
 import Tag from '../../../IQueries/ITagsQueries/ITagsBaseQueries/Tag';
 import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
+import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
 
 export default class UsersTagsRatingQueries implements IUsersTagsRatingQueries {
     constructor(private db: IDatabase<IExtensions>) {}
@@ -21,7 +22,12 @@ export default class UsersTagsRatingQueries implements IUsersTagsRatingQueries {
     updateUserTagRating(req: UpdateUserTagRating): Promise<void> {
         return this.db.none(
             'UPDATE users_tags_rating SET rating = rating + $1, rating_update_time = $2 WHERE user_id = $3 AND tag = $4',
-            [req.like ? 1 : -1, new Date().getTime(), req.user_id, req.tag]
+            [
+                boolRatingToNumForQuery(req.like),
+                new Date().getTime(),
+                req.user_id,
+                req.tag,
+            ]
         );
     }
     getUserTagRating(req: GetUserTagRating): Promise<Tag> {

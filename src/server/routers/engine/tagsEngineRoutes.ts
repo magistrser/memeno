@@ -36,11 +36,11 @@ router.post(
 router.post(
     routes.server.engine.tags.remove,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const removeTagReq: RemoveTagReq = {
-            tag: req.body.tag,
+        const removeTagsReq: RemoveTagReq = {
+            tags: req.body.tags,
         };
 
-        await TagsEngine.removeTag(removeTagReq);
+        await TagsEngine.removeTags(removeTagsReq);
         res.json();
     }
 );

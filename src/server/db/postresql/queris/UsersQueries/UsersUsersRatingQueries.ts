@@ -8,6 +8,7 @@ import {
 } from '../../../IQueries/IUsersQueries/IUsersUsersRatingQueries';
 import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
+import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
 
 export default class UsersUsersRatingQueries
     implements IUsersUsersRatingQueries {
@@ -23,7 +24,7 @@ export default class UsersUsersRatingQueries
         return this.db.none(
             'UPDATE users_users_rating SET rating = rating + $1, rating_update_time = $2 WHERE user_id = $3 AND second_user_id = $4',
             [
-                req.like ? 1 : -1,
+                boolRatingToNumForQuery(req.like),
                 new Date().getTime(),
                 req.user_id,
                 req.second_user_id,

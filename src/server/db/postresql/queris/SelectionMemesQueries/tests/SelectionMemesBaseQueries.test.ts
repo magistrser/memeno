@@ -12,18 +12,24 @@ test('[SelectionMemesBaseQueries] getAverageTopRating', async () => {
                 await MemesQueriesUtils.createMem(async (args) => {
                     const [user_id, mem_id1, mem_id2, mem_id3] = args;
 
-                    await db.memes.memesBaseQueries.updateMemRating({
-                        mem_id: mem_id1,
-                        like: 4,
-                    });
-                    await db.memes.memesBaseQueries.updateMemRating({
-                        mem_id: mem_id2,
-                        like: 6,
-                    });
-                    await db.memes.memesBaseQueries.updateMemRating({
-                        mem_id: mem_id3,
-                        like: 3,
-                    });
+                    for (let i = 0; i < 4; ++i) {
+                        await db.memes.memesBaseQueries.updateMemRating({
+                            mem_id: mem_id1,
+                            like: 1,
+                        });
+                    }
+                    for (let i = 0; i < 6; ++i) {
+                        await db.memes.memesBaseQueries.updateMemRating({
+                            mem_id: mem_id2,
+                            like: 1,
+                        });
+                    }
+                    for (let i = 0; i < 3; ++i) {
+                        await db.memes.memesBaseQueries.updateMemRating({
+                            mem_id: mem_id3,
+                            like: 1,
+                        });
+                    }
 
                     const req = {
                         createdAfterDate: 0,
@@ -53,22 +59,30 @@ test('[SelectionMemesBaseQueries] getTop', async () => {
                             mem_id4,
                         ] = args;
 
-                        await db.memes.memesBaseQueries.updateMemRating({
-                            mem_id: mem_id1,
-                            like: 4,
-                        });
-                        await db.memes.memesBaseQueries.updateMemRating({
-                            mem_id: mem_id2,
-                            like: 6,
-                        });
-                        await db.memes.memesBaseQueries.updateMemRating({
-                            mem_id: mem_id3,
-                            like: 3,
-                        });
-                        await db.memes.memesBaseQueries.updateMemRating({
-                            mem_id: mem_id4,
-                            like: 7,
-                        });
+                        for (let i = 0; i < 4; ++i) {
+                            await db.memes.memesBaseQueries.updateMemRating({
+                                mem_id: mem_id1,
+                                like: 1,
+                            });
+                        }
+                        for (let i = 0; i < 6; ++i) {
+                            await db.memes.memesBaseQueries.updateMemRating({
+                                mem_id: mem_id2,
+                                like: 1,
+                            });
+                        }
+                        for (let i = 0; i < 3; ++i) {
+                            await db.memes.memesBaseQueries.updateMemRating({
+                                mem_id: mem_id3,
+                                like: 1,
+                            });
+                        }
+                        for (let i = 0; i < 7; ++i) {
+                            await db.memes.memesBaseQueries.updateMemRating({
+                                mem_id: mem_id4,
+                                like: 1,
+                            });
+                        }
 
                         await db.users.usersWatchedMemesQueries.addUserWatchedMem(
                             {
@@ -80,7 +94,7 @@ test('[SelectionMemesBaseQueries] getTop', async () => {
 
                         const req = {
                             user_id,
-                            ratingBarrier: 3,
+                            ratingBarrier: 4,
                             createdAfterDate: 0,
                             count: 3,
                         };

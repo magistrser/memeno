@@ -19,7 +19,9 @@ const Index: React.FC = () => {
                     authPath={routes.react.login.noFail}
                     errorPath={routes.react.login.serverErrorResponse}
                 >
-                    <Memeno />
+                    <Route path={routes.root}>
+                        <Memeno />
+                    </Route>
                 </AuthRoute>
             </Switch>
         </Router>

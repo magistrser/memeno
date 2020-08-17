@@ -8,6 +8,7 @@ import {
     UpdateTagRating,
 } from '../../../IQueries/ITagsQueries/ITagsBaseQueries';
 import Tag from '../../../IQueries/ITagsQueries/ITagsBaseQueries/Tag';
+import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
 
 export default class TagsBaseQueries implements ITagsBaseQueries {
     constructor(private db: IDatabase<IExtensions>) {}
@@ -21,7 +22,7 @@ export default class TagsBaseQueries implements ITagsBaseQueries {
     updateTagRating(req: UpdateTagRating): Promise<void> {
         return this.db.none(
             'UPDATE tags SET rating = rating + $1, rating_update_time = $2 WHERE tag = $3',
-            [req.like ? 1 : -1, new Date().getTime(), req.tag]
+            [boolRatingToNumForQuery(req.like), new Date().getTime(), req.tag]
         );
     }
     getTag(req: GetTag): Promise<Tag> {

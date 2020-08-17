@@ -7,12 +7,12 @@ export type RateTags = {
     tags: TagId[];
     like: boolean;
 };
-export type RemoveTag = {
-    tag: TagId;
+export type RemoveTags = {
+    tags: TagId[];
 };
 
 export default interface ITagsEngine {
     addTags(req: AddTags): Promise<void>;
     rateTags(req: RateTags): Promise<void>;
-    removeTag(req: RemoveTag): Promise<void>;
+    removeTags(req: RemoveTags): Promise<void>;
 }

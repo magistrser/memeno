@@ -10,6 +10,7 @@ import {
 } from '../../../IQueries/IUsersQueries/IUsersBaseQueries/User';
 import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
+import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
 
 export default class UsersBaseQueries implements IUsersBaseQueries {
     constructor(private db: IDatabase<IExtensions>) {}
@@ -24,7 +25,11 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
     updateUserRating(req: UpdateUserRating): Promise<void> {
         return this.db.none(
             'UPDATE users SET rating = rating + $1, rating_update_time = $2 WHERE user_id = $3',
-            [req.like ? 1 : -1, new Date().getTime(), req.user_id]
+            [
+                boolRatingToNumForQuery(req.like),
+                new Date().getTime(),
+                req.user_id,
+            ]
         );
     }
     getUser(req: GetUser): Promise<User> {
