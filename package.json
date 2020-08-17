@@ -9,7 +9,8 @@
         "dev": "cross-env MODE=DEV webpack --mode development --devtool inline-source-map && nodemon",
         "prettier": "prettier --write .",
         "eslint": "eslint \"src/**\"",
-        "test": "jest"
+        "test": "jest",
+        "loadMemes": "npx ts-node ./src/scripts/loadMemesFromFolder.ts"
     },
     "author": "Sergey Frantsishkov",
     "license": "MIT",
