@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 
 import MenuButton from '../../components/MenuButton';
@@ -12,23 +12,30 @@ import Waiting from '../Waiting';
 import Rating from '../../business-logic/mem-provider/rating';
 import memProvider from '../../business-logic/mem-provider/ServerMemProvider';
 
-import reducer, { initState } from './reducer';
+import { initMemes, swipeMemes, swipeEnd } from './actions';
+import { GlobalState } from '../../store/initialState';
+import { connect, ConnectedProps } from 'react-redux';
 
-const Index: React.FC = () => {
+function mapStateToProps(state: GlobalState) {
+    return { ...state.memes };
+}
+const mapDispatchToProps = { initMemes, swipeMemes, swipeEnd };
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux;
+
+const Index: React.FC<Props> = (props) => {
     const [isWaiting, setWaiting] = useState(true);
-    const [state, dispatch] = useReducer(reducer, initState);
 
     const handleOnWait = () => {
         setWaiting(true);
     };
     const handleOnLoad = (currentMem) => {
         if (currentMem) {
-            dispatch({
-                type: 'init-memes',
-                payload: {
-                    prevMem: currentMem,
-                    currentMem: currentMem,
-                },
+            props.initMemes({
+                prevMem: currentMem,
+                currentMem: currentMem,
             });
         }
         setWaiting(false);
@@ -39,32 +46,29 @@ const Index: React.FC = () => {
     }, []);
 
     const updateMemes = (rating: Rating) => {
-        dispatch({
-            type: 'swipe-memes',
-            payload: {
-                rating: rating,
-                prevMem: state.currentMem,
-                currentMem: memProvider.getCurrentMem(),
-            },
+        props.swipeMemes({
+            rating: rating,
+            prevMem: props.currentMem,
+            currentMem: memProvider.getCurrentMem(),
         });
     };
 
     const onLikeClick = () => {
-        if (state.isSwipeEnd) {
+        if (props.isSwipeEnd) {
             memProvider.swapMem(Rating.Like);
             updateMemes(Rating.Like);
         }
     };
 
     const onDislikeClick = () => {
-        if (state.isSwipeEnd) {
+        if (props.isSwipeEnd) {
             memProvider.swapMem(Rating.Dislike);
             updateMemes(Rating.Dislike);
         }
     };
 
     const onSwipeEnd = () => {
-        dispatch({ type: 'swipe-end' });
+        props.swipeEnd();
     };
 
     return (
@@ -87,14 +91,14 @@ const Index: React.FC = () => {
                     <Waiting />
                 ) : (
                     <StaticMem
-                        currentMem={state.currentMem}
-                        prevMem={state.prevMem}
-                        rating={state.rating}
-                        isSwipeEnd={state.isSwipeEnd}
+                        currentMem={props.currentMem}
+                        prevMem={props.prevMem}
+                        rating={props.rating}
+                        isSwipeEnd={props.isSwipeEnd}
                         onDislikeClick={onDislikeClick}
                         onLikeClick={onLikeClick}
                         onSwipeEnd={onSwipeEnd}
-                        updatingTriggerCounter={state.updatingTriggerCounter}
+                        updatingTriggerCounter={props.updatingTriggerCounter}
                     />
                 )}
             </div>
@@ -106,4 +110,4 @@ const Index: React.FC = () => {
     );
 };
 
-export default Index;
+export default connector(Index);

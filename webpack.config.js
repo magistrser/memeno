@@ -74,10 +74,16 @@ module.exports = {
         extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.json', '.less'],
         alias: {
             ConfigureStoreWebpackResolved:
-                process.env.MODE === 'DEV' ?
-                    path.resolve(__dirname, 'src/client/store/configureStore.dev')
-                    : path.resolve(__dirname, 'src/client/store/configureStore')
-        }
+                process.env.MODE === 'DEV'
+                    ? path.resolve(
+                          __dirname,
+                          'src/client/store/configureStore.dev'
+                      )
+                    : path.resolve(
+                          __dirname,
+                          'src/client/store/configureStore'
+                      ),
+        },
     },
     plugins: [
         new CleanWebpackPlugin(),

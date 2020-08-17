@@ -1,7 +1,8 @@
-import {initState as memesInitialState} from "../pages/Memes/reducer";
+import { initState as memesInitialState } from '../pages/Memes/reducer';
 
 const initialState = {
-    memes: memesInitialState
-}
+    memes: memesInitialState,
+};
 
+export type GlobalState = typeof initialState;
 export default initialState;
