@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import routes from '../../routes';
+import routes from '../../../routes';
 
-import AuthRoute from '../components/AuthRoute';
-import Memeno from './Memes';
-import Login from './Login';
+import AuthRoute from '../../components/AuthRoute';
+import Memeno from '../Memes';
+import Login from '../Login';
 
 const Index: React.FC = () => {
     return (

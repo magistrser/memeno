@@ -1,4 +1,4 @@
-import {initState as memesInitialState} from "../MainPageRouter/Memes/reducer";
+import {initState as memesInitialState} from "../pages/Memes/reducer";
 
 const initialState = {
     memes: memesInitialState

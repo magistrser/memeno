@@ -1,4 +1,4 @@
-import Rating from '../../business-logic/mem-provider/rating';
+import Rating from '../../business-logic/mem-provider/Rating';
 import { Action } from './actions';
 import { MemClient } from '../../../api/responses';
 import { SpecialMemes } from '../../business-logic/mem-provider/resources-folder-mem-provider/SpecialMemes';

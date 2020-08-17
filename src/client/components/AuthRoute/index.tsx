@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import routes from '../../../routes';
 
-import Waiting from '../../MainPageRouter/Waiting';
+import Waiting from '../../pages/Waiting';
 import { IsAuthRes } from '../../../api/auth/response';
 
 const Index = ({ children, authPath, errorPath, path, ...rest }) => {

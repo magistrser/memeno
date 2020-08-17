@@ -1,4 +1,4 @@
-import memesReducer from '../MainPageRouter/Memes/reducer';
+import memesReducer from '../pages/Memes/reducer';
 import {combineReducers} from "redux";
 
 const rootReducer = combineReducers({

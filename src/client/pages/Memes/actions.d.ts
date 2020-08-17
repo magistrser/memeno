@@ -1,4 +1,4 @@
-import Rating from '../../business-logic/mem-provider/rating';
+import Rating from '../../business-logic/mem-provider/Rating';
 import { MemClient } from '../../../api/responses';
 
 type InitMemes = {
