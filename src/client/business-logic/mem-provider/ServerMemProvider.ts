@@ -10,6 +10,7 @@ class ServerMemProvider implements IMemProvider {
     private memes: MemClient[];
     private readonly memesUpdateThreshold: number;
     private isMemesUpdating: boolean;
+    private isServerError: boolean;
 
     private onWait: () => void;
     private onLoad: (currentMem?: MemClient) => void;
@@ -18,6 +19,7 @@ class ServerMemProvider implements IMemProvider {
         this.memes = [];
         this.memesUpdateThreshold = 10;
         this.isMemesUpdating = false;
+        this.isServerError = false;
     }
 
     init(onWait, onLoad) {
@@ -34,7 +36,7 @@ class ServerMemProvider implements IMemProvider {
             .get<GetTopRes>(routes.server.engine.select.top)
             .then((res) => {
                 this.isMemesUpdating = false;
-                console.log(routes.server.engine.select.top);
+                this.isServerError = false;
 
                 if (isInit) {
                     this.memes = res.data;
@@ -51,6 +53,7 @@ class ServerMemProvider implements IMemProvider {
                 this.onLoad();
             })
             .catch(() => {
+                this.isServerError = true;
                 this.isMemesUpdating = false;
             });
     }
@@ -64,7 +67,9 @@ class ServerMemProvider implements IMemProvider {
         }
 
         if (this.memes.length == 0) {
-            return SpecialMemes.EndMem;
+            return this.isServerError
+                ? SpecialMemes.ServerNotRespodMem
+                : SpecialMemes.EndMem;
         }
 
         return this.memes[0];
