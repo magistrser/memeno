@@ -1,10 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 import './index.css';
 import './swipe.css';
 
-import Rating from '../../business-logic/mem-provider/rating';
+import Rating from '../../business-logic/mem-provider/Rating';
 import { MemClient } from '../../../api/responses';
 
 interface IStaticMem {
@@ -12,10 +12,9 @@ interface IStaticMem {
     prevMem: MemClient;
     currentMem: MemClient;
     rating: Rating;
-    isSwipeEnd: boolean;
-    onDislikeClick: () => void;
-    onLikeClick: () => void;
-    onSwipeEnd: () => void;
+    onDislikeClick?: () => void;
+    onLikeClick?: () => void;
+    onSwipeEnd?: () => void;
 }
 
 const Index: React.FC<IStaticMem> = (props) => {
@@ -37,6 +36,7 @@ const Index: React.FC<IStaticMem> = (props) => {
 
     const [currentMem, setCurrentMem] = useState(props.currentMem);
     const [prevMem, setPrevMem] = useState(props.prevMem);
+    const [isSwipeEnd, setSwipeEnd] = useState(true);
 
     const handleAnimationStop = () => {
         setPrevStaticMemStyle(PREV_ANIMATION_STOP_NAME);
@@ -87,16 +87,18 @@ const Index: React.FC<IStaticMem> = (props) => {
 
     const onCurrentAnimationEnd = () => {
         handleFinalizeSwipe();
+        setSwipeEnd(true);
         props.onSwipeEnd();
     };
 
     const swipeableHandlers = useSwipeable({
         onSwiped: (eventData) => {
-            if (props.isSwipeEnd) {
+            if (isSwipeEnd) {
                 if (eventData.absX < 10) {
                     handleFinalizeSwipe();
                     return;
                 }
+                setSwipeEnd(false);
                 if (eventData.dir === 'Left') {
                     props.onDislikeClick();
                     return;
@@ -108,7 +110,7 @@ const Index: React.FC<IStaticMem> = (props) => {
             }
         },
         onSwiping: (eventData) => {
-            if (props.isSwipeEnd) {
+            if (isSwipeEnd) {
                 const rotation = eventData.absX / 5;
                 const opacity = 1 - rotation / FINAL_ROTATION_ANGLE;
                 document.documentElement.style.setProperty(

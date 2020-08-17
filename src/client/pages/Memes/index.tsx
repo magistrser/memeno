@@ -3,11 +3,11 @@ import './index.css';
 import MenuButton from '../../components/MenuButton';
 import Header from '../../components/Header';
 import AvatarButton from '../../components/AvatarButton';
-import StaticMem from '../../components/StaticMem';
+import StaticMem from '../../components/MemesSwiper';
 import DislikeButton from '../../components/DislikeButton';
 import LikeButton from '../../components/LikeButton';
 import Waiting from '../Waiting';
-import Rating from '../../business-logic/mem-provider/rating';
+import Rating from '../../business-logic/mem-provider/Rating';
 import memProvider from '../../business-logic/mem-provider/ServerMemProvider';
 import { GlobalState } from '../../store/initialState';
 import { connect, ConnectedProps } from 'react-redux';
@@ -88,7 +88,6 @@ const Index: React.FC<Props> = (props) => {
                         currentMem={props.currentMem}
                         prevMem={props.prevMem}
                         rating={props.rating}
-                        isSwipeEnd={props.isSwipeEnd}
                         onDislikeClick={onDislikeClick}
                         onLikeClick={onLikeClick}
                         onSwipeEnd={onSwipeEnd}
