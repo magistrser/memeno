@@ -1,4 +1,13 @@
 import { LoginResult } from './LoginResult';
+import {
+    DropUserTagsRating,
+    DropUserUsersRating,
+    DropUserWatchedMemes,
+    SetMemRating,
+    SetUserRating,
+    SetUserTagRating,
+    SetUserUserRating,
+} from '../server/db/IQueries/IDevQueries/IDevBaseQueries';
 
 const routes = {
     root: '/',
@@ -24,6 +33,15 @@ const routes = {
             },
         },
         engine: {
+            dev: {
+                dropUserWatchedMemes: '/api/engine/dev/drop-user-watched-memes',
+                setUserUserRating: '/api/engine/dev/set-user-user-rating',
+                dropUserUsersRating: '/api/engine/dev/drop-user-users-rating',
+                setUserTagRating: '/api/engine/dev/set-user-tag-rating',
+                dropUserTagsRating: '/api/engine/dev/drop-user-tags-rating',
+                setMemRating: '/api/engine/dev/set-mem-rating',
+                setUserRating: '/api/engine/dev/set-user-rating',
+            },
             users: {
                 create: '/api/engine/users/create',
                 addVk: '/api/engine/users/add-vk',
