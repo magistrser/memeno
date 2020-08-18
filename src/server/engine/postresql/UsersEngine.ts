@@ -1,11 +1,13 @@
 import IUsersEngine, {
     AddVkUser,
     CreateNewUser,
+    GetAccessLevel,
     GetUser,
     GetVkUserByUserId,
     GetVkUserByVkId,
     RateTags,
     RemoveUser,
+    SetAccessLevel,
 } from '../IEngine/IUsersEngine';
 import {
     User,
@@ -14,6 +16,7 @@ import {
 import { db } from '../../db/postresql';
 import { AuthType } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import { VkUser } from '../../db/IQueries/IUsersQueries/IVkUsersQueries/VkUser';
+import { AccessLevel } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
 
 const UsersEngine: IUsersEngine = class {
     static addVkUser(req: AddVkUser): Promise<UserId> {
@@ -94,6 +97,12 @@ const UsersEngine: IUsersEngine = class {
                 }
             }
         });
+    }
+    static setAccessLevel(req: SetAccessLevel): Promise<void> {
+        return db.users.usersBaseQueries.setAccessLevel(req);
+    }
+    static getAccessLevel(req: GetAccessLevel): Promise<AccessLevel> {
+        return db.users.usersBaseQueries.getAccessLevel(req);
     }
 };
 

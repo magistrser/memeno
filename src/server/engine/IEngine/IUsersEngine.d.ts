@@ -6,8 +6,13 @@ import {
     User,
     UserId,
 } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/User';
+import {
+    SetAccessLevel as SetAccessLevelQueriesReq,
+    GetAccessLevel as GetAccessLevelQueriesReq,
+} from '../../db/IQueries/IUsersQueries/IUsersBaseQueries';
 import { TagId } from '../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag';
 import { AuthType } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
+import { AccessLevel } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
 
 export type AddVkUser = {
     vk_id: VkUserId;
@@ -36,6 +41,8 @@ export type RateTags = {
 export type RemoveUser = {
     user_id: UserId;
 };
+export type SetAccessLevel = SetAccessLevelQueriesReq;
+export type GetAccessLevel = GetAccessLevelQueriesReq;
 
 export default interface IUsersEngine {
     addVkUser(req: AddVkUser): Promise<UserId>;
@@ -45,4 +52,6 @@ export default interface IUsersEngine {
     getUser(req: GetUser): Promise<User>;
     rateTags(req: RateTags): Promise<void>;
     removeUser(req: RemoveUser): Promise<void>;
+    setAccessLevel(req: SetAccessLevel): Promise<void>;
+    getAccessLevel(req: GetAccessLevel): Promise<AccessLevel>;
 }

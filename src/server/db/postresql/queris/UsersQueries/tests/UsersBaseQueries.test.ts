@@ -1,8 +1,9 @@
 import 'babel-polyfill';
 
-import { pgp, db } from '../../../index';
+import { db, pgp } from '../../../index';
 import { AuthType } from '../../../../IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import UsersQueriesUtils from './utils';
+import { AccessLevel } from '../../../../IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
 
 test('[UsersBaseQueries] createNewUser/getUser/removeUser', async () => {
     await UsersQueriesUtils.createUser(async ([user_id]) => {
@@ -30,6 +31,24 @@ test('[UsersBaseQueries] updateUserRating', async () => {
             rating: 2,
         });
         user && expect(typeof user.rating_update_time).toBe('number');
+    });
+});
+
+test('[UsersBaseQueries] updateUserRating', async () => {
+    await UsersQueriesUtils.createUser(async ([user_id]) => {
+        let accessLevel = await db.users.usersBaseQueries.getAccessLevel({
+            user_id,
+        });
+        expect(accessLevel).toBe(AccessLevel.common);
+
+        await db.users.usersBaseQueries.setAccessLevel({
+            user_id,
+            access_level: AccessLevel.developer,
+        });
+        accessLevel = await db.users.usersBaseQueries.getAccessLevel({
+            user_id,
+        });
+        expect(accessLevel).toBe(AccessLevel.developer);
     });
 });
 

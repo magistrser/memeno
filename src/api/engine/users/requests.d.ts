@@ -6,6 +6,8 @@ import {
     GetUser,
     RateTags,
     RemoveUser,
+    SetAccessLevel,
+    GetAccessLevel,
 } from '../../../server/engine/IEngine/IUsersEngine';
 
 export type CreateNewUserReq = CreateNewUser;
@@ -15,3 +17,5 @@ export type GetVkByVkIdReq = GetVkUserByVkId;
 export type GetUserReq = GetUser;
 export type RateTagsReq = RateTags;
 export type RemoveUserReq = RemoveUser;
+export type SetAccessLevelReq = SetAccessLevel;
+export type GetAccessLevelReq = GetAccessLevel;

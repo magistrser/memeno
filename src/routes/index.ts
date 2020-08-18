@@ -50,6 +50,8 @@ const routes = {
                 get: '/api/engine/users/get',
                 rateTags: '/api/engine/users/rate-tags',
                 remove: '/api/engine/users/remove',
+                setAccessLevel: '/api/engine/users/set-access-level',
+                getAccessLevel: '/api/engine/users/get-access-level',
             },
             memes: {
                 add: '/api/engine/mem/add',

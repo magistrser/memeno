@@ -18,7 +18,8 @@ CREATE TABLE users (
   user_id SERIAL NOT NULL PRIMARY KEY,
   auth_type TEXT NOT NULL, 
   rating BIGINT DEFAULT 0,
-  rating_update_time BIGINT NOT NULL
+  rating_update_time BIGINT NOT NULL,
+  access_level TEXT NOT NULL DEFAULT 'common'
 );
 
 /*

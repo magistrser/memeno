@@ -1,7 +1,9 @@
 import IUsersBaseQueries, {
     CreateNewUser,
+    GetAccessLevel,
     GetUser,
     RemoveUser,
+    SetAccessLevel,
     UpdateUserRating,
 } from '../../../IQueries/IUsersQueries/IUsersBaseQueries';
 import {
@@ -11,6 +13,7 @@ import {
 import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
 import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
+import { AccessLevel } from '../../../IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
 
 export default class UsersBaseQueries implements IUsersBaseQueries {
     constructor(private db: IDatabase<IExtensions>) {}
@@ -52,5 +55,18 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
         return this.db.none('DELETE FROM users WHERE user_id = $1', [
             req.user_id,
         ]);
+    }
+    setAccessLevel(req: SetAccessLevel): Promise<void> {
+        return this.db.none(
+            'UPDATE users SET access_level = ${access_level} WHERE user_id = ${user_id}',
+            req
+        );
+    }
+    getAccessLevel(req: GetAccessLevel): Promise<AccessLevel> {
+        return this.db.one(
+            'SELECT access_level FROM users WHERE user_id = ${user_id}',
+            req,
+            (res) => res.access_level
+        );
     }
 }

@@ -4,11 +4,13 @@ import express from 'express';
 import {
     AddVkUserReq,
     CreateNewUserReq,
+    GetAccessLevelReq,
     GetUserReq,
     GetVkByUserIdReq,
     GetVkByVkIdReq,
     RateTagsReq,
     RemoveUserReq,
+    SetAccessLevelReq,
 } from '../../../api/engine/users/requests';
 import {
     CreateNewUserRes,
@@ -107,6 +109,29 @@ router.delete(
 
         await UsersEngine.removeUser(removeUserReq);
         res.json();
+    }
+);
+router.post(
+    routes.server.engine.users.setAccessLevel,
+    async (req: IGetUserAuthInfoRequest, res) => {
+        const setAccessLevelReq: SetAccessLevelReq = {
+            user_id: req.body.user_id,
+            access_level: req.body.access_level,
+        };
+
+        await UsersEngine.setAccessLevel(setAccessLevelReq);
+        res.json();
+    }
+);
+router.get(
+    routes.server.engine.users.getAccessLevel,
+    async (req: IGetUserAuthInfoRequest, res) => {
+        const getAccessLevelReq: GetAccessLevelReq = {
+            user_id: req.body.user_id,
+        };
+
+        const accessLevel = await UsersEngine.getAccessLevel(getAccessLevelReq);
+        res.json(accessLevel);
     }
 );
 
