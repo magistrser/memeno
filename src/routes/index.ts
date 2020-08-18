@@ -11,6 +11,7 @@ import {
 
 const routes = {
     root: '/',
+    development: '/development',
     login: '/login/:fail',
     waiting: '/waiting',
     react: {
