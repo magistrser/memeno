@@ -1,5 +1,3 @@
-import { MemClient } from '../../../../api/responses';
-
 export const SpecialMemes = {
     EndMem: {
         mem_id: -1,

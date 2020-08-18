@@ -1,7 +1,3 @@
-/**
- * Passport configuration goes here
- */
-
 import config from '../config';
 import routes from '../routes';
 import { Strategy as VKontakteStrategy } from 'passport-vkontakte';

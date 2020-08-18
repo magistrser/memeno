@@ -2,16 +2,11 @@
 
 Memeno project. Enjoy memes with swipe mechanics.
 
-## Use scripts
+## What are scripts available?
 
-### Run memeno
+Available commands you can find in `package-scripts.js`
+For example for load memes in DB you must write:
 
-```sh
-       yarn start
 ```
-
-### Run memeno in development mode
-
-```sh
-       yarn dev
+yarn start development.loadMemes
 ```

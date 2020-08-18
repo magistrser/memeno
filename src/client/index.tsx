@@ -5,6 +5,7 @@ import './index.css';
 import MobilePhoneScreen from './components/MobilePhoneScreen';
 import MainPageRouter from './pages/MainPageRouter';
 
+// eslint-disable-next-line
 // @ts-ignore
 import configureStore from 'ConfigureStoreWebpackResolved';
 
