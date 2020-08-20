@@ -1,19 +1,15 @@
 import routes from '../../../routes/routes';
 import express from 'express';
 import TagsEngine from '../../engine/postresql/TagsEngine';
-import {
-    AddTagsReq,
-    RateTagsReq,
-    RemoveTagReq,
-} from '../../../routes/engine/tags/requests';
+import { Tags } from '../../../routes/engine/tags';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 const router = express.Router();
 
-router.post(
-    routes.server.engine.tags.add,
+router[Tags.AddTags.Type](
+    Tags.AddTags.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const addTagsReq: AddTagsReq = {
+        const addTagsReq: Tags.AddTags.Req = {
             tags: req.body.tags,
         };
 
@@ -21,10 +17,10 @@ router.post(
         res.json();
     }
 );
-router.post(
-    routes.server.engine.tags.rate,
+router[Tags.RateTags.Type](
+    Tags.RateTags.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const rateTagsReq: RateTagsReq = {
+        const rateTagsReq: Tags.RateTags.Req = {
             tags: req.body.tags,
             like: req.body.like,
         };
@@ -33,10 +29,10 @@ router.post(
         res.json();
     }
 );
-router.post(
-    routes.server.engine.tags.remove,
+router[Tags.RemoveTags.Type](
+    Tags.RemoveTags.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const removeTagsReq: RemoveTagReq = {
+        const removeTagsReq: Tags.RemoveTags.Req = {
             tags: req.body.tags,
         };
 
