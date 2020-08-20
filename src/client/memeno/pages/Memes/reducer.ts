@@ -1,6 +1,6 @@
-import Rating from '../../business-logic/mem-provider/Rating';
-import { MemClient } from '../../../routes/MemClient';
-import { SpecialMemes } from '../../business-logic/mem-provider/resources-folder-mem-provider/SpecialMemes';
+import Rating from '../../../business-logic/mem-provider/Rating';
+import { MemClient } from '../../../../routes/MemClient';
+import { SpecialMemes } from '../../../business-logic/mem-provider/resources-folder-mem-provider/SpecialMemes';
 import { Actions } from './actions';
 import { INIT_MEMES_ACTION } from './actions/InitMemes';
 import { SWIPE_MEMES_ACTION } from './actions/SwipeEnd';

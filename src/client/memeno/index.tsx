@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
-import MobilePhoneScreen from './components/MobilePhoneScreen';
-import MainPageRouter from './components/MainPageRouter';
+import MobilePhoneScreen from '../components/MobilePhoneScreen';
+import MainPageRouter from '../components/MainPageRouter';
 import Memeno from './pages/Memes';
 
 // eslint-disable-next-line
 // @ts-ignore
 import configureStore from 'ConfigureStoreWebpackResolved';
-import routes from '../routes/routes';
+import routes from '../../routes/routes';
 
 const store = configureStore();
 

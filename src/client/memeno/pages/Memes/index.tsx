@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
-import MenuButton from '../../components/MenuButton';
-import Header from '../../components/Header';
-import AvatarButton from '../../components/AvatarButton';
-import StaticMem from '../../components/MemesSwiper';
-import DislikeButton from '../../components/DislikeButton';
-import LikeButton from '../../components/LikeButton';
-import Waiting from '../../components/Waiting';
-import Rating from '../../business-logic/mem-provider/Rating';
-import memProvider from '../../business-logic/mem-provider/ServerMemProvider';
+import MenuButton from '../../../components/MenuButton';
+import Header from '../../../components/Header';
+import AvatarButton from '../../../components/AvatarButton';
+import StaticMem from '../../../components/MemesSwiper';
+import DislikeButton from '../../../components/DislikeButton';
+import LikeButton from '../../../components/LikeButton';
+import Waiting from '../../../components/Waiting';
+import Rating from '../../../business-logic/mem-provider/Rating';
+import memProvider from '../../../business-logic/mem-provider/ServerMemProvider';
 import { GlobalState } from '../../store/initialState';
 import { connect, ConnectedProps } from 'react-redux';
 import actions from './actions';
@@ -76,7 +76,7 @@ const Index: React.FC<Props> = (props) => {
                 </div>
                 <div className="memeno-avatar-button">
                     <AvatarButton
-                        img={require('../../resources/avatar-example.jpg')}
+                        img={require('../../../resources/avatar-example.jpg')}
                     />
                 </div>
             </div>

@@ -1,5 +1,5 @@
-import Rating from '../../../business-logic/mem-provider/Rating';
-import { MemClient } from '../../../../routes/MemClient';
+import Rating from '../../../../business-logic/mem-provider/Rating';
+import { MemClient } from '../../../../../routes/MemClient';
 
 export const SWIPE_MEMES_ACTION = 'swipe-memes';
 export type SwipeMemesPayload = {

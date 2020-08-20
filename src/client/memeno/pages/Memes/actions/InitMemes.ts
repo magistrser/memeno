@@ -1,4 +1,4 @@
-import { MemClient } from '../../../../routes/MemClient';
+import { MemClient } from '../../../../../routes/MemClient';
 
 export const INIT_MEMES_ACTION = 'init-memes';
 export type InitMemesPayload = {
