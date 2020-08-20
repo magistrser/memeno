@@ -1,9 +1,9 @@
 import express from 'express';
-import memesEngineRoutes from './memesEngineRoutes';
-import selectMemesEngineRoutes from './selectMemesEngineRoutes';
-import tagsEngineRoutes from './tagsEngineRoutes';
-import usersEngineRoutes from './usersEngingeRoutes';
-import devEngineRoutes from './devEngineRoutes';
+import memesEngineRoutes from './memes';
+import selectMemesEngineRoutes from './select';
+import tagsEngineRoutes from './tags';
+import usersEngineRoutes from './users';
+import devEngineRoutes from './dev';
 
 const router = express.Router();
 

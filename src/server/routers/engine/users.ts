@@ -1,44 +1,27 @@
-import routes from '../../../routes/routes';
 import UsersEngine from '../../engine/postresql/UsersEngine';
 import express from 'express';
-import {
-    AddVkUserReq,
-    CreateNewUserReq,
-    GetAccessLevelReq,
-    GetUserReq,
-    GetVkByUserIdReq,
-    GetVkByVkIdReq,
-    RateTagsReq,
-    RemoveUserReq,
-    SetAccessLevelReq,
-} from '../../../routes/engine/users/requests';
-import {
-    CreateNewUserRes,
-    GetUserRes,
-    GetVkByUserIdRes,
-    GetVkUserByVkIdRes,
-} from '../../../routes/engine/users/responses';
+import { Users } from '../../../routes/engine/users';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 const router = express.Router();
 
-router.post(
-    routes.server.engine.users.create,
+router[Users.CreateNewUser.Type](
+    Users.CreateNewUser.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const createNewUserReq: CreateNewUserReq = {
+        const createNewUserReq: Users.CreateNewUser.Req = {
             auth_type: req.body.auth_type,
         };
 
-        const user_id: CreateNewUserRes = await UsersEngine.createNewUser(
+        const user_id: Users.CreateNewUser.Res = await UsersEngine.createNewUser(
             createNewUserReq
         );
         res.json(user_id);
     }
 );
-router.post(
-    routes.server.engine.users.addVk,
+router[Users.AddVkUser.Type](
+    Users.AddVkUser.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const addVkUserReq: AddVkUserReq = {
+        const addVkUserReq: Users.AddVkUser.Req = {
             vk_id: req.body.vk_id,
             email: req.body.email,
             full_name: req.body.full_name,
@@ -50,47 +33,47 @@ router.post(
         res.json();
     }
 );
-router.get(
-    routes.server.engine.users.getVkByUserId,
+router[Users.GetVkUserByUserId.Type](
+    Users.GetVkUserByUserId.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const getVkUserByUserIdReq: GetVkByUserIdReq = {
+        const getVkUserByUserIdReq: Users.GetVkUserByUserId.Req = {
             user_id: req.body.user_id,
         };
 
-        const vkUser: GetVkByUserIdRes = await UsersEngine.getVkUserByUserId(
+        const vkUser: Users.GetVkUserByUserId.Res = await UsersEngine.getVkUserByUserId(
             getVkUserByUserIdReq
         );
         res.json(vkUser);
     }
 );
-router.get(
-    routes.server.engine.users.getVkByVkId,
+router[Users.GetVkUserByVkId.Type](
+    Users.GetVkUserByVkId.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const getVkUserByVkIdReq: GetVkByVkIdReq = {
+        const getVkUserByVkIdReq: Users.GetVkUserByVkId.Req = {
             vk_id: req.body.vk_id,
         };
 
-        const vkUser: GetVkUserByVkIdRes = await UsersEngine.getVkUserByVkId(
+        const vkUser: Users.GetVkUserByVkId.Res = await UsersEngine.getVkUserByVkId(
             getVkUserByVkIdReq
         );
         res.json(vkUser);
     }
 );
-router.get(
-    routes.server.engine.users.get,
+router[Users.GetUser.Type](
+    Users.GetUser.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const getUserReq: GetUserReq = {
+        const getUserReq: Users.GetUser.Req = {
             user_id: req.body.user_id,
         };
 
-        const user: GetUserRes = await UsersEngine.getUser(getUserReq);
+        const user: Users.GetUser.Res = await UsersEngine.getUser(getUserReq);
         res.json(user);
     }
 );
-router.post(
-    routes.server.engine.users.rateTags,
+router[Users.RateTags.Type](
+    Users.RateTags.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const rateTagsReq: RateTagsReq = {
+        const rateTagsReq: Users.RateTags.Req = {
             user_id: req.body.user_id,
             tags: req.body.tags,
             like: req.body.like,
@@ -100,10 +83,10 @@ router.post(
         res.json();
     }
 );
-router.delete(
-    routes.server.engine.users.remove,
+router[Users.RemoveUser.Type](
+    Users.RemoveUser.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const removeUserReq: RemoveUserReq = {
+        const removeUserReq: Users.RemoveUser.Req = {
             user_id: req.body.user_id,
         };
 
@@ -111,10 +94,10 @@ router.delete(
         res.json();
     }
 );
-router.post(
-    routes.server.engine.users.setAccessLevel,
+router[Users.SetAccessLevel.Type](
+    Users.SetAccessLevel.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const setAccessLevelReq: SetAccessLevelReq = {
+        const setAccessLevelReq: Users.SetAccessLevel.Req = {
             user_id: req.body.user_id,
             access_level: req.body.access_level,
         };
@@ -123,10 +106,10 @@ router.post(
         res.json();
     }
 );
-router.get(
-    routes.server.engine.users.getAccessLevel,
+router[Users.GetAccessLevel.Type](
+    Users.GetAccessLevel.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const getAccessLevelReq: GetAccessLevelReq = {
+        const getAccessLevelReq: Users.GetAccessLevel.Req = {
             user_id: req.body.user_id,
         };
 
