@@ -24,7 +24,7 @@ import MemesEngine from '../server/engine/postresql/MemesEngine';
         const mem = fs.readFileSync(path.join(absoluteMemesFolder, file));
 
         const tagsFilePath = path.join(absoluteMemesFolder, tagsFileName);
-        if(!fs.existsSync(tagsFilePath)) {
+        if (!fs.existsSync(tagsFilePath)) {
             continue;
         }
 

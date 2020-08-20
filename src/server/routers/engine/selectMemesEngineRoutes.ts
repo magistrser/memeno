@@ -4,8 +4,8 @@ import express from 'express';
 import {
     GetAverageRes,
     GetTopRes,
-} from '../../../api/engine/selectMemesEngine/responses';
-import { GetTopReq } from '../../../api/engine/selectMemesEngine/requests';
+} from '../../../routes/engine/selectMemesEngine/responses';
+import { GetTopReq } from '../../../routes/engine/selectMemesEngine/requests';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 const router = express.Router();

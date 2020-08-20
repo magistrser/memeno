@@ -5,8 +5,8 @@ import {
     AddMemReq,
     RateMemReq,
     RemoveMemReq,
-} from '../../../api/engine/memes/requests';
-import { AddMemRes } from '../../../api/engine/memes/responses';
+} from '../../../routes/engine/memes/requests';
+import { AddMemRes } from '../../../routes/engine/memes/responses';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 const router = express.Router();

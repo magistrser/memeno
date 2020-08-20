@@ -2,8 +2,9 @@ import { series } from 'nps-utils';
 
 const nodemonServer = 'nodemon';
 const clientWebpackProd = 'webpack --mode production';
-const clientWebpackDev = 'cross-env MODE=DEV webpack --mode development --devtool inline-source-map';
-const devClientWebpack = 'webpack --config webpack.dev-client.config.js'
+const clientWebpackDev =
+    'cross-env MODE=DEV webpack --mode development --devtool inline-source-map';
+const devClientWebpack = 'webpack --config webpack.dev-client.config.js';
 
 export default {
     scripts: {
@@ -18,5 +19,3 @@ export default {
         test: 'jest',
     },
 };
-
-

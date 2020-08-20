@@ -11,13 +11,13 @@ import {
     RateTagsReq,
     RemoveUserReq,
     SetAccessLevelReq,
-} from '../../../api/engine/users/requests';
+} from '../../../routes/engine/users/requests';
 import {
     CreateNewUserRes,
     GetUserRes,
     GetVkByUserIdRes,
     GetVkUserByVkIdRes,
-} from '../../../api/engine/users/responses';
+} from '../../../routes/engine/users/responses';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 const router = express.Router();

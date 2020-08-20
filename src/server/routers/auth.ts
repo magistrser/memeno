@@ -23,9 +23,12 @@ router.get(routes.server.auth.fail, (req, res) => {
     res.redirect(routes.react.login.fail);
 });
 
-router.get(Auth.IsAuth.Route, (req: IGetUserAuthInfoRequest, res) => {
-    const isAuth: Auth.IsAuth.Res = req.isAuthenticated();
-    res.json(isAuth);
-});
+router[Auth.IsAuth.Type](
+    Auth.IsAuth.Route,
+    (req: IGetUserAuthInfoRequest, res) => {
+        const isAuth: Auth.IsAuth.Res = req.isAuthenticated();
+        res.json(isAuth);
+    }
+);
 
 export default router;

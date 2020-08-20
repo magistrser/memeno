@@ -4,7 +4,7 @@ import axios from 'axios';
 import { SpecialMemes } from './resources-folder-mem-provider/SpecialMemes';
 import routes from '../../../routes/routes';
 import { MemClient } from '../../../routes/MemClient';
-import { GetTopRes } from '../../../api/engine/selectMemesEngine/responses';
+import { GetTopRes } from '../../../routes/engine/selectMemesEngine/responses';
 
 class ServerMemProvider implements IMemProvider {
     private memes: MemClient[];

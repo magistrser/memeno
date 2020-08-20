@@ -5,7 +5,7 @@ import {
     AddTagsReq,
     RateTagsReq,
     RemoveTagReq,
-} from '../../../api/engine/tags/requests';
+} from '../../../routes/engine/tags/requests';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 const router = express.Router();

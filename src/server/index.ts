@@ -31,7 +31,10 @@ app.use(passport.session());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-app.use(routes.development, express.static(path.join(__dirname, '../../dist-dev-client')));
+app.use(
+    routes.development,
+    express.static(path.join(__dirname, '../../dist-dev-client'))
+);
 
 app.use(routes.root, express.static(path.join(__dirname, '../../dist')));
 app.use(routes.login, express.static(path.join(__dirname, '../../dist')));
