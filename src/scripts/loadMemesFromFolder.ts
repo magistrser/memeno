@@ -20,12 +20,15 @@ import MemesEngine from '../server/engine/postresql/MemesEngine';
         const file = files[i];
         const name = path.parse(file).name;
         const tagsFileName = name + tagsExtension;
+
         const mem = fs.readFileSync(path.join(absoluteMemesFolder, file));
 
-        const tagsFile = fs.readFileSync(
-            path.join(absoluteMemesFolder, tagsFileName),
-            'utf-8'
-        );
+        const tagsFilePath = path.join(absoluteMemesFolder, tagsFileName);
+        if(!fs.existsSync(tagsFilePath)) {
+            continue;
+        }
+
+        const tagsFile = fs.readFileSync(tagsFilePath, 'utf-8');
         const tags = tagsFile.split(/\r?\n/);
 
         await MemesEngine.addMem({
