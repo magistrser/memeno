@@ -7,7 +7,7 @@ import passport from 'passport';
 import configurePassport from './passport';
 
 import config from '../config';
-import routes from '../routes';
+import routes from '../routes/routes';
 import auth from './routers/auth';
 import engine from './routers/engine';
 

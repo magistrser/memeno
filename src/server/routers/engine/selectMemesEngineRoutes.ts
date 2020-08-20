@@ -1,4 +1,4 @@
-import routes from '../../../routes';
+import routes from '../../../routes/routes';
 import SelectMemesEngine from '../../engine/postresql/SelectMemesEngine';
 import express from 'express';
 import {

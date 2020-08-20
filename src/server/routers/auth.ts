@@ -1,8 +1,8 @@
 import express from 'express';
 import passport from 'passport';
 
-import routes from '../../routes';
-import { IsAuthRes } from '../../api/auth/response';
+import routes from '../../routes/routes';
+import { Auth } from '../../routes/auth';
 import { IGetUserAuthInfoRequest } from '../types';
 
 const router = express.Router();
@@ -23,8 +23,8 @@ router.get(routes.server.auth.fail, (req, res) => {
     res.redirect(routes.react.login.fail);
 });
 
-router.get(routes.server.auth.isAuth, (req: IGetUserAuthInfoRequest, res) => {
-    const isAuth: IsAuthRes = req.isAuthenticated();
+router.get(Auth.IsAuth.Route, (req: IGetUserAuthInfoRequest, res) => {
+    const isAuth: Auth.IsAuth.Res = req.isAuthenticated();
     res.json(isAuth);
 });
 

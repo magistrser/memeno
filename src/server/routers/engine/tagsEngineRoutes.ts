@@ -1,4 +1,4 @@
-import routes from '../../../routes';
+import routes from '../../../routes/routes';
 import express from 'express';
 import TagsEngine from '../../engine/postresql/TagsEngine';
 import {

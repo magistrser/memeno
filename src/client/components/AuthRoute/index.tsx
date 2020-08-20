@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Route, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-import routes from '../../../routes';
-
 import Waiting from '../../pages/Waiting';
-import { IsAuthRes } from '../../../api/auth/response';
+import { Auth } from '../../../routes/auth';
 
 const Index = ({ children, authPath, errorPath, path, ...rest }) => {
     const [isAuth, setAuth] = useState(false);
@@ -16,7 +14,7 @@ const Index = ({ children, authPath, errorPath, path, ...rest }) => {
     useEffect(() => {
         setAuth(false);
         axios
-            .get<IsAuthRes>(routes.server.auth.isAuth)
+            .get<Auth.IsAuth.Res>(Auth.IsAuth.Route)
             .then((res) => {
                 const { from } =
                     location.state || res.data

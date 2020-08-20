@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import routes from '../../../routes';
+import routes from '../../../routes/routes';
 
 import AuthRoute from '../../components/AuthRoute';
 import Memeno from '../Memes';

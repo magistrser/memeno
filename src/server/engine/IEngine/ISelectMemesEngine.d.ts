@@ -1,6 +1,6 @@
 import { UserId } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/User';
 import { MemId } from '../../db/IQueries/IMemesQueries/IMemesBaseQueries/Mem';
-import { MemClient } from '../../../api/responses';
+import { MemClient } from '../../../routes/MemClient';
 
 export type GetTop = {
     user_id: UserId;

@@ -1,6 +1,6 @@
 import ISelectMemesEngine, { GetTop } from '../IEngine/ISelectMemesEngine';
 import { db } from '../../db/postresql';
-import { MemClient } from '../../../api/responses';
+import { MemClient } from '../../../routes/MemClient';
 
 const SelectMemesEngine: ISelectMemesEngine = class {
     static getAverageTopRating(): Promise<number> {

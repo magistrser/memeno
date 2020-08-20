@@ -1,13 +1,4 @@
 import { LoginResult } from './LoginResult';
-import {
-    DropUserTagsRating,
-    DropUserUsersRating,
-    DropUserWatchedMemes,
-    SetMemRating,
-    SetUserRating,
-    SetUserTagRating,
-    SetUserUserRating,
-} from '../server/db/IQueries/IDevQueries/IDevBaseQueries';
 
 const routes = {
     root: '/',

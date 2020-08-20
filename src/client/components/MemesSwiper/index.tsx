@@ -5,7 +5,7 @@ import './index.css';
 import './swipe.css';
 
 import Rating from '../../business-logic/mem-provider/Rating';
-import { MemClient } from '../../../api/responses';
+import { MemClient } from '../../../routes/MemClient';
 
 interface IStaticMem {
     updatingTriggerCounter: number;
