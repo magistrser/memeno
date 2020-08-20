@@ -18,7 +18,7 @@ const Index = ({ children, authPath, errorPath, path, ...rest }) => {
             .then((res) => {
                 const { from } =
                     location.state || res.data
-                        ? { from: { pathname: path } }
+                        ? { from: { pathname: location.state } }
                         : { from: { pathname: authPath } };
 
                 setAuth(res.data);

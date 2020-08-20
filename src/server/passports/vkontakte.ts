@@ -3,8 +3,6 @@ import routes from '../../routes/routes';
 import { Strategy as VKontakteStrategy } from 'passport-vkontakte';
 import UsersEngine from '../engine/postresql/UsersEngine';
 
-function createStrategy(callback: string) {}
-
 export default (passport) => {
     passport.use(
         new VKontakteStrategy(

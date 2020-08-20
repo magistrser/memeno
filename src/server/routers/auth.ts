@@ -39,7 +39,7 @@ router.get(routes.server.auth.success, (req, res) => {
     res.redirect(routes.react.root);
 });
 router.get(routes.server.development.auth.success, (req, res) => {
-    res.redirect(routes.react.development.root);
+    res.redirect(routes.react.development.main.users);
 });
 router.get(routes.server.auth.fail, (req, res) => {
     res.redirect(routes.react.login.fail);

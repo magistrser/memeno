@@ -32,10 +32,17 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(
-    routes.development,
+    routes.development.root,
     express.static(path.join(__dirname, '../../dist-dev-client'))
 );
-app.use(routes.developmentLogin, express.static(path.join(__dirname, '../../dist-dev-client')));
+app.use(
+    routes.development.menu,
+    express.static(path.join(__dirname, '../../dist-dev-client'))
+);
+app.use(
+    routes.development.login,
+    express.static(path.join(__dirname, '../../dist-dev-client'))
+);
 
 app.use(routes.root, express.static(path.join(__dirname, '../../dist')));
 app.use(routes.login, express.static(path.join(__dirname, '../../dist')));
@@ -46,6 +53,7 @@ app.use(auth);
 app.use(engine);
 
 app.use('*', (req, res) => {
+    console.log('[!] router *');
     res.redirect(routes.react.root);
 });
 

@@ -1,9 +1,13 @@
 import { LoginResult } from './LoginResult';
+import { MenuCategory } from './development/MenuCategory';
 
 const routes = {
     root: '/',
-    development: '/development',
-    developmentLogin: '/development/login/:fail',
+    development: {
+        root: '/development',
+        login: '/development/login/:fail',
+        menu: '/development/main/:menu',
+    },
     login: '/login/:fail',
     waiting: '/waiting',
     react: {
@@ -15,7 +19,11 @@ const routes = {
             serverErrorResponse: `/login/${LoginResult.serverErrorResponse}`,
         },
         development: {
-            root: '/development',
+            main: {
+                users: `/development/main/${MenuCategory.Users}`,
+                memes: `/development/main/${MenuCategory.Memes}`,
+                dev: `/development/main/${MenuCategory.Dev}`,
+            },
             login: {
                 noFail: `/development/login/${LoginResult.noFail}`,
                 fail: `/development/login/${LoginResult.fail}`,

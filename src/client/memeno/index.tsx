@@ -17,7 +17,8 @@ ReactDOM.render(
     <Provider store={store}>
         <MobilePhoneScreen>
             <MainPageRouter
-                rootPath={routes.root}
+                authPath={routes.root}
+                contentPath={routes.root}
                 loginPath={routes.login}
                 loginNoFailPath={routes.react.login.noFail}
                 loginServerErrorResponse={

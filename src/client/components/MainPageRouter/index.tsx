@@ -5,7 +5,8 @@ import Login from '../Login';
 
 type Props = {
     loginPath: string;
-    rootPath: string;
+    authPath: string;
+    contentPath: string;
     loginNoFailPath: string;
     loginServerErrorResponse: string;
     serverLoginPath: string;
@@ -20,11 +21,12 @@ const Index: React.FC<Props> = (props) => {
                     serverLoginPath={props.serverLoginPath}
                 />
                 <AuthRoute
-                    path={props.rootPath}
+                    path={props.authPath}
+                    contentPath={props.contentPath}
                     authPath={props.loginNoFailPath}
                     errorPath={props.loginServerErrorResponse}
                 >
-                    <Route path={props.rootPath}>{props.children}</Route>
+                    <Route path={props.contentPath}>{props.children}</Route>
                 </AuthRoute>
             </Switch>
         </Router>

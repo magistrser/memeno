@@ -5,29 +5,36 @@
     padding: 0;
 }
 
-@border-size: 2px;
-@border-color: green;
+@buttons-color: black;
+
+@border-size: 1px;
+@border-color: lightgray;
 @border: @border-color solid @border-size;
+.borders {
+    border-top: @border;
+    border-right: @border;
+}
 
 .dev-menu li a {
-    color: aqua;
+    display: block;
+    color: lightgray;
     text-decoration: none;
 }
 
 .dev-menu li {
-    background: #ffed2b;
+    background: @buttons-color;
     text-align: center;
-    border: @border;
     padding: 5% 0;
+    .borders();
 }
 
 #selected-button {
     border-right: none;
-    background: black;
+    background: linear-gradient(90deg, @buttons-color 60%, #373737 100%);
 }
 
 #free-space {
     height: 100%;
     border-right: @border;
-    background: inherit;
+    background: @buttons-color;
 }
