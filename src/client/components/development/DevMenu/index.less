@@ -1,3 +1,5 @@
+@import '../dark-style';
+
 .dev-menu {
     list-style-type: none;
     margin: auto;
@@ -5,11 +7,6 @@
     padding: 0;
 }
 
-@buttons-color: black;
-
-@border-size: 1px;
-@border-color: lightgray;
-@border: @border-color solid @border-size;
 .borders {
     border-top: @border;
     border-right: @border;
@@ -22,7 +19,7 @@
 }
 
 .dev-menu li {
-    background: @buttons-color;
+    background: @color;
     text-align: center;
     padding: 5% 0;
     .borders();
@@ -30,11 +27,11 @@
 
 #selected-button {
     border-right: none;
-    background: linear-gradient(90deg, @buttons-color 60%, #373737 100%);
+    background: linear-gradient(90deg, @color 60%, #373737 100%);
 }
 
 #free-space {
     height: 100%;
     border-right: @border;
-    background: @buttons-color;
+    background: @color;
 }

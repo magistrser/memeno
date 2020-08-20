@@ -1,6 +1,8 @@
+@import '../../components/development/dark-style';
+
 body {
     margin: 0;
-    background-color: #373737;
+    background-color: @content-color;
 }
 
 .development {
@@ -16,10 +18,12 @@ body {
 .main {
     display: grid;
     grid-template-rows: [screen-row-begin] 1fr [screen-row-end];
-    grid-template-columns: [buttons-column-begin] minmax(100px, 200px) [controls-column-begin] minmax(
-            400px,
-            auto
-        ) [controls-column-end];
+    grid-template-columns:
+        [buttons-column-begin] minmax(
+            100px,
+            200px
+        ) [controls-column-begin] minmax(400px, auto)
+        [output-column-start] 200px [output-column-end];
     justify-content: stretch;
     align-content: stretch;
 }
@@ -31,5 +35,10 @@ body {
 
 .controls {
     grid-area: screen-row-begin / controls-column-begin / screen-row-end /
-        controls-column-end;
+        output-column-start;
+}
+
+.output {
+    grid-area: screen-row-begin / output-column-start / screen-row-end /
+        output-column-end;
 }

@@ -1,0 +1,18 @@
+@keyframes blinkAnimation {
+    from {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.blink {
+    animation-name: blinkAnimation;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-timing-function: step-end;
+}
