@@ -88,7 +88,7 @@ const Index: React.FC<IStaticMem> = (props) => {
     const onCurrentAnimationEnd = () => {
         handleFinalizeSwipe();
         setSwipeEnd(true);
-        props.onSwipeEnd();
+        props.onSwipeEnd ? props.onSwipeEnd() : {};
     };
 
     const swipeableHandlers = useSwipeable({
@@ -100,11 +100,11 @@ const Index: React.FC<IStaticMem> = (props) => {
                 }
                 setSwipeEnd(false);
                 if (eventData.dir === 'Left') {
-                    props.onDislikeClick();
+                    props.onDislikeClick ? props.onDislikeClick() : {};
                     return;
                 }
                 if (eventData.dir === 'Right') {
-                    props.onLikeClick();
+                    props.onLikeClick ? props.onLikeClick() : {};
                     return;
                 }
             }

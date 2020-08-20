@@ -2,9 +2,9 @@ import { db } from '../../../index';
 
 export default class TagsQueriesUtils {
     static async createTag(
-        next: (args: any[]) => Promise<void>,
+        next: (args: any[]) => Promise<null>,
         args: any[] = []
-    ): Promise<void> {
+    ): Promise<null> {
         const tag = Math.random().toString(16).substring(7);
         await db.tags.tagsBaseQueries.addTag({ tag });
 

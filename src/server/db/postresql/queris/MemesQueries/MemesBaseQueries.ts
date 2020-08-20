@@ -27,7 +27,7 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
             (res) => res.mem_id
         );
     }
-    updateMemRating(req: UpdateMemRating): Promise<void> {
+    updateMemRating(req: UpdateMemRating): Promise<null> {
         return this.db.none(
             'UPDATE memes SET rating = rating + $1, rating_update_time = $2 WHERE mem_id = $3',
             [
@@ -37,7 +37,7 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
             ]
         );
     }
-    getMem(req: GetMem): Promise<Mem> {
+    getMem(req: GetMem): Promise<Mem | null> {
         return this.db.oneOrNone(
             'SELECT * FROM memes WHERE mem_id = $1',
             [req.mem_id],
@@ -55,17 +55,17 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
             }
         );
     }
-    removeMem(req: RemoveMem): Promise<void> {
+    removeMem(req: RemoveMem): Promise<null> {
         return this.db.none('DELETE FROM memes WHERE mem_id = $1', [
             req.mem_id,
         ]);
     }
-    removeFromUsersMemes(req: RemoveMem): Promise<void> {
+    removeFromUsersMemes(req: RemoveMem): Promise<null> {
         return this.db.none('DELETE FROM users_memes WHERE mem_id = $1', [
             req.mem_id,
         ]);
     }
-    removeFromUsersWatchedMemes(req: RemoveMem): Promise<void> {
+    removeFromUsersWatchedMemes(req: RemoveMem): Promise<null> {
         return this.db.none(
             'DELETE FROM users_watched_memes WHERE mem_id = $1',
             [req.mem_id]

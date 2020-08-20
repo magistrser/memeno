@@ -12,9 +12,9 @@ export type GetUserWatchedMemIds = {
 export type RemoveFromUsersWatchedMemes = GetUserWatchedMemIds;
 
 interface IUsersWatchedMemesQueries {
-    addUserWatchedMem: (req: AddUserWatchedMem) => Promise<void>;
+    addUserWatchedMem: (req: AddUserWatchedMem) => Promise<null>;
     getUserWatchedMemIds: (req: GetUserWatchedMemIds) => Promise<MemId[]>;
     removeFromUsersWatchedMemes: (
         req: RemoveFromUsersWatchedMemes
-    ) => Promise<void>;
+    ) => Promise<null>;
 }

@@ -1,4 +1,5 @@
 import { UserId } from '../IUsersBaseQueries/User';
+import { VkUser } from '../IVkUsersQueries/VkUser';
 
 export type UserUserRating = {
     user_id: UserId;
@@ -24,10 +25,12 @@ export type RemoveFromUsersUsersRating = {
 };
 
 interface IUsersUsersRatingQueries {
-    addUserUserRating: (req: AddUserUserRating) => Promise<void>;
-    updateUserUserRating: (req: UpdateUserUserRating) => Promise<void>;
-    getUserUserRating: (req: GetUserUserRating) => Promise<UserUserRating>;
+    addUserUserRating: (req: AddUserUserRating) => Promise<null>;
+    updateUserUserRating: (req: UpdateUserUserRating) => Promise<null>;
+    getUserUserRating: (
+        req: GetUserUserRating
+    ) => Promise<UserUserRating | null>;
     removeFromUsersUsersRating: (
         req: RemoveFromUsersUsersRating
-    ) => Promise<void>;
+    ) => Promise<null>;
 }

@@ -12,7 +12,7 @@ export default class UsersWatchedMemesQueries
     implements IUsersWatchedMemesQueries {
     constructor(private db: IDatabase<IExtensions>) {}
 
-    addUserWatchedMem(req: AddUserWatchedMem): Promise<void> {
+    addUserWatchedMem(req: AddUserWatchedMem): Promise<null> {
         return this.db.none(
             'INSERT INTO users_watched_memes(user_id, mem_id, is_like, watched_time) VALUES($1, $2, $3, $4) ON CONFLICT (user_id, mem_id) DO NOTHING',
             [req.user_id, req.mem_id, req.like, new Date().getTime()]
@@ -27,7 +27,7 @@ export default class UsersWatchedMemesQueries
     }
     removeFromUsersWatchedMemes(
         req: RemoveFromUsersWatchedMemes
-    ): Promise<void> {
+    ): Promise<null> {
         return this.db.none(
             'DELETE FROM users_watched_memes WHERE user_id = $1',
             [req.user_id]

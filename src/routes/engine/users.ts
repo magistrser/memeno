@@ -24,49 +24,49 @@ export namespace Users {
     }
     export namespace AddVkUser {
         export type Req = AddVkUser;
-        export type Res = void;
+        export type Res = null;
         export const Rout = routes.server.engine.users.addVk;
         export const Type = RequestType.post;
     }
     export namespace GetVkUserByUserId {
         export type Req = GetVkUserByUserId;
-        export type Res = VkUser;
+        export type Res = VkUser | null;
         export const Rout = routes.server.engine.users.getVkByUserId;
         export const Type = RequestType.get;
     }
     export namespace GetVkUserByVkId {
         export type Req = GetVkUserByVkId;
-        export type Res = VkUser;
+        export type Res = VkUser | null;
         export const Rout = routes.server.engine.users.getVkByVkId;
         export const Type = RequestType.get;
     }
     export namespace GetUser {
         export type Req = GetUser;
-        export type Res = User;
+        export type Res = User | null;
         export const Rout = routes.server.engine.users.get;
         export const Type = RequestType.get;
     }
     export namespace RateTags {
         export type Req = RateTags;
-        export type Res = void;
+        export type Res = null;
         export const Rout = routes.server.engine.users.rateTags;
         export const Type = RequestType.post;
     }
     export namespace RemoveUser {
         export type Req = RemoveUser;
-        export type Res = void;
+        export type Res = null;
         export const Rout = routes.server.engine.users.remove;
         export const Type = RequestType.delete;
     }
     export namespace SetAccessLevel {
         export type Req = SetAccessLevel;
-        export type Res = void;
+        export type Res = null;
         export const Rout = routes.server.engine.users.setAccessLevel;
         export const Type = RequestType.post;
     }
     export namespace GetAccessLevel {
         export type Req = GetAccessLevel;
-        export type Res = AccessLevel;
+        export type Res = AccessLevel | null;
         export const Rout = routes.server.engine.users.getAccessLevel;
         export const Type = RequestType.get;
     }

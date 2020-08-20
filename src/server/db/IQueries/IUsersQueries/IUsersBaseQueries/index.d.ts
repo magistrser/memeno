@@ -1,6 +1,7 @@
 import { AuthType } from './AuthType';
 import { User, UserId } from './User';
 import { AccessLevel } from './AccessLevel';
+import { VkUser } from '../IVkUsersQueries/VkUser';
 
 export type CreateNewUser = {
     auth_type: AuthType;
@@ -25,9 +26,9 @@ export type GetAccessLevel = {
 
 export default interface IUsersBaseQueries {
     createNewUser(req: CreateNewUser): Promise<UserId>;
-    updateUserRating(req: UpdateUserRating): Promise<void>;
-    getUser(req: GetUser): Promise<User>;
-    removeUser(req: RemoveUser): Promise<void>;
-    setAccessLevel(req: SetAccessLevel): Promise<void>;
+    updateUserRating(req: UpdateUserRating): Promise<null>;
+    getUser(req: GetUser): Promise<User | null>;
+    removeUser(req: RemoveUser): Promise<null>;
+    setAccessLevel(req: SetAccessLevel): Promise<null>;
     getAccessLevel(req: GetAccessLevel): Promise<AccessLevel>;
 }

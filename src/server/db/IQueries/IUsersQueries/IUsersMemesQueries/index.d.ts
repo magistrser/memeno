@@ -11,7 +11,7 @@ export type GetUserMemIds = {
 export type RemoveFromUsersMemes = GetUserMemIds;
 
 interface IUsersMemesQueries {
-    addUserMem: (req: AddUserMem) => Promise<void>;
+    addUserMem: (req: AddUserMem) => Promise<null>;
     getUserMemIds: (req: GetUserMemIds) => Promise<MemId[]>;
-    removeFromUsersMemes: (req: RemoveFromUsersMemes) => Promise<void>;
+    removeFromUsersMemes: (req: RemoveFromUsersMemes) => Promise<null>;
 }

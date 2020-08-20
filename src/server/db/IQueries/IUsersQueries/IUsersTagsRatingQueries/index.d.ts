@@ -1,5 +1,6 @@
 import { UserId } from '../IUsersBaseQueries/User';
 import Tag, { TagId } from '../../ITagsQueries/ITagsBaseQueries/Tag';
+import { VkUser } from '../IVkUsersQueries/VkUser';
 
 export type Tag = {
     user_id: UserId;
@@ -23,10 +24,10 @@ export type RemoveFromUsersTagsRating = {
 };
 
 interface IUsersTagsRatingQueries {
-    addUserTagRating: (req: AddUserTagRating) => Promise<void>;
-    updateUserTagRating: (req: UpdateUserTagRating) => Promise<void>;
-    getUserTagRating: (req: GetUserTagRating) => Promise<Tag>;
+    addUserTagRating: (req: AddUserTagRating) => Promise<null>;
+    updateUserTagRating: (req: UpdateUserTagRating) => Promise<null>;
+    getUserTagRating: (req: GetUserTagRating) => Promise<Tag | null>;
     removeFromUsersTagsRating: (
         req: RemoveFromUsersTagsRating
-    ) => Promise<void>;
+    ) => Promise<null>;
 }

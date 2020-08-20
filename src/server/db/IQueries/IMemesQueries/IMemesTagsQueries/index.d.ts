@@ -11,7 +11,7 @@ export type GetMemTags = {
 export type RemoveMemTags = GetMemTags;
 
 export default interface IMemesTagsQueries {
-    addMemTag: (req: AddMemTag) => Promise<void>;
+    addMemTag: (req: AddMemTag) => Promise<null>;
     getMemTags: (req: GetMemTags) => Promise<TagId[]>;
-    removeMemTags: (req: RemoveMemTags) => Promise<void>;
+    removeMemTags: (req: RemoveMemTags) => Promise<null>;
 }

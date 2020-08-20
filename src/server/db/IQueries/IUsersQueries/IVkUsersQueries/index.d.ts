@@ -10,8 +10,8 @@ export type GetVkUserByUserId = {
 export type RemoveVkUser = GetVkUserByVkId;
 
 interface IVkUsersQueries {
-    addVkUserToVkUsers: (req: AddVkUserToVkUsers) => Promise<void>;
-    getVkUserByVkId: (req: GetVkUserByVkId) => Promise<VkUser>;
-    getVkUserByUserId: (req: GetVkUserByUserId) => Promise<VkUser>;
-    removeVkUser: (req: RemoveVkUser) => Promise<void>;
+    addVkUserToVkUsers: (req: AddVkUserToVkUsers) => Promise<null>;
+    getVkUserByVkId: (req: GetVkUserByVkId) => Promise<VkUser | null>;
+    getVkUserByUserId: (req: GetVkUserByUserId) => Promise<VkUser | null>;
+    removeVkUser: (req: RemoveVkUser) => Promise<null>;
 }

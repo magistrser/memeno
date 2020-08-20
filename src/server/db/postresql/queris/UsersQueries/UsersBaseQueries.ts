@@ -14,6 +14,7 @@ import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
 import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
 import { AccessLevel } from '../../../IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
+import { VkUser } from '../../../IQueries/IUsersQueries/IVkUsersQueries/VkUser';
 
 export default class UsersBaseQueries implements IUsersBaseQueries {
     constructor(private db: IDatabase<IExtensions>) {}
@@ -25,7 +26,7 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
             (res) => res.user_id
         );
     }
-    updateUserRating(req: UpdateUserRating): Promise<void> {
+    updateUserRating(req: UpdateUserRating): Promise<null> {
         return this.db.none(
             'UPDATE users SET rating = rating + $1, rating_update_time = $2 WHERE user_id = $3',
             [
@@ -35,7 +36,7 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
             ]
         );
     }
-    getUser(req: GetUser): Promise<User> {
+    getUser(req: GetUser): Promise<User | null> {
         return this.db.oneOrNone(
             'SELECT * FROM users WHERE user_id = $1',
             [req.user_id],
@@ -51,12 +52,12 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
             }
         );
     }
-    removeUser(req: RemoveUser): Promise<void> {
+    removeUser(req: RemoveUser): Promise<null> {
         return this.db.none('DELETE FROM users WHERE user_id = $1', [
             req.user_id,
         ]);
     }
-    setAccessLevel(req: SetAccessLevel): Promise<void> {
+    setAccessLevel(req: SetAccessLevel): Promise<null> {
         return this.db.none(
             'UPDATE users SET access_level = ${access_level} WHERE user_id = ${user_id}',
             req

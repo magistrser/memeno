@@ -39,12 +39,12 @@ const UsersEngine: IUsersEngine = class {
             return user_id;
         });
     }
-    static getVkUserByVkId(req: GetVkUserByVkId): Promise<VkUser> {
+    static getVkUserByVkId(req: GetVkUserByVkId): Promise<VkUser | null> {
         return db.tx(async (transaction) => {
             return transaction.users.vkUsersQueries.getVkUserByVkId(req);
         });
     }
-    static getVkUserByUserId(req: GetVkUserByUserId): Promise<VkUser> {
+    static getVkUserByUserId(req: GetVkUserByUserId): Promise<VkUser | null> {
         return db.tx(async (transaction) => {
             return transaction.users.vkUsersQueries.getVkUserByUserId(req);
         });
@@ -52,7 +52,7 @@ const UsersEngine: IUsersEngine = class {
     static createNewUser(req: CreateNewUser): Promise<UserId> {
         return db.users.usersBaseQueries.createNewUser(req);
     }
-    static getUser(req: GetUser): Promise<User> {
+    static getUser(req: GetUser): Promise<User | null> {
         return db.users.usersBaseQueries.getUser(req);
     }
     static rateTags(req: RateTags): Promise<void> {
@@ -87,21 +87,26 @@ const UsersEngine: IUsersEngine = class {
                         const vk_user = await transaction.users.vkUsersQueries.getVkUserByUserId(
                             req
                         );
-                        await transaction.users.vkUsersQueries.removeVkUser({
-                            vk_id: vk_user.vk_id,
-                        });
-                        await transaction.users.usersBaseQueries.removeUser(
-                            req
-                        );
+
+                        if (vk_user) {
+                            await transaction.users.vkUsersQueries.removeVkUser(
+                                {
+                                    vk_id: vk_user.vk_id,
+                                }
+                            );
+                            await transaction.users.usersBaseQueries.removeUser(
+                                req
+                            );
+                        }
                     }
                 }
             }
         });
     }
-    static setAccessLevel(req: SetAccessLevel): Promise<void> {
+    static setAccessLevel(req: SetAccessLevel): Promise<null> {
         return db.users.usersBaseQueries.setAccessLevel(req);
     }
-    static getAccessLevel(req: GetAccessLevel): Promise<AccessLevel> {
+    static getAccessLevel(req: GetAccessLevel): Promise<AccessLevel | null> {
         return db.users.usersBaseQueries.getAccessLevel(req);
     }
 };

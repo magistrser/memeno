@@ -13,10 +13,10 @@ export type GetTag = {
 export type RemoveTag = GetTag;
 
 export interface ITagsBaseQueries {
-    addTag: (req: AddTag) => Promise<void>;
-    updateTagRating: (req: UpdateTagRating) => Promise<void>;
-    getTag: (req: GetTag) => Promise<Tag>;
-    removeTag: (req: RemoveTag) => Promise<void>;
-    removeTagFromMemesTags: (req: RemoveTag) => Promise<void>;
-    removeTagFromUsersTagsRating: (req: RemoveTag) => Promise<void>;
+    addTag: (req: AddTag) => Promise<null>;
+    updateTagRating: (req: UpdateTagRating) => Promise<null>;
+    getTag: (req: GetTag) => Promise<Tag | null>;
+    removeTag: (req: RemoveTag) => Promise<null>;
+    removeTagFromMemesTags: (req: RemoveTag) => Promise<null>;
+    removeTagFromUsersTagsRating: (req: RemoveTag) => Promise<null>;
 }

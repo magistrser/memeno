@@ -9,17 +9,18 @@ import Tag from '../../../IQueries/ITagsQueries/ITagsBaseQueries/Tag';
 import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
 import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
+import { VkUser } from '../../../IQueries/IUsersQueries/IVkUsersQueries/VkUser';
 
 export default class UsersTagsRatingQueries implements IUsersTagsRatingQueries {
     constructor(private db: IDatabase<IExtensions>) {}
 
-    addUserTagRating(req: AddUserTagRating): Promise<void> {
+    addUserTagRating(req: AddUserTagRating): Promise<null> {
         return this.db.none(
             'INSERT INTO users_tags_rating(user_id, tag, rating_update_time) VALUES($1, $2, $3) ON CONFLICT (user_id, tag) DO NOTHING',
             [req.user_id, req.tag, new Date().getTime()]
         );
     }
-    updateUserTagRating(req: UpdateUserTagRating): Promise<void> {
+    updateUserTagRating(req: UpdateUserTagRating): Promise<null> {
         return this.db.none(
             'UPDATE users_tags_rating SET rating = rating + $1, rating_update_time = $2 WHERE user_id = $3 AND tag = $4',
             [
@@ -30,7 +31,7 @@ export default class UsersTagsRatingQueries implements IUsersTagsRatingQueries {
             ]
         );
     }
-    getUserTagRating(req: GetUserTagRating): Promise<Tag> {
+    getUserTagRating(req: GetUserTagRating): Promise<Tag | null> {
         return this.db.oneOrNone(
             'SELECT * FROM users_tags_rating WHERE user_id = $1 AND tag = $2',
             [req.user_id, req.tag],
@@ -46,7 +47,7 @@ export default class UsersTagsRatingQueries implements IUsersTagsRatingQueries {
             }
         );
     }
-    removeFromUsersTagsRating(req: RemoveFromUsersTagsRating): Promise<void> {
+    removeFromUsersTagsRating(req: RemoveFromUsersTagsRating): Promise<null> {
         return this.db.none(
             'DELETE FROM users_tags_rating WHERE user_id = $1',
             [req.user_id]

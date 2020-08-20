@@ -11,7 +11,7 @@ import {
 import { db } from '../../db/postresql';
 
 const DevEngine: IDevEngine = class {
-    static dropUserWatchedMemes(req: DropUserWatchedMemes): Promise<void> {
+    static dropUserWatchedMemes(req: DropUserWatchedMemes): Promise<null> {
         return db.dev.devBaseQueries.dropUserWatchedMemes(req);
     }
     static setUserUserRating(req: SetUserUserRating): Promise<void> {

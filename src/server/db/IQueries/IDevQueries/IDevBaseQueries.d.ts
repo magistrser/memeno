@@ -41,13 +41,13 @@ export type SetUserRating = {
 };
 
 interface IDevBaseQueries {
-    dropUserWatchedMemes(req: DropUserWatchedMemes): Promise<void>;
-    setUserUserRating(req: SetUserUserRating): Promise<void>;
-    dropUserUsersRating(req: DropUserUsersRating): Promise<void>;
-    setUserTagRating(req: SetUserTagRating): Promise<void>;
-    dropUserTagsRating(req: DropUserTagsRating): Promise<void>;
-    setMemRating(req: SetMemRating): Promise<void>;
-    setUserRating(req: SetUserRating): Promise<void>;
+    dropUserWatchedMemes(req: DropUserWatchedMemes): Promise<null>;
+    setUserUserRating(req: SetUserUserRating): Promise<null>;
+    dropUserUsersRating(req: DropUserUsersRating): Promise<null>;
+    setUserTagRating(req: SetUserTagRating): Promise<null>;
+    dropUserTagsRating(req: DropUserTagsRating): Promise<null>;
+    setMemRating(req: SetMemRating): Promise<null>;
+    setUserRating(req: SetUserRating): Promise<null>;
 }
 
 export default IDevBaseQueries;

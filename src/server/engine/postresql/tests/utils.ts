@@ -7,7 +7,7 @@ import { db } from '../../../db/postresql';
 
 export default class Utils {
     static async createUser(
-        next: (args: any[]) => Promise<void>,
+        next: (args: any[]) => Promise<null>,
         args: any[] = []
     ) {
         const user_id = await UsersEngine.createNewUser({
@@ -21,7 +21,7 @@ export default class Utils {
     }
 
     static async createMem(
-        next: (args: any[]) => Promise<void>,
+        next: (args: any[]) => Promise<null>,
         args: any[] = []
     ) {
         const [user_id, tags] = args;
@@ -41,7 +41,7 @@ export default class Utils {
 
     static async generateRandomTags(
         count: number,
-        next: (args: any[]) => Promise<void>,
+        next: (args: any[]) => Promise<null>,
         args: any[] = []
     ) {
         const tags = [];
@@ -56,7 +56,7 @@ export default class Utils {
     }
 
     static async createTwoUserWithToMemes(
-        next: (part1, part2) => Promise<void>
+        next: (part1, part2) => Promise<null>
     ) {
         await Utils.createUser(
             async (args) =>

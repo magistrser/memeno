@@ -34,9 +34,14 @@ export default (passport) => {
                         });
                     }
 
+                    if (!vkUser) {
+                        throw new Error('Failed to create VK user');
+                    }
+
                     const user = await UsersEngine.getUser({
                         user_id: vkUser.user_id,
                     });
+
                     return done(null, user);
                 } catch (err) {
                     return done(err);

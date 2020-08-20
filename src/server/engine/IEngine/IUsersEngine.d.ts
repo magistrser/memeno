@@ -46,12 +46,12 @@ export type GetAccessLevel = GetAccessLevelQueriesReq;
 
 export default interface IUsersEngine {
     addVkUser(req: AddVkUser): Promise<UserId>;
-    getVkUserByVkId(req: GetVkUserByVkId): Promise<VkUser>;
-    getVkUserByUserId(req: GetVkUserByUserId): Promise<VkUser>;
+    getVkUserByVkId(req: GetVkUserByVkId): Promise<VkUser | null>;
+    getVkUserByUserId(req: GetVkUserByUserId): Promise<VkUser | null>;
     createNewUser(req: CreateNewUser): Promise<UserId>;
-    getUser(req: GetUser): Promise<User>;
+    getUser(req: GetUser): Promise<User | null>;
     rateTags(req: RateTags): Promise<void>;
     removeUser(req: RemoveUser): Promise<void>;
-    setAccessLevel(req: SetAccessLevel): Promise<void>;
-    getAccessLevel(req: GetAccessLevel): Promise<AccessLevel>;
+    setAccessLevel(req: SetAccessLevel): Promise<null>;
+    getAccessLevel(req: GetAccessLevel): Promise<AccessLevel | null>;
 }

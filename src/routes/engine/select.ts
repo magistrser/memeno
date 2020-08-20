@@ -5,7 +5,7 @@ import { GetTop } from '../../server/engine/IEngine/ISelectMemesEngine';
 
 export namespace Select {
     export namespace GetAverage {
-        export type Req = void;
+        export type Req = null;
         export type Res = number;
         export const Rout = routes.server.engine.select.average;
         export const Type = RequestType.get;

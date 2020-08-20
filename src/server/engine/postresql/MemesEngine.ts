@@ -68,6 +68,9 @@ const MemesEngine: IMemesEngine = class {
             });
 
             const mem = await transaction.memes.memesBaseQueries.getMem(req);
+            if (!mem) {
+                return;
+            }
 
             await transaction.users.usersUsersRatingQueries.addUserUserRating({
                 user_id: req.user_id,
