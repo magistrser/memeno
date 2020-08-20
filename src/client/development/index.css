@@ -3,6 +3,11 @@ body {
     background-color: lightgoldenrodyellow;
 }
 
+.development {
+    margin: auto;
+    height: 100vh;
+}
+
 .main {
     margin: auto;
     height: 100vh;

@@ -8,13 +8,17 @@ type Props = {
     rootPath: string;
     loginNoFailPath: string;
     loginServerErrorResponse: string;
+    serverLoginPath: string;
 };
 
 const Index: React.FC<Props> = (props) => {
     return (
         <Router>
             <Switch>
-                <Login path={props.loginPath} />
+                <Login
+                    path={props.loginPath}
+                    serverLoginPath={props.serverLoginPath}
+                />
                 <AuthRoute
                     path={props.rootPath}
                     authPath={props.loginNoFailPath}

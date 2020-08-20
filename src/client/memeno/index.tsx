@@ -23,6 +23,7 @@ ReactDOM.render(
                 loginServerErrorResponse={
                     routes.react.login.serverErrorResponse
                 }
+                serverLoginPath={routes.server.auth.vk.login}
             >
                 <Memeno />
             </MainPageRouter>

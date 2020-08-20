@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import passport from 'passport';
 
-import configurePassport from './passport';
+import configurePassport from './passports/vkontakte';
 
 import config from '../config';
 import routes from '../routes/routes';

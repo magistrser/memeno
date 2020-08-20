@@ -13,8 +13,24 @@ const routes = {
             fail: `/login/${LoginResult.fail}`,
             serverErrorResponse: `/login/${LoginResult.serverErrorResponse}`,
         },
+        development: {
+            root: '/development',
+            login: {
+                noFail: `/development/login/${LoginResult.noFail}`,
+                fail: `/development/login/${LoginResult.fail}`,
+                serverErrorResponse: `/development/login/${LoginResult.serverErrorResponse}`,
+            },
+        },
     },
     server: {
+        development: {
+            auth: {
+                success: '/development/api/auth/success',
+                vk: {
+                    login: '/development/api/auth/vk/login',
+                },
+            },
+        },
         auth: {
             success: '/api/auth/success',
             fail: '/api/auth/fail',

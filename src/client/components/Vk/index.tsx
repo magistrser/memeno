@@ -1,10 +1,13 @@
 import React from 'react';
 import './index.css';
-import routes from '../../../routes/routes';
 
-const Index: React.FC = (props) => {
+type Props = {
+    serverLoginPath;
+};
+
+const Index: React.FC<Props> = (props) => {
     return (
-        <a className="vk-auth" href={routes.server.auth.vk.login}>
+        <a className="vk-auth" href={props.serverLoginPath}>
             <div className="button-content"></div>
             <div className="button-content-login"></div>
         </a>

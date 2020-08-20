@@ -9,6 +9,7 @@ import Vk from '../../components/Vk';
 
 type Props = {
     path: string;
+    serverLoginPath: string;
 };
 
 const Index: React.FC<Props> = (props) => {
@@ -28,7 +29,7 @@ const Index: React.FC<Props> = (props) => {
         <Route path={props.path}>
             <div className="login">
                 {getFailMessage()}
-                <Vk />
+                <Vk serverLoginPath={props.serverLoginPath} />
             </div>
         </Route>
     );
