@@ -1,30 +1,27 @@
-import routes from '../../../routes/routes';
 import SelectMemesEngine from '../../engine/postresql/SelectMemesEngine';
 import express from 'express';
-import {
-    GetAverageRes,
-    GetTopRes,
-} from '../../../routes/engine/selectMemesEngine/responses';
-import { GetTopReq } from '../../../routes/engine/selectMemesEngine/requests';
+import { Select } from '../../../routes/engine/select';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 const router = express.Router();
 
-router.get(
-    routes.server.engine.select.average,
+router[Select.GetAverage.Type](
+    Select.GetAverage.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const average: GetAverageRes = await SelectMemesEngine.getAverageTopRating();
+        const average: Select.GetAverage.Res = await SelectMemesEngine.getAverageTopRating();
         res.json(average);
     }
 );
-router.get(
-    routes.server.engine.select.top,
+router[Select.GetTop.Type](
+    Select.GetTop.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const getTopReq: GetTopReq = {
+        const getTopReq: Select.GetTop.Req = {
             user_id: req.user.user_id,
         };
 
-        const memes: GetTopRes = await SelectMemesEngine.getTop(getTopReq);
+        const memes: Select.GetTop.Res = await SelectMemesEngine.getTop(
+            getTopReq
+        );
         res.json(memes);
     }
 );

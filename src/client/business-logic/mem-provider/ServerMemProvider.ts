@@ -4,7 +4,7 @@ import axios from 'axios';
 import { SpecialMemes } from './resources-folder-mem-provider/SpecialMemes';
 import routes from '../../../routes/routes';
 import { MemClient } from '../../../routes/MemClient';
-import { GetTopRes } from '../../../routes/engine/selectMemesEngine/responses';
+import { Select } from '../../../routes/engine/select';
 
 class ServerMemProvider implements IMemProvider {
     private memes: MemClient[];
@@ -32,8 +32,7 @@ class ServerMemProvider implements IMemProvider {
 
     private updateMemes(isInit = false) {
         this.isMemesUpdating = true;
-        axios
-            .get<GetTopRes>(routes.server.engine.select.top)
+        axios[Select.GetTop.Type]<Select.GetTop.Res>(Select.GetTop.Rout)
             .then((res) => {
                 this.isMemesUpdating = false;
                 this.isServerError = false;
