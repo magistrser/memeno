@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    background-color: lightgoldenrodyellow;
+}
+
+.main {
+    margin: auto;
+    height: 100vh;
+}
+
+.main {
+    display: grid;
+    grid-template-rows: [screen-row-begin] 1fr [screen-row-end];
+    grid-template-columns: [buttons-column-begin] 0.2fr [controls-column-begin] 0.8fr [controls-column-end];
+    justify-content: stretch;
+    align-content: stretch;
+}
+
+.buttons {
+    grid-area: screen-row-begin / buttons-column-begin / screen-row-end /
+        controls-column-begin;
+    background-color: red;
+}
+
+.controls {
+    grid-area: screen-row-begin / controls-column-begin / screen-row-end /
+        controls-column-end;
+    background-color: blue;
+}

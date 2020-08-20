@@ -6,7 +6,7 @@ import AvatarButton from '../../components/AvatarButton';
 import StaticMem from '../../components/MemesSwiper';
 import DislikeButton from '../../components/DislikeButton';
 import LikeButton from '../../components/LikeButton';
-import Waiting from '../Waiting';
+import Waiting from '../../components/Waiting';
 import Rating from '../../business-logic/mem-provider/Rating';
 import memProvider from '../../business-logic/mem-provider/ServerMemProvider';
 import { GlobalState } from '../../store/initialState';

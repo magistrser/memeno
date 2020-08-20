@@ -4,6 +4,6 @@
     "ignore": ["src/server/**/*.spec.ts"],
     "exec": "npx ts-node ./src/server/index.ts",
     "events": {
-        "restart": "webpack --mode development --devtool inline-source-map"
+        "restart": "webpack --mode development --devtool inline-source-map && webpack --config webpack.dev-client.config.js"
     }
 }

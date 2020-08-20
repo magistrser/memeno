@@ -1,7 +1,11 @@
 import ReactDOM from 'react-dom';
 import * as React from 'react';
+import './index.css';
 
 ReactDOM.render(
-    <div>Welcome to dev client</div>,
+    <div className="main">
+        <div className="buttons"></div>
+        <div className="controls"></div>
+    </div>,
     document.getElementById('root')
 );

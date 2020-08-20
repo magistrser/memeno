@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Route, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-import Waiting from '../../pages/Waiting';
+import Waiting from '../Waiting';
 import { Auth } from '../../../routes/auth';
 
 const Index = ({ children, authPath, errorPath, path, ...rest }) => {

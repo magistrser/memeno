@@ -1,12 +1,17 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './index.css';
 
 import { LoginResult } from '../../../routes/LoginResult';
 
 import Vk from '../../components/Vk';
 
-const Index: React.FC = () => {
+type Props = {
+    path: string;
+};
+
+const Index: React.FC<Props> = (props) => {
     const getFailMessage = () => {
         const { fail } = useParams() as { fail: LoginResult };
         if (fail == LoginResult.fail) {
@@ -20,10 +25,12 @@ const Index: React.FC = () => {
     };
 
     return (
-        <div className="login">
-            {getFailMessage()}
-            <Vk />
-        </div>
+        <Route path={props.path}>
+            <div className="login">
+                {getFailMessage()}
+                <Vk />
+            </div>
+        </Route>
     );
 };
 
