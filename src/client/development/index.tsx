@@ -3,6 +3,20 @@ import * as React from 'react';
 import './index.css';
 import routes from '../../routes/routes';
 import MainPageRouter from '../components/MainPageRouter';
+import DevMenu from '../components/development/DevMenu';
+
+const buttons = [
+    {
+        path: 'test1',
+        label: 'Test1',
+        isSelected: true
+    },
+    {
+        path: 'test2',
+        label: 'Test2',
+        isSelected: false
+    }
+]
 
 ReactDOM.render(
     <div className="development">
@@ -16,7 +30,9 @@ ReactDOM.render(
             serverLoginPath={routes.server.development.auth.vk.login}
         >
             <div className="main">
-                <div className="buttons"></div>
+                <div className="buttons">
+                    <DevMenu buttons={buttons}/>
+                </div>
                 <div className="controls"></div>
             </div>
         </MainPageRouter>

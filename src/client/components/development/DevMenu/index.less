@@ -1,0 +1,33 @@
+.dev-menu {
+    list-style-type: none;
+    margin: auto;
+    height: 100%;
+    padding: 0;
+}
+
+@border-size: 2px;
+@border-color: green;
+@border: @border-color solid @border-size;
+
+.dev-menu li a {
+    color: aqua;
+    text-decoration: none;
+}
+
+.dev-menu li {
+    background: #ffed2b;
+    text-align: center;
+    border: @border;
+    padding: 5% 0;
+}
+
+#selected-button {
+    border-right: none;
+    background: black;
+}
+
+#free-space {
+    height: 100%;
+    border-right: @border;
+    background: inherit;
+}

@@ -16,7 +16,7 @@ body {
 .main {
     display: grid;
     grid-template-rows: [screen-row-begin] 1fr [screen-row-end];
-    grid-template-columns: [buttons-column-begin] 0.2fr [controls-column-begin] 0.8fr [controls-column-end];
+    grid-template-columns: [buttons-column-begin] minmax(100px, 200px) [controls-column-begin] minmax(400px, auto) [controls-column-end];
     justify-content: stretch;
     align-content: stretch;
 }
