@@ -1,5 +1,4 @@
 import express from 'express';
-import routes from '../../../routes/routes';
 import { IGetUserAuthInfoRequest } from '../../types';
 import { Dev } from '../../../routes/engine/dev';
 import DevEngine from '../../engine/postresql/DevEngine';

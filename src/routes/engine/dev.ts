@@ -6,9 +6,9 @@ import {
     DropUserTagsRating,
     SetMemRating,
     SetUserRating,
-} from '../../../server/db/IQueries/IDevQueries/IDevBaseQueries';
-import routes from '../../routes';
-import { RequestType } from '../../RequestType';
+} from '../../server/db/IQueries/IDevQueries/IDevBaseQueries';
+import routes from '../routes';
+import { RequestType } from '../RequestType';
 
 export namespace Dev {
     export namespace DropUserWatchedMemes {

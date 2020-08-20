@@ -1,33 +1,27 @@
 import express from 'express';
-import routes from '../../../routes/routes';
 import MemesEngine from '../../engine/postresql/MemesEngine';
-import {
-    AddMemReq,
-    RateMemReq,
-    RemoveMemReq,
-} from '../../../routes/engine/memes/requests';
-import { AddMemRes } from '../../../routes/engine/memes/responses';
+import { Memes } from '../../../routes/engine/memes';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 const router = express.Router();
 
-router.post(
-    routes.server.engine.memes.add,
+router[Memes.AddMem.Type](
+    Memes.AddMem.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const addMemReq: AddMemReq = {
+        const addMemReq: Memes.AddMem.Req = {
             data: Buffer.from(req.body.data, 'base64'),
             tags: req.body.tags,
             user_id: req.body.user_id,
         };
 
-        const mem_id: AddMemRes = await MemesEngine.addMem(addMemReq);
+        const mem_id: Memes.AddMem.Res = await MemesEngine.addMem(addMemReq);
         res.json(mem_id);
     }
 );
-router.post(
-    routes.server.engine.memes.rate,
+router[Memes.RateMem.Type](
+    Memes.RateMem.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const rateMemReq: RateMemReq = {
+        const rateMemReq: Memes.RateMem.Req = {
             user_id: 1,
             mem_id: req.body.mem_id,
             like: req.body.like,
@@ -37,10 +31,10 @@ router.post(
         res.json();
     }
 );
-router.delete(
-    routes.server.engine.memes.remove,
+router[Memes.RemoveMem.Type](
+    Memes.RemoveMem.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
-        const reqRemoveMem: RemoveMemReq = {
+        const reqRemoveMem: Memes.RemoveMem.Req = {
             mem_id: req.body.mem_id,
         };
 
