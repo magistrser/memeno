@@ -19,12 +19,14 @@ const Index: React.FC<Props> = (props) => {
         values.map((prop) => <InputValue {...prop} />);
 
     return (
-        <div className="input-line">
-            <div className="label">{props.label}</div>
-            {getValues(props.values)}
-            <button className="enter-button" onClick={props.onEnter}>
-                Submit
-            </button>
+        <div className="block-wrapper">
+            <div className="input-line">
+                <div className="label">{props.label}</div>
+                {getValues(props.values)}
+                <button className="enter-button" onClick={props.onEnter}>
+                    Submit
+                </button>
+            </div>
         </div>
     );
 };

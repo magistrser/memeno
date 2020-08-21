@@ -60,11 +60,16 @@ const UsersEngine: IUsersEngine = class {
             const like = req.like ? 1 : 0;
             for (let i = 0; i < req.tags.length; ++i) {
                 const tag = { tag: req.tags[i], user_id: req.user_id };
-                transaction.users.usersTagsRatingQueries.addUserTagRating(tag);
-                transaction.users.usersTagsRatingQueries.updateUserTagRating({
-                    ...tag,
-                    like,
-                });
+                await transaction.tags.tagsBaseQueries.addTag(tag);
+                await transaction.users.usersTagsRatingQueries.addUserTagRating(
+                    tag
+                );
+                await transaction.users.usersTagsRatingQueries.updateUserTagRating(
+                    {
+                        ...tag,
+                        like,
+                    }
+                );
             }
         });
     }

@@ -9,7 +9,6 @@ import Tag from '../../../IQueries/ITagsQueries/ITagsBaseQueries/Tag';
 import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
 import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
-import { VkUser } from '../../../IQueries/IUsersQueries/IVkUsersQueries/VkUser';
 
 export default class UsersTagsRatingQueries implements IUsersTagsRatingQueries {
     constructor(private db: IDatabase<IExtensions>) {}
