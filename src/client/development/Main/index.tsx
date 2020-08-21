@@ -5,6 +5,7 @@ import './index.less';
 import { MenuCategory } from '../../../routes/development/MenuCategory';
 import { useParams } from 'react-router-dom';
 import UsersController from '../UsersController';
+import DevController from '../DevController';
 import ResponseOutput from '../../components/development/ResponseOutput';
 
 const Index: React.FC = () => {
@@ -49,9 +50,14 @@ const Index: React.FC = () => {
         }
 
         return (
-            <div style={usersStyle}>
-                <UsersController setOutput={setOutputWrapper} />
-            </div>
+            <>
+                <div style={usersStyle}>
+                    <UsersController setOutput={setOutputWrapper} />
+                </div>
+                <div style={devStyle}>
+                    <DevController setOutput={setOutputWrapper} />
+                </div>
+            </>
         );
     };
 

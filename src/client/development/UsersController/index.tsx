@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './index.css';
 import InputLine from '../../components/development/InputLine';
 import DevelopmentProvider from '../../../providers/DevelopmentProvider';
 import { AuthType } from '../../../server/db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
