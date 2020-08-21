@@ -22,7 +22,6 @@ const Index: React.FC<Props> = (props) => {
         },
     ];
 
-
     const handleLoadMem = () => {
         if(memes.length === 0) {
             props.setOutput('Select files');
@@ -84,12 +83,72 @@ const Index: React.FC<Props> = (props) => {
         }
     }
 
+    const [memIdRemoveMem, setMemIdRemoveMem] = useState(0);
+    const getValuesForRemoveMem = () => [
+        {
+            label: 'Mem ID',
+            onChange: setMemIdRemoveMem,
+            value: memIdRemoveMem,
+        },
+    ];
+
+    const [userIdRateMem, setUserIdRateMem] = useState(0);
+    const [memIdRateMem, setMemIdRateMem] = useState(0);
+    const [likeRateMem, setLikeIdRateMem] = useState(0);
+    const getValuesForRateMem = () => [
+        {
+            label: 'User ID',
+            onChange: setUserIdRateMem,
+            value: userIdRateMem,
+        },
+        {
+            label: 'Mem ID',
+            onChange: setMemIdRateMem,
+            value: memIdRateMem,
+        },
+        {
+            label: 'Rating (0/1)',
+            onChange: setLikeIdRateMem,
+            value: likeRateMem,
+        },
+    ];
+
     return (
         <div className="users-controller">
             <InputLine
                 label="Add Memes"
                 onEnter={handleLoadMem}
                 values={getValuesForCreateUser()}
+            />
+            <InputLine
+                label="Remove Mem"
+                onEnter={() => {
+                    DevelopmentProvider.memes
+                        .removeMem({
+                            mem_id: memIdRemoveMem,
+                        })
+                        .then((res) => {
+                            props.setOutput(res);
+                        })
+                        .catch(props.setOutput);
+                }}
+                values={getValuesForRemoveMem()}
+            />
+            <InputLine
+                label="Rate Mem"
+                onEnter={() => {
+                    DevelopmentProvider.memes
+                        .rateMem({
+                            mem_id: memIdRateMem,
+                            user_id: userIdRateMem,
+                            like: likeRateMem == 1
+                        })
+                        .then((res) => {
+                            props.setOutput(res);
+                        })
+                        .catch(props.setOutput);
+                }}
+                values={getValuesForRateMem()}
             />
         </div>
     );
