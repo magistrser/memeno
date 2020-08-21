@@ -9,10 +9,12 @@ interface Props {
 const Index: React.FC<Props> = (props) => {
     return (
         <div className="response-output">
-            {props.output}
-            <div className="blink-symbol blink">
-                {props.output ? <br /> : null}
-                &#x275A;
+            <div className="text-output">
+                {props.output}
+                <div className="blink-symbol blink">
+                    {props.output ? <br /> : null}
+                    &#x275A;
+                </div>
             </div>
         </div>
     );

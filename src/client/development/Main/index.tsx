@@ -6,6 +6,7 @@ import { MenuCategory } from '../../../routes/development/MenuCategory';
 import { useParams } from 'react-router-dom';
 import UsersController from '../UsersController';
 import DevController from '../DevController';
+import MemesController from '../MemesController';
 import ResponseOutput from '../../components/development/ResponseOutput';
 
 const Index: React.FC = () => {
@@ -29,8 +30,13 @@ const Index: React.FC = () => {
     ];
 
     const [output, setOutput] = useState('');
-    const setOutputWrapper = (value: any) =>
-        setOutput(JSON.stringify(value, null, '\t'));
+    const setOutputWrapper = (value: any) => {
+        if(typeof value === 'string') {
+            setOutput(value);
+            return;
+        }
+        setOutput(JSON.stringify(value, null, '\t'))
+    };
 
     const getCurrentContent = (menu) => {
         let usersStyle = { display: 'none' };
@@ -56,6 +62,9 @@ const Index: React.FC = () => {
                 </div>
                 <div style={devStyle}>
                     <DevController setOutput={setOutputWrapper} />
+                </div>
+                <div style={memesStyle}>
+                    <MemesController setOutput={setOutputWrapper} />
                 </div>
             </>
         );

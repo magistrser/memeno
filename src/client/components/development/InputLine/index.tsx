@@ -5,7 +5,8 @@ import InputValue from '../InputValue';
 type Value = {
     label: string;
     onChange: (value: any) => void;
-    value: any;
+    value?: any;
+    type?: string;
 };
 
 interface Props {
