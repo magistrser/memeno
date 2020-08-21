@@ -77,7 +77,7 @@ const Index: React.FC<Props> = (props) => {
     return (
         <div className="users-controller">
             <InputLine
-                label="Set Access level"
+                label="Create user"
                 onEnter={() => {
                     DevelopmentProvider.users
                         .createNewUser({ auth_type: AuthType[authType] })

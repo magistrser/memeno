@@ -8,7 +8,7 @@ ReactDOM.render(
     <div className="development">
         <MainPageRouter
             authPath={routes.development.root}
-            contentPath={routes.development.menu}
+            contentPath={routes.development.main}
             loginPath={routes.react.development.login.noFail}
             loginNoFailPath={routes.react.development.login.noFail}
             loginServerErrorResponse={

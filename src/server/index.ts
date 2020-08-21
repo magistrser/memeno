@@ -36,7 +36,7 @@ app.use(
     express.static(path.join(__dirname, '../../dist-dev-client'))
 );
 app.use(
-    routes.development.menu,
+    routes.development.main,
     express.static(path.join(__dirname, '../../dist-dev-client'))
 );
 app.use(

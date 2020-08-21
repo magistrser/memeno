@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import DevMenu from '../../components/development/DevMenu';
 import routes from '../../../routes/routes';
 import './index.less';
-import { MenuCategory } from '../../../routes/development/MenuCategory';
-import { useParams } from 'react-router-dom';
+import {MenuCategory} from '../../../routes/development/MenuCategory';
+import {useParams} from 'react-router-dom';
 import UsersController from '../UsersController';
 import DevController from '../DevController';
 import MemesController from '../MemesController';
@@ -15,7 +15,7 @@ const Index: React.FC = () => {
         {
             path: routes.react.development.main.users,
             label: 'Users',
-            isSelected: menu === MenuCategory.Users,
+            isSelected: menu === MenuCategory.Users || menu === MenuCategory.NotSelected,
         },
         {
             path: routes.react.development.main.memes,
@@ -44,6 +44,7 @@ const Index: React.FC = () => {
         let devStyle = { display: 'none' };
 
         switch (menu) {
+            case MenuCategory.NotSelected:
             case MenuCategory.Users:
                 usersStyle = { display: 'block' };
                 break;

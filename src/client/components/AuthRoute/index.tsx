@@ -5,7 +5,7 @@ import axios from 'axios';
 import Waiting from '../Waiting';
 import { Auth } from '../../../routes/auth';
 
-const Index = ({ children, authPath, errorPath, path, ...rest }) => {
+const Index = ({ children, loginPath, contentPath, errorPath, ...rest }) => {
     const [isAuth, setAuth] = useState(false);
 
     const history = useHistory();
@@ -17,8 +17,8 @@ const Index = ({ children, authPath, errorPath, path, ...rest }) => {
             .then((res) => {
                 const { from } =
                     location.state || res.data == true
-                        ? { from: { pathname: location.state } }
-                        : { from: { pathname: authPath } };
+                        ? { from: { pathname: contentPath } }
+                        : { from: { pathname: loginPath } };
 
                 setAuth(res.data);
                 history.replace(from);

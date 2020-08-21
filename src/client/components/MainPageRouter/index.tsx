@@ -23,7 +23,7 @@ const Index: React.FC<Props> = (props) => {
                 <AuthRoute
                     path={props.authPath}
                     contentPath={props.contentPath}
-                    authPath={props.loginNoFailPath}
+                    loginPath={props.loginNoFailPath}
                     errorPath={props.loginServerErrorResponse}
                 >
                     <Route path={props.contentPath}>{props.children}</Route>
