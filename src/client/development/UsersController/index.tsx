@@ -10,12 +10,20 @@ interface Props {
 
 const Index: React.FC<Props> = (props) => {
     const [authType, setAuthType] = useState('vk');
-
     const getValuesForCreateUser = () => [
         {
             label: 'AuthType',
             onChange: setAuthType,
             value: authType,
+        },
+    ];
+
+    const [userIdGetUser, setUserIdGetUser] = useState(0);
+    const getValuesForGetUser = () => [
+        {
+            label: 'User ID',
+            onChange: setUserIdGetUser,
+            value: userIdGetUser,
         },
     ];
 
@@ -31,6 +39,17 @@ const Index: React.FC<Props> = (props) => {
                         });
                 }}
                 values={getValuesForCreateUser()}
+            />
+            <InputLine
+                label="Get User"
+                onEnter={() => {
+                    DevelopmentProvider.users
+                        .getUser({ user_id: userIdGetUser })
+                        .then((res) => {
+                            props.setOutput(res);
+                        });
+                }}
+                values={getValuesForGetUser()}
             />
         </div>
     );

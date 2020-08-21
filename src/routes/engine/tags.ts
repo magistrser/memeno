@@ -23,6 +23,6 @@ export namespace Tags {
         export type Req = RemoveTags;
         export type Res = null;
         export const Rout = routes.server.engine.tags.remove;
-        export const Type = RequestType.delete;
+        export const Type = RequestType.post;
     }
 }

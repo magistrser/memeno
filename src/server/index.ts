@@ -53,7 +53,6 @@ app.use(auth);
 app.use(engine);
 
 app.use('*', (req, res) => {
-    console.log('[!] router *');
     res.redirect(routes.react.root);
 });
 

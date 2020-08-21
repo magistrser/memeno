@@ -32,19 +32,19 @@ export namespace Users {
         export type Req = GetVkUserByUserId;
         export type Res = VkUser | null;
         export const Rout = routes.server.engine.users.getVkByUserId;
-        export const Type = RequestType.get;
+        export const Type = RequestType.post;
     }
     export namespace GetVkUserByVkId {
         export type Req = GetVkUserByVkId;
         export type Res = VkUser | null;
         export const Rout = routes.server.engine.users.getVkByVkId;
-        export const Type = RequestType.get;
+        export const Type = RequestType.post;
     }
     export namespace GetUser {
         export type Req = GetUser;
         export type Res = User | null;
         export const Rout = routes.server.engine.users.get;
-        export const Type = RequestType.get;
+        export const Type = RequestType.post;
     }
     export namespace RateTags {
         export type Req = RateTags;
@@ -56,7 +56,7 @@ export namespace Users {
         export type Req = RemoveUser;
         export type Res = null;
         export const Rout = routes.server.engine.users.remove;
-        export const Type = RequestType.delete;
+        export const Type = RequestType.post;
     }
     export namespace SetAccessLevel {
         export type Req = SetAccessLevel;
@@ -68,6 +68,6 @@ export namespace Users {
         export type Req = GetAccessLevel;
         export type Res = AccessLevel | null;
         export const Rout = routes.server.engine.users.getAccessLevel;
-        export const Type = RequestType.get;
+        export const Type = RequestType.post;
     }
 }

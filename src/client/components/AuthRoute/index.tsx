@@ -13,11 +13,10 @@ const Index = ({ children, authPath, errorPath, path, ...rest }) => {
 
     useEffect(() => {
         setAuth(false);
-        axios
-            .get<Auth.IsAuth.Res>(Auth.IsAuth.Route)
+        axios[Auth.IsAuth.Type]<Auth.IsAuth.Res>(Auth.IsAuth.Route)
             .then((res) => {
                 const { from } =
-                    location.state || res.data
+                    location.state || res.data == true
                         ? { from: { pathname: location.state } }
                         : { from: { pathname: authPath } };
 

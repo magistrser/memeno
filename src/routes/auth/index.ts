@@ -6,6 +6,6 @@ export namespace Auth {
         export type Req = null;
         export type Res = boolean;
         export const Route = routes.server.auth.isAuth;
-        export const Type = RequestType.get;
+        export const Type = RequestType.post;
     }
 }

@@ -8,12 +8,12 @@ export namespace Select {
         export type Req = null;
         export type Res = number;
         export const Rout = routes.server.engine.select.average;
-        export const Type = RequestType.get;
+        export const Type = RequestType.post;
     }
     export namespace GetTop {
         export type Req = GetTop;
         export type Res = MemClient[];
         export const Rout = routes.server.engine.select.top;
-        export const Type = RequestType.get;
+        export const Type = RequestType.post;
     }
 }

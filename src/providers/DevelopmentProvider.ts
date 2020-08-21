@@ -1,83 +1,78 @@
-import axios from 'axios';
 import { Users } from '../routes/engine/users';
 import { Memes } from '../routes/engine/memes';
 import { Dev } from '../routes/engine/dev';
+import { axiosExtractResult } from './utils';
 
 const UsersEngine = class {
     static createNewUser(
         req: Users.CreateNewUser.Req
     ): Promise<Users.CreateNewUser.Res> {
-        return new Promise<Users.CreateNewUser.Res>((resolve, rej) =>
-            axios[Users.CreateNewUser.Type](Users.CreateNewUser.Rout, req)
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
-        );
+        return axiosExtractResult<
+            Users.CreateNewUser.Req,
+            Users.CreateNewUser.Res
+        >(Users.CreateNewUser.Rout, Users.CreateNewUser.Type, req);
     }
     static getUser(req: Users.GetUser.Req): Promise<Users.GetUser.Res> {
-        return new Promise<Users.GetUser.Res>((resolve, rej) =>
-            axios[Users.GetUser.Type](Users.GetUser.Rout, { data: req })
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
+        return axiosExtractResult<Users.GetUser.Req, Users.GetUser.Res>(
+            Users.GetUser.Rout,
+            Users.GetUser.Type,
+            req
         );
     }
     static rateTags(req: Users.RateTags.Req): Promise<Users.RateTags.Res> {
-        return new Promise<Users.RateTags.Res>((resolve, rej) =>
-            axios[Users.RateTags.Type](Users.RateTags.Rout, req)
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
+        return axiosExtractResult<Users.RateTags.Req, Users.RateTags.Res>(
+            Users.RateTags.Rout,
+            Users.RateTags.Type,
+            req
         );
     }
     static removeUser(
         req: Users.RemoveUser.Req
     ): Promise<Users.RemoveUser.Res> {
-        return new Promise<Users.RemoveUser.Res>((resolve, rej) =>
-            axios[Users.RemoveUser.Type](Users.RemoveUser.Rout, { data: req })
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
+        return axiosExtractResult<Users.RemoveUser.Req, Users.RemoveUser.Res>(
+            Users.RemoveUser.Rout,
+            Users.RemoveUser.Type,
+            req
         );
     }
     static setAccessLevel(
         req: Users.SetAccessLevel.Req
     ): Promise<Users.SetAccessLevel.Res> {
-        return new Promise<Users.SetAccessLevel.Res>((resolve, rej) =>
-            axios[Users.SetAccessLevel.Type](Users.SetAccessLevel.Rout, req)
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
-        );
+        return axiosExtractResult<
+            Users.SetAccessLevel.Req,
+            Users.SetAccessLevel.Res
+        >(Users.SetAccessLevel.Rout, Users.SetAccessLevel.Type, req);
     }
     static getAccessLevel(
         req: Users.GetAccessLevel.Req
     ): Promise<Users.GetAccessLevel.Res> {
-        return new Promise<Users.GetAccessLevel.Res>((resolve, rej) =>
-            axios[Users.GetAccessLevel.Type](Users.GetAccessLevel.Rout, {
-                data: req,
-            })
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
-        );
+        return axiosExtractResult<
+            Users.GetAccessLevel.Req,
+            Users.GetAccessLevel.Res
+        >(Users.GetAccessLevel.Rout, Users.GetAccessLevel.Type, req);
     }
 };
 
 const MemesEngine = class {
     static addMem(req: Memes.AddMem.Req): Promise<Memes.AddMem.Res> {
-        return new Promise<Memes.AddMem.Res>((resolve, rej) =>
-            axios[Memes.AddMem.Type](Memes.AddMem.Rout, req)
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
+        return axiosExtractResult<Memes.AddMem.Req, Memes.AddMem.Res>(
+            Memes.AddMem.Rout,
+            Memes.AddMem.Type,
+            req
         );
     }
     static removeMem(req: Memes.RemoveMem.Req): Promise<Memes.RemoveMem.Res> {
-        return new Promise<Memes.RemoveMem.Res>((resolve, rej) =>
-            axios[Memes.RemoveMem.Type](Memes.RemoveMem.Rout, { data: req })
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
+        return axiosExtractResult<Memes.RemoveMem.Req, Memes.RemoveMem.Res>(
+            Memes.RemoveMem.Rout,
+            Memes.RemoveMem.Type,
+            req
         );
     }
     static rateMem(req: Memes.RateMem.Req): Promise<Memes.RateMem.Res> {
-        return new Promise<Memes.RateMem.Res>((resolve, rej) =>
-            axios[Memes.RateMem.Type](Memes.RateMem.Rout, req)
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
+        return axiosExtractResult<Memes.RateMem.Req, Memes.RateMem.Res>(
+            Memes.RateMem.Rout,
+            Memes.RateMem.Type,
+            req
         );
     }
 };
@@ -86,72 +81,59 @@ const DevEngine = class {
     static dropUserWatchedMemes(
         req: Dev.DropUserWatchedMemes.Req
     ): Promise<Dev.DropUserWatchedMemes.Res> {
-        return new Promise<Dev.DropUserWatchedMemes.Res>((resolve, rej) =>
-            axios[Dev.DropUserWatchedMemes.Type](
-                Dev.DropUserWatchedMemes.Rout,
-                req
-            )
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
-        );
+        return axiosExtractResult<
+            Dev.DropUserWatchedMemes.Req,
+            Dev.DropUserWatchedMemes.Res
+        >(Dev.DropUserWatchedMemes.Rout, Dev.DropUserWatchedMemes.Type, req);
     }
     static setUserUserRating(
         req: Dev.SetUserUserRating.Req
     ): Promise<Dev.SetUserUserRating.Res> {
-        return new Promise<Dev.SetUserUserRating.Res>((resolve, rej) =>
-            axios[Dev.SetUserUserRating.Type](Dev.SetUserUserRating.Rout, req)
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
-        );
+        return axiosExtractResult<
+            Dev.SetUserUserRating.Req,
+            Dev.SetUserUserRating.Res
+        >(Dev.SetUserUserRating.Rout, Dev.SetUserUserRating.Type, req);
     }
     static dropUserUsersRating(
         req: Dev.DropUserUsersRating.Req
     ): Promise<Dev.DropUserUsersRating.Res> {
-        return new Promise<Dev.DropUserUsersRating.Res>((resolve, rej) =>
-            axios[Dev.DropUserUsersRating.Type](
-                Dev.DropUserUsersRating.Rout,
-                req
-            )
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
-        );
+        return axiosExtractResult<
+            Dev.DropUserUsersRating.Req,
+            Dev.DropUserUsersRating.Res
+        >(Dev.DropUserUsersRating.Rout, Dev.DropUserUsersRating.Type, req);
     }
     static setUserTagRating(
         req: Dev.SetUserTagRating.Req
     ): Promise<Dev.SetUserTagRating.Res> {
-        return new Promise<Dev.SetUserTagRating.Res>((resolve, rej) =>
-            axios[Dev.SetUserTagRating.Type](Dev.SetUserTagRating.Rout, {
-                data: req,
-            })
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
-        );
+        return axiosExtractResult<
+            Dev.SetUserTagRating.Req,
+            Dev.SetUserTagRating.Res
+        >(Dev.SetUserTagRating.Rout, Dev.SetUserTagRating.Type, req);
     }
     static dropUserTagsRating(
         req: Dev.DropUserTagsRating.Req
     ): Promise<Dev.DropUserTagsRating.Res> {
-        return new Promise<Dev.DropUserTagsRating.Res>((resolve, rej) =>
-            axios[Dev.DropUserTagsRating.Type](Dev.DropUserTagsRating.Rout, req)
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
-        );
+        return axiosExtractResult<
+            Dev.DropUserTagsRating.Req,
+            Dev.DropUserTagsRating.Res
+        >(Dev.DropUserTagsRating.Rout, Dev.DropUserTagsRating.Type, req);
     }
     static setMemRating(
         req: Dev.SetMemRating.Req
     ): Promise<Dev.SetMemRating.Res> {
-        return new Promise<Dev.SetMemRating.Res>((resolve, rej) =>
-            axios[Dev.SetMemRating.Type](Dev.SetMemRating.Rout, { data: req })
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
+        return axiosExtractResult<Dev.SetMemRating.Req, Dev.SetMemRating.Res>(
+            Dev.SetMemRating.Rout,
+            Dev.SetMemRating.Type,
+            req
         );
     }
     static setUserRating(
         req: Dev.SetUserRating.Req
     ): Promise<Dev.SetUserRating.Res> {
-        return new Promise<Dev.SetUserRating.Res>((resolve, rej) =>
-            axios[Dev.SetUserRating.Type](Dev.SetUserRating.Rout, { data: req })
-                .then((res) => resolve(res.data))
-                .catch((err) => rej(err))
+        return axiosExtractResult<Dev.SetUserRating.Req, Dev.SetUserRating.Res>(
+            Dev.SetUserRating.Rout,
+            Dev.SetUserRating.Type,
+            req
         );
     }
 };

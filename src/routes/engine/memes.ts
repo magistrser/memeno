@@ -24,6 +24,6 @@ export namespace Memes {
         export type Req = RemoveMem;
         export type Res = null;
         export const Rout = routes.server.engine.memes.remove;
-        export const Type = RequestType.delete;
+        export const Type = RequestType.post;
     }
 }

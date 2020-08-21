@@ -28,7 +28,8 @@ const Index: React.FC = () => {
     ];
 
     const [output, setOutput] = useState('');
-    const setOutputWrapper = (value: any) => setOutput(JSON.stringify(value));
+    const setOutputWrapper = (value: any) =>
+        setOutput(JSON.stringify(value, null, '\t'));
 
     return (
         <div className="main">
