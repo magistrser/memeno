@@ -1,10 +1,10 @@
-import Rating from './rating';
+import Rating from './Rating';
 import IMemProvider from './IMemProvider';
 import axios from 'axios';
 import { SpecialMemes } from './resources-folder-mem-provider/SpecialMemes';
-import { MemClient } from '../../../routes/MemClient';
-import { Select } from '../../../routes/engine/select';
-import DevelopmentProvider from '../../../providers/DevelopmentProvider';
+import { MemClient } from '../../../../../routes/MemClient';
+import { Select } from '../../../../../routes/engine/select';
+import DevelopmentProvider from '../../../../../providers/DevelopmentProvider';
 
 class ServerMemProvider implements IMemProvider {
     private memes: MemClient[];
@@ -43,8 +43,6 @@ class ServerMemProvider implements IMemProvider {
             .then((res) => {
                 this.isMemesUpdating = false;
                 this.isServerError = false;
-
-                console.log(res.data);
 
                 if (isInit) {
                     this.memes = res.data;

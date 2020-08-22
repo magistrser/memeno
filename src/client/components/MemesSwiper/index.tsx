@@ -4,7 +4,7 @@ import { useSwipeable } from 'react-swipeable';
 import './index.css';
 import './swipe.css';
 
-import Rating from '../../business-logic/mem-provider/Rating';
+import Rating from '../../memeno/pages/Memes/MemProvider/Rating';
 import { MemClient } from '../../../routes/MemClient';
 
 interface IStaticMem {
