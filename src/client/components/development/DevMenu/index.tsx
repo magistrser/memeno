@@ -9,6 +9,7 @@ type Button = {
 };
 interface Props {
     buttons: Button[];
+    userId: number | null;
 }
 
 const Index: React.FC<Props> = (props) => {
@@ -25,7 +26,9 @@ const Index: React.FC<Props> = (props) => {
     return (
         <ul className="dev-menu">
             {getButtons(props.buttons)}
-            <li id="free-space" />
+            <li id="free-space">
+                {props.userId ? `Your ID: ${props.userId}` : null}
+            </li>
         </ul>
     );
 };

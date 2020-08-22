@@ -53,4 +53,16 @@ export namespace Dev {
         export const Rout = routes.server.engine.dev.setUserRating;
         export const Type = RequestType.post;
     }
+    export namespace GetMyId {
+        export type Req = void;
+        export type Res = number;
+        export const Rout = routes.server.engine.dev.getMyId;
+        export const Type = RequestType.post;
+    }
+    export namespace CleanDb {
+        export type Req = void;
+        export type Res = void;
+        export const Rout = routes.server.engine.dev.cleanDB;
+        export const Type = RequestType.post;
+    }
 }

@@ -136,6 +136,12 @@ const DevEngine = class {
             req
         );
     }
+    static getMyId(): Promise<Dev.GetMyId.Res> {
+        return axiosExtractResult<Dev.GetMyId.Req, Dev.GetMyId.Res>(
+            Dev.GetMyId.Rout,
+            Dev.GetMyId.Type
+        );
+    }
 };
 
 const DevelopmentProvider = {

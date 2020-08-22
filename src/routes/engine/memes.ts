@@ -14,8 +14,12 @@ export namespace Memes {
         export const Rout = routes.server.engine.memes.add;
         export const Type = RequestType.post;
     }
+    export type RatMemReq = {
+        mem_id: MemId;
+        like: boolean;
+    };
     export namespace RateMem {
-        export type Req = RateMem;
+        export type Req = RatMemReq;
         export type Res = null;
         export const Rout = routes.server.engine.memes.rate;
         export const Type = RequestType.post;

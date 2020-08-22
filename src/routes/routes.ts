@@ -58,6 +58,8 @@ const routes = {
                 dropUserTagsRating: '/api/engine/dev/drop-user-tags-rating',
                 setMemRating: '/api/engine/dev/set-mem-rating',
                 setUserRating: '/api/engine/dev/set-user-rating',
+                getMyId: '/api/engine/dev/get-my-id',
+                cleanDB: '/api/engine/dev/clean-db',
             },
             users: {
                 create: '/api/engine/users/create',

@@ -2,9 +2,9 @@ import Rating from './rating';
 import IMemProvider from './IMemProvider';
 import axios from 'axios';
 import { SpecialMemes } from './resources-folder-mem-provider/SpecialMemes';
-import routes from '../../../routes/routes';
 import { MemClient } from '../../../routes/MemClient';
 import { Select } from '../../../routes/engine/select';
+import DevelopmentProvider from '../../../providers/DevelopmentProvider';
 
 class ServerMemProvider implements IMemProvider {
     private memes: MemClient[];
@@ -75,6 +75,15 @@ class ServerMemProvider implements IMemProvider {
     }
     swapMem(type: Rating) {
         if (this.memes.length > 0) {
+            DevelopmentProvider.memes
+                .rateMem({
+                    mem_id: this.memes[0].mem_id,
+                    like: type === Rating.Like,
+                })
+                .catch((error) => {
+                    // todo server error handler
+                    console.log(error);
+                });
             this.memes.shift();
             return;
         }

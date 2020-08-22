@@ -2,6 +2,7 @@ import express from 'express';
 import MemesEngine from '../../engine/postresql/MemesEngine';
 import { Memes } from '../../../routes/engine/memes';
 import { IGetUserAuthInfoRequest } from '../../types';
+import { RateMem } from '../../engine/IEngine/IMemesEngine';
 
 const router = express.Router();
 
@@ -22,12 +23,15 @@ router[Memes.RateMem.Type](
     Memes.RateMem.Rout,
     async (req: IGetUserAuthInfoRequest, res) => {
         const rateMemReq: Memes.RateMem.Req = {
-            user_id: 1,
             mem_id: req.body.mem_id,
             like: req.body.like,
         };
+        const rateMem: RateMem = {
+            ...rateMemReq,
+            user_id: req.user.user_id,
+        };
 
-        await MemesEngine.rateMem(rateMemReq);
+        await MemesEngine.rateMem(rateMem);
         res.json();
     }
 );

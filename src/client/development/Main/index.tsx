@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DevMenu from '../../components/development/DevMenu';
 import routes from '../../../routes/routes';
 import './index.less';
@@ -8,6 +8,7 @@ import UsersController from '../UsersController';
 import DevController from '../DevController';
 import MemesController from '../MemesController';
 import ResponseOutput from '../../components/development/ResponseOutput';
+import DevelopmentProvider from '../../../providers/DevelopmentProvider';
 
 const Index: React.FC = () => {
     const { menu } = useParams() as { menu: MenuCategory };
@@ -39,6 +40,18 @@ const Index: React.FC = () => {
         }
         setOutput(JSON.stringify(value, null, '\t'));
     };
+
+    const [yourId, setYourId] = useState<number | null>(null);
+    useEffect(() => {
+        DevelopmentProvider.dev
+            .getMyId()
+            .then((userId) => {
+                setYourId(userId);
+            })
+            .catch
+            // todo
+            ();
+    }, []);
 
     const getCurrentContent = (menu) => {
         let usersStyle = { display: 'none' };
@@ -76,7 +89,7 @@ const Index: React.FC = () => {
     return (
         <div className="main">
             <div className="buttons">
-                <DevMenu buttons={getButtons()} />
+                <DevMenu buttons={getButtons()} userId={yourId} />
             </div>
             <div className="controls">
                 <div className="userController">{getCurrentContent(menu)}</div>

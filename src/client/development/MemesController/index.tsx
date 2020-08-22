@@ -15,7 +15,7 @@ function separateMemAndTagsFiles(files: File[]) {
             };
             continue;
         }
-        if (files[i].name.endsWith('tags')) {
+        if (files[i].name.endsWith('txt')) {
             tagsFiles = {
                 ...tagsFiles,
                 [files[i].name.split('.')[0]]: files[i],
@@ -91,15 +91,9 @@ const Index: React.FC<Props> = (props) => {
         },
     ];
 
-    const [userIdRateMem, setUserIdRateMem] = useState(0);
     const [memIdRateMem, setMemIdRateMem] = useState(0);
     const [likeRateMem, setLikeIdRateMem] = useState(0);
     const getValuesForRateMem = () => [
-        {
-            label: 'User ID',
-            onChange: setUserIdRateMem,
-            value: userIdRateMem,
-        },
         {
             label: 'Mem ID',
             onChange: setMemIdRateMem,
@@ -139,7 +133,6 @@ const Index: React.FC<Props> = (props) => {
                     DevelopmentProvider.memes
                         .rateMem({
                             mem_id: memIdRateMem,
-                            user_id: userIdRateMem,
                             like: likeRateMem == 1,
                         })
                         .then((res) => {

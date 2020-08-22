@@ -88,5 +88,11 @@ router[Dev.SetUserRating.Type](
         res.json();
     }
 );
+router[Dev.GetMyId.Type](
+    Dev.GetMyId.Rout,
+    async (req: IGetUserAuthInfoRequest, res) => {
+        res.json(req.user.user_id);
+    }
+);
 
 export default router;

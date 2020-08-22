@@ -4,7 +4,7 @@ import axios from 'axios';
 export function axiosExtractResult<RequestDataType, ResolveType>(
     url: string,
     type: RequestType,
-    data: RequestDataType
+    data?: RequestDataType
 ) {
     return new Promise<ResolveType>((resolve, reject) =>
         axios[type](url, data)
