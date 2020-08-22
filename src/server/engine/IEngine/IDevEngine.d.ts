@@ -16,6 +16,7 @@ interface IDevEngine {
     dropUserTagsRating(req: DropUserTagsRating): Promise<void>;
     setMemRating(req: SetMemRating): Promise<void>;
     setUserRating(req: SetUserRating): Promise<void>;
+    cleanDb(): Promise<void>;
 }
 
 export default IDevEngine;

@@ -4,6 +4,7 @@ import { MemClient } from '../../../routes/MemClient';
 
 export type GetTop = {
     user_id: UserId;
+    ignore_memes: MemId[];
 };
 
 export default interface ISelectMemesEngine {

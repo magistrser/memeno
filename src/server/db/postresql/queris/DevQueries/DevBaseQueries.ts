@@ -1,6 +1,7 @@
 import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
 import IDevBaseQueries, {
+    DeleteAllRows,
     DropUserTagsRating,
     DropUserUsersRating,
     DropUserWatchedMemes,
@@ -54,5 +55,8 @@ export default class DevBaseQueries implements IDevBaseQueries {
             'UPDATE users SET rating = ${rating} WHERE user_id = ${user_id}',
             req
         );
+    }
+    deleteAllRows(req: DeleteAllRows): Promise<null> {
+        return this.db.none('DELETE FROM ' + req.table_name);
     }
 }

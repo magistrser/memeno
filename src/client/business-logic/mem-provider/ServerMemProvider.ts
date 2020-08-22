@@ -32,10 +32,19 @@ class ServerMemProvider implements IMemProvider {
 
     private updateMemes(isInit = false) {
         this.isMemesUpdating = true;
-        axios[Select.GetTop.Type]<Select.GetTop.Res>(Select.GetTop.Rout)
+
+        const getTopReq = {
+            ignore_memes: this.memes.map((x) => x.mem_id),
+        };
+        axios[Select.GetTop.Type]<Select.GetTop.Res>(
+            Select.GetTop.Rout,
+            getTopReq
+        )
             .then((res) => {
                 this.isMemesUpdating = false;
                 this.isServerError = false;
+
+                console.log(res.data);
 
                 if (isInit) {
                     this.memes = res.data;

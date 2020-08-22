@@ -222,6 +222,18 @@ const Index: React.FC<Props> = (props) => {
                 }}
                 values={getValuesForSetUserRating()}
             />
+            <InputLine
+                label="Clean DB"
+                onEnter={() => {
+                    DevelopmentProvider.dev
+                        .cleanDb()
+                        .then((res) => {
+                            props.setOutput(res);
+                        })
+                        .catch(props.setOutput);
+                }}
+                values={[]}
+            />
         </div>
     );
 };

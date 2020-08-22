@@ -94,5 +94,12 @@ router[Dev.GetMyId.Type](
         res.json(req.user.user_id);
     }
 );
+router[Dev.CleanDb.Type](
+    Dev.CleanDb.Rout,
+    async (req: IGetUserAuthInfoRequest, res) => {
+        await DevEngine.cleanDb();
+        res.json();
+    }
+);
 
 export default router;

@@ -39,6 +39,9 @@ export type SetUserRating = {
     user_id: UserId;
     rating: number;
 };
+export type DeleteAllRows = {
+    table_name: string;
+};
 
 interface IDevBaseQueries {
     dropUserWatchedMemes(req: DropUserWatchedMemes): Promise<null>;
@@ -48,6 +51,7 @@ interface IDevBaseQueries {
     dropUserTagsRating(req: DropUserTagsRating): Promise<null>;
     setMemRating(req: SetMemRating): Promise<null>;
     setUserRating(req: SetUserRating): Promise<null>;
+    deleteAllRows(req: DeleteAllRows): Promise<null>;
 }
 
 export default IDevBaseQueries;

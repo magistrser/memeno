@@ -1,5 +1,5 @@
 import { UserId } from '../../IUsersQueries/IUsersBaseQueries/User';
-import { Mem, MemId } from '../../IMemesQueries/IMemesBaseQueries/Mem';
+import { MemId } from '../../IMemesQueries/IMemesBaseQueries/Mem';
 
 export type GetAverageTopRating = {
     createdAfterDate: number;
@@ -7,6 +7,7 @@ export type GetAverageTopRating = {
 };
 export type GetTop = {
     user_id: UserId;
+    ignore_memes: MemId[];
     ratingBarrier: number;
     createdAfterDate: number;
     count: number;

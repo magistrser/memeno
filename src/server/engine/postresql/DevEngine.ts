@@ -50,6 +50,23 @@ const DevEngine: IDevEngine = class {
             await transaction.dev.devBaseQueries.setUserRating(req);
         });
     }
+    static async cleanDb(): Promise<void> {
+        await db.dev.devBaseQueries.deleteAllRows({
+            table_name: 'users_tags_rating',
+        });
+        await db.dev.devBaseQueries.deleteAllRows({
+            table_name: 'users_users_rating',
+        });
+        await db.dev.devBaseQueries.deleteAllRows({
+            table_name: 'users_watched_memes',
+        });
+        await db.dev.devBaseQueries.deleteAllRows({
+            table_name: 'users_memes',
+        });
+        await db.dev.devBaseQueries.deleteAllRows({ table_name: 'memes_tags' });
+        await db.dev.devBaseQueries.deleteAllRows({ table_name: 'memes' });
+        await db.dev.devBaseQueries.deleteAllRows({ table_name: 'tags' });
+    }
 };
 
 export default DevEngine;

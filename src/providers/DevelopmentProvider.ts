@@ -142,6 +142,12 @@ const DevEngine = class {
             Dev.GetMyId.Type
         );
     }
+    static cleanDb(): Promise<Dev.CleanDb.Res> {
+        return axiosExtractResult<Dev.CleanDb.Req, Dev.CleanDb.Res>(
+            Dev.CleanDb.Rout,
+            Dev.CleanDb.Type
+        );
+    }
 };
 
 const DevelopmentProvider = {

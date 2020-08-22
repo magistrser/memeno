@@ -9,6 +9,12 @@ import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
 import { MemId } from '../../../IQueries/IMemesQueries/IMemesBaseQueries/Mem';
 
+function getFilterForMemesInPull(ignore_memes: MemId[]) {
+    return ignore_memes.length
+        ? ` AND mem_id NOT IN (` + ignore_memes.join(', ') + ')'
+        : '';
+}
+
 export default class SelectionMemesBaseQueries
     implements ISelectionMemesQueries {
     constructor(private db: IDatabase<IExtensions>) {}
@@ -22,7 +28,11 @@ export default class SelectionMemesBaseQueries
     }
     getTop(req: GetTop): Promise<MemForClient[]> {
         return this.db.map(
-            'SELECT * FROM memes WHERE mem_id NOT IN (SELECT mem_id FROM users_watched_memes WHERE user_id = ${user_id}) AND creation_date > ${createdAfterDate} AND rating >= ${ratingBarrier} ORDER BY rating DESC FETCH FIRST ${count} ROWS ONLY',
+            'SELECT * FROM memes WHERE mem_id NOT IN (SELECT mem_id FROM users_watched_memes WHERE user_id = ${user_id})' +
+                ' AND creation_date > ${createdAfterDate}' +
+                ' AND rating >= ${ratingBarrier}' +
+                getFilterForMemesInPull(req.ignore_memes) +
+                ' ORDER BY rating DESC FETCH FIRST ${count} ROWS ONLY',
             req,
             (mem) => {
                 return {
