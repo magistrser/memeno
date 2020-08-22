@@ -4,7 +4,7 @@ import './index.less';
 interface Props {
     label: string;
     onChange: (value: any) => void;
-    type?: string
+    type?: string;
     value?: any;
 }
 
@@ -18,8 +18,9 @@ const Index: React.FC<Props> = (props) => {
                 className="value"
                 type={type}
                 onChange={(event) => {
-                    props.type === 'file' ? props.onChange(event.target.files)
-                        : props.onChange(event.target.value)
+                    props.type === 'file'
+                        ? props.onChange(event.target.files)
+                        : props.onChange(event.target.value);
                 }}
                 multiple={props.type === 'file'}
                 value={props.value}

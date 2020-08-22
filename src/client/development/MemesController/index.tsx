@@ -1,6 +1,31 @@
 import React, { useState } from 'react';
 import InputLine from '../../components/development/InputLine';
 import DevelopmentProvider from '../../../providers/DevelopmentProvider';
+import readFileText from '../../utils/files/readTextFile';
+import readBinaryFile from '../../utils/files/readBinaryFile';
+
+function separateMemAndTagsFiles(files: File[]) {
+    let tagsFiles = {};
+    let memFiles = {};
+    for (let i = 0; i < files.length; ++i) {
+        if (files[i].type.startsWith('image')) {
+            memFiles = {
+                ...memFiles,
+                [files[i].name.split('.')[0]]: files[i],
+            };
+            continue;
+        }
+        if (files[i].name.endsWith('tags')) {
+            tagsFiles = {
+                ...tagsFiles,
+                [files[i].name.split('.')[0]]: files[i],
+            };
+            continue;
+        }
+    }
+
+    return { tagsFiles, memFiles };
+}
 
 interface Props {
     setOutput: (output: any) => void;
@@ -22,66 +47,40 @@ const Index: React.FC<Props> = (props) => {
         },
     ];
 
-    const handleLoadMem = () => {
-        if(memes.length === 0) {
+    const handleLoadMem = async () => {
+        if (memes.length === 0) {
             props.setOutput('Select files');
             return;
         }
         let outputString = '';
 
-        let tagsFiles = {};
-        let memFiles = {}
-        for (let i = 0; i < memes.length; ++i) {
-            if(memes[i].type.startsWith('image')) {
-                memFiles = {...memFiles, [memes[i].name.split('.')[0]]: memes[i]};
-                continue;
-            }
-            if(memes[i].name.endsWith('txt')) {
-                tagsFiles = {...tagsFiles, [memes[i].name.split('.')[0]]: memes[i]}
-                continue;
-            }
-        }
-
+        const { tagsFiles, memFiles } = separateMemAndTagsFiles(memes);
         const memNames = Object.keys(memFiles);
-        let countMemesToUpload = memNames.length;
-        let loadedMemesCount = 0;
-
-        for(let i = 0; i < memNames.length; ++i) {
+        for (let i = 0; i < memNames.length; ++i) {
             const memName = memNames[i];
-            if(!tagsFiles[memName]) {
-                --countMemesToUpload;
-                outputString += `[!] Not found tags file for: '${memName}'`;
+            if (!tagsFiles[memName]) {
+                outputString += `[-] Tags file miss: '${memName}'`;
                 props.setOutput(outputString);
                 continue;
             }
 
-            const tagsReader = new FileReader();
-            tagsReader.onload = function (ev) {
-                const tags = (tagsReader.result as string).split(/\r?\n/).filter(x => x.length);
-                const memReader = new FileReader();
-                memReader.onload = function (ev) {
-                    DevelopmentProvider.memes
-                        .addMem({
-                            data: Buffer.from(memReader.result as ArrayBuffer),
-                            tags: tags,
-                            user_id: userIdAddMem
-                        })
-                        .then((res) => {
-                            outputString += `\n[+] Mem'${memName}' uploaded to server with id: ${res} and tags: ${tags.join(', ')}`;
-                            ++loadedMemesCount;
-                            if(loadedMemesCount >= countMemesToUpload) {
-                                outputString += '\n[+] All memes loaded';
-                            }
-                            props.setOutput(outputString);
-                        })
-                        .catch(props.setOutput);
-                }
+            const tagsStr = await readFileText(tagsFiles[memName]);
+            const tags = tagsStr.split(/\r?\n/).filter((x) => x.length);
 
-                memReader.readAsArrayBuffer(tagsFiles[memName]);
-            };
-            tagsReader.readAsText(tagsFiles[memName]);
+            const memData = await readBinaryFile(memFiles[memName]);
+            const memId = await DevelopmentProvider.memes.addMem({
+                data: memData,
+                tags: tags,
+                user_id: userIdAddMem,
+            });
+            outputString += `\n[+] Mem'${memName}' id: ${memId}, tags: ${tags.join(
+                ', '
+            )}`;
+            props.setOutput(outputString);
         }
-    }
+        outputString += '\n[+] All memes loaded';
+        props.setOutput(outputString);
+    };
 
     const [memIdRemoveMem, setMemIdRemoveMem] = useState(0);
     const getValuesForRemoveMem = () => [
@@ -141,7 +140,7 @@ const Index: React.FC<Props> = (props) => {
                         .rateMem({
                             mem_id: memIdRateMem,
                             user_id: userIdRateMem,
-                            like: likeRateMem == 1
+                            like: likeRateMem == 1,
                         })
                         .then((res) => {
                             props.setOutput(res);

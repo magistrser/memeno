@@ -60,15 +60,11 @@ const UsersEngine: IUsersEngine = class {
         for (let i = 0; i < req.tags.length; ++i) {
             const tag = { tag: req.tags[i], user_id: req.user_id };
             await db.tags.tagsBaseQueries.addTag(tag);
-            await db.users.usersTagsRatingQueries.addUserTagRating(
-                tag
-            );
-            await db.users.usersTagsRatingQueries.updateUserTagRating(
-                {
-                    ...tag,
-                    like,
-                }
-            );
+            await db.users.usersTagsRatingQueries.addUserTagRating(tag);
+            await db.users.usersTagsRatingQueries.updateUserTagRating({
+                ...tag,
+                like,
+            });
         }
     }
     static removeUser(req: RemoveUser): Promise<void> {
