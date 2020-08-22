@@ -6,25 +6,21 @@ import ITagsEngine, {
 import { db } from '../../db/postresql';
 
 const TagsEngine: ITagsEngine = class {
-    static addTags(req: AddTags): Promise<void> {
-        return db.tx(async (transaction) => {
-            for (let i = 0; i < req.tags.length; ++i) {
-                await transaction.tags.tagsBaseQueries.addTag({
-                    tag: req.tags[i],
-                });
-            }
-        });
+    static async addTags(req: AddTags): Promise<void> {
+        for (let i = 0; i < req.tags.length; ++i) {
+            await db.tags.tagsBaseQueries.addTag({
+                tag: req.tags[i],
+            });
+        }
     }
-    static rateTags(req: RateTags): Promise<void> {
-        return db.tx(async (transaction) => {
-            const like = req.like ? 1 : 0;
-            for (let i = 0; i < req.tags.length; ++i) {
-                await transaction.tags.tagsBaseQueries.updateTagRating({
-                    tag: req.tags[i],
-                    like,
-                });
-            }
-        });
+    static async rateTags(req: RateTags): Promise<void> {
+        const like = req.like ? 1 : 0;
+        for (let i = 0; i < req.tags.length; ++i) {
+            await db.tags.tagsBaseQueries.updateTagRating({
+                tag: req.tags[i],
+                like,
+            });
+        }
     }
     static removeTags(req: RemoveTags): Promise<void> {
         return db.tx(async (transaction) => {

@@ -62,7 +62,9 @@ const MemesEngine: IMemesEngine = class {
                 mem_id: req.mem_id,
                 like,
             });
-            await transaction.memes.memesBaseQueries.updateMemRating({
+
+            // db for avoid deadlock
+            await db.memes.memesBaseQueries.updateMemRating({
                 mem_id: req.mem_id,
                 like,
             });
@@ -79,7 +81,9 @@ const MemesEngine: IMemesEngine = class {
             await transaction.users.usersUsersRatingQueries.updateUserUserRating(
                 { user_id: req.user_id, second_user_id: mem.user_id, like }
             );
-            await transaction.users.usersBaseQueries.updateUserRating({
+
+            // db for avoid deadlock
+            await db.users.usersBaseQueries.updateUserRating({
                 user_id: mem.user_id,
                 like,
             });

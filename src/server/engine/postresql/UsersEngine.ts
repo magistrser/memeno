@@ -55,23 +55,21 @@ const UsersEngine: IUsersEngine = class {
     static getUser(req: GetUser): Promise<User | null> {
         return db.users.usersBaseQueries.getUser(req);
     }
-    static rateTags(req: RateTags): Promise<void> {
-        return db.tx(async (transaction) => {
-            const like = req.like ? 1 : 0;
-            for (let i = 0; i < req.tags.length; ++i) {
-                const tag = { tag: req.tags[i], user_id: req.user_id };
-                await transaction.tags.tagsBaseQueries.addTag(tag);
-                await transaction.users.usersTagsRatingQueries.addUserTagRating(
-                    tag
-                );
-                await transaction.users.usersTagsRatingQueries.updateUserTagRating(
-                    {
-                        ...tag,
-                        like,
-                    }
-                );
-            }
-        });
+    static async rateTags(req: RateTags): Promise<void> {
+        const like = req.like ? 1 : 0;
+        for (let i = 0; i < req.tags.length; ++i) {
+            const tag = { tag: req.tags[i], user_id: req.user_id };
+            await db.tags.tagsBaseQueries.addTag(tag);
+            await db.users.usersTagsRatingQueries.addUserTagRating(
+                tag
+            );
+            await db.users.usersTagsRatingQueries.updateUserTagRating(
+                {
+                    ...tag,
+                    like,
+                }
+            );
+        }
     }
     static removeUser(req: RemoveUser): Promise<void> {
         return db.tx(async (transaction) => {
