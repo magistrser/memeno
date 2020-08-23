@@ -1,0 +1,26 @@
+.waiting-connection-main {
+    position: relative;
+    height: 100%;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.waiting-connection-hide {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    content: '';
+    background-color: white;
+    opacity: 0.5;
+    z-index: 100;
+}
+
+.waiting-connection-message {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 101;
+}

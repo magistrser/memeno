@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Route, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-import Waiting from '../Waiting';
+import WaitingResponse from '../WaitingResponse';
 import { Auth } from '../../../routes/auth';
 
 const Index = ({ children, loginPath, contentPath, errorPath, ...rest }) => {
@@ -34,7 +34,10 @@ const Index = ({ children, loginPath, contentPath, errorPath, ...rest }) => {
     }, []);
 
     return (
-        <Route {...rest} render={() => (!isAuth ? <Waiting /> : children)} />
+        <Route
+            {...rest}
+            render={() => (!isAuth ? <WaitingResponse /> : children)}
+        />
     );
 };
 

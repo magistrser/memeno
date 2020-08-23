@@ -1,6 +1,6 @@
 import session from 'express-session';
 import MongoDBStore from 'connect-mongodb-session';
-import config from "../config";
+import config from '../config';
 
 const store = new (MongoDBStore(session))(
     {
@@ -10,8 +10,8 @@ const store = new (MongoDBStore(session))(
         connectionOptions: {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 10000
-        }
+            serverSelectionTimeoutMS: 10000,
+        },
     },
     function (error) {
         error ? console.log(error) : null;

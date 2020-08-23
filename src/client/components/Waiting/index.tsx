@@ -1,12 +1,12 @@
 import React from 'react';
 import './index.css';
 
-const Index: React.FC = () => {
-    return (
-        <div className="login">
-            <div className="waiting">memeno</div>
-        </div>
-    );
+interface Props {
+    message: string;
+}
+
+const Index: React.FC<Props> = (props) => {
+    return <div className="waiting">{props.message}</div>;
 };
 
 export default Index;

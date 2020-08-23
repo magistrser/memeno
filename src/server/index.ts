@@ -3,7 +3,7 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import path from 'path';
 import passport from 'passport';
-import store from "./sessions-store";
+import store from './sessions-store';
 import configurePassport from './passports/vkontakte';
 import config from '../config';
 import routes from '../routes/routes';

@@ -23,7 +23,7 @@ export default {
         address: `mongodb://${mongoUser}:${mongoPassword}@${mongoIp}:${mongoPort}`,
         collection: 'sessions',
         secret: 'secret', // TODO: Generate guid or something,
-        lifeTimeOfSession: 14 * 24 * 60 * 60 * 1000
+        lifeTimeOfSession: 14 * 24 * 60 * 60 * 1000,
     },
     server: {
         ip: serverIp,

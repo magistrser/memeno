@@ -16,6 +16,11 @@ element {
 
 .waiting {
     margin: auto;
+    height: 100%;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
 
     font-size: var(--zoom-font-start-size);
     color: #ffed2b;

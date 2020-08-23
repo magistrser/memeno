@@ -6,7 +6,7 @@ import AvatarButton from '../../../components/AvatarButton';
 import StaticMem from '../../../components/MemesSwiper';
 import DislikeButton from '../../../components/DislikeButton';
 import LikeButton from '../../../components/LikeButton';
-import Waiting from '../../../components/Waiting';
+import WaitingResponse from '../../../components/WaitingResponse';
 import Rating from './MemProvider/Rating';
 import memProvider from './MemProvider/ServerMemProvider';
 import { GlobalState } from '../../store/initialState';
@@ -82,7 +82,7 @@ const Index: React.FC<Props> = (props) => {
             </div>
             <div className="content">
                 {isWaiting ? (
-                    <Waiting />
+                    <WaitingResponse />
                 ) : (
                     <StaticMem
                         currentMem={props.currentMem}
