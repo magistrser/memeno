@@ -9,6 +9,7 @@ import DevController from '../DevController';
 import MemesController from '../MemesController';
 import ResponseOutput from '../../components/development/ResponseOutput';
 import DevelopmentProvider from '../../../providers/DevelopmentProvider';
+import developmentConnectionTracker from '../developmentConnectionTracker';
 
 const Index: React.FC = () => {
     const { menu } = useParams() as { menu: MenuCategory };
@@ -40,6 +41,13 @@ const Index: React.FC = () => {
         }
         setOutput(JSON.stringify(value, null, '\t'));
     };
+    developmentConnectionTracker.setServerInternalErrorHandle((data?: any) => {
+        const error = {
+            status: data.response.status,
+            description: data.response.data,
+        };
+        setOutputWrapper(`Error:\n${JSON.stringify(error, null, '\t')}`);
+    });
 
     const [yourId, setYourId] = useState<number | null>(null);
     useEffect(() => {

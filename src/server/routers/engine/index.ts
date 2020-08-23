@@ -4,7 +4,10 @@ import selectMemesEngineRoutes from './select';
 import tagsEngineRoutes from './tags';
 import usersEngineRoutes from './users';
 import devEngineRoutes from './dev';
-import {needCommonAccess, needDeveloperAccess} from "../../passports/validateAccessLevel";
+import {
+    needCommonAccess,
+    needDeveloperAccess,
+} from '../../passports/validateAccessLevel';
 
 const router = express.Router();
 

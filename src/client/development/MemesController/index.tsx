@@ -3,6 +3,7 @@ import InputLine from '../../components/development/InputLine';
 import DevelopmentProvider from '../../../providers/DevelopmentProvider';
 import readFileText from '../../utils/files/readTextFile';
 import readBinaryFile from '../../utils/files/readBinaryFile';
+import developmentConnectionTracker from '../developmentConnectionTracker';
 
 function separateMemAndTagsFiles(files: File[]) {
     let tagsFiles = {};
@@ -68,11 +69,13 @@ const Index: React.FC<Props> = (props) => {
             const tags = tagsStr.split(/\r?\n/).filter((x) => x.length);
 
             const memData = await readBinaryFile(memFiles[memName]);
-            const memId = await DevelopmentProvider.memes.addMem({
-                data: memData,
-                tags: tags,
-                user_id: userIdAddMem,
-            });
+            const memId = await developmentConnectionTracker.makeRequest(() =>
+                DevelopmentProvider.memes.addMem({
+                    data: memData,
+                    tags: tags,
+                    user_id: userIdAddMem,
+                })
+            );
             outputString += `\n[+] Mem'${memName}' id: ${memId}, tags: ${tags.join(
                 ', '
             )}`;
@@ -116,10 +119,12 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Remove Mem"
                 onEnter={() => {
-                    DevelopmentProvider.memes
-                        .removeMem({
-                            mem_id: memIdRemoveMem,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.memes.removeMem({
+                                mem_id: memIdRemoveMem,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -130,11 +135,13 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Rate Mem"
                 onEnter={() => {
-                    DevelopmentProvider.memes
-                        .rateMem({
-                            mem_id: memIdRateMem,
-                            like: likeRateMem == 1,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.memes.rateMem({
+                                mem_id: memIdRateMem,
+                                like: likeRateMem == 1,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })

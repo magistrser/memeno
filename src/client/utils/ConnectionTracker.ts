@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import config from '../config';
 
-type HandleType = (() => void) | null;
+type HandleType = ((data?: any) => void) | null;
 type RequestFunctionType<ResponseType> = () => Promise<ResponseType>;
 
 type RestartRequestObj<ResponseType> = {
@@ -18,7 +18,7 @@ export interface IConnectionTracker {
     setConnectionRestoreHandle(handle: HandleType): void;
     setAuthLostHandle(handle: HandleType): void;
     setAccessDeniedHandle(handle: HandleType): void;
-    setUnknownErrorHandle(handle: HandleType): void;
+    setServerInternalErrorHandle(handle: HandleType): void;
 }
 
 export class ConnectionTracker implements IConnectionTracker {
@@ -26,7 +26,7 @@ export class ConnectionTracker implements IConnectionTracker {
     private onConnectionRestoreHandle: HandleType = null;
     private onAuthLost: HandleType = null;
     private onAccessDenied: HandleType = null;
-    private onUnknownError: HandleType = null;
+    private onServerInternalError: HandleType = null;
 
     private isConnectionLost = false;
 
@@ -55,8 +55,11 @@ export class ConnectionTracker implements IConnectionTracker {
             this.handleAuthLost(restartRequestObj);
             return;
         }
+        if (error && error.response && error.response.status === 500) {
+            this.handleServerInternalError(restartRequestObj, error);
+            return;
+        }
 
-        this.onUnknownError ? this.onUnknownError() : null;
         restartRequestObj.reject();
     }
 
@@ -77,6 +80,14 @@ export class ConnectionTracker implements IConnectionTracker {
             () => this.restartRequest(restartRequestObj),
             config.connectionTracker.restartRequestTimeout
         );
+    }
+
+    handleServerInternalError<ResponseType>(
+        restartRequestObj: RestartRequestObj<ResponseType>,
+        error?: any
+    ): void {
+        this.onServerInternalError ? this.onServerInternalError(error) : null;
+        restartRequestObj.reject();
     }
 
     restartRequest<ResponseType>(
@@ -108,8 +119,8 @@ export class ConnectionTracker implements IConnectionTracker {
     setAccessDeniedHandle(handle: HandleType): void {
         this.onAccessDenied = handle;
     }
-    setUnknownErrorHandle(handle: HandleType): void {
-        this.onUnknownError = handle;
+    setServerInternalErrorHandle(handle: HandleType): void {
+        this.onServerInternalError = handle;
     }
 }
 

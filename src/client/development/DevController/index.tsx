@@ -3,6 +3,7 @@ import InputLine from '../../components/development/InputLine';
 import DevelopmentProvider from '../../../providers/DevelopmentProvider';
 import { AuthType } from '../../../server/db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import { AccessLevel } from '../../../server/db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
+import developmentConnectionTracker from '../developmentConnectionTracker';
 
 interface Props {
     setOutput: (output: any) => void;
@@ -121,10 +122,12 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Drop user watched memes"
                 onEnter={() => {
-                    DevelopmentProvider.dev
-                        .dropUserWatchedMemes({
-                            user_id: userIdDropUserWatchedMemes,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.dev.dropUserWatchedMemes({
+                                user_id: userIdDropUserWatchedMemes,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -135,12 +138,14 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Set user-user rating"
                 onEnter={() => {
-                    DevelopmentProvider.dev
-                        .setUserUserRating({
-                            user_id: userIdSetUserUserRating,
-                            second_user_id: secondUserIdSetUserUserRating,
-                            rating: ratingSetUserUserRating,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.dev.setUserUserRating({
+                                user_id: userIdSetUserUserRating,
+                                second_user_id: secondUserIdSetUserUserRating,
+                                rating: ratingSetUserUserRating,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -151,10 +156,12 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Drop user users rating"
                 onEnter={() => {
-                    DevelopmentProvider.dev
-                        .dropUserUsersRating({
-                            user_id: userIdDropUserUsersRating,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.dev.dropUserUsersRating({
+                                user_id: userIdDropUserUsersRating,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -165,12 +172,14 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Set user tag rating"
                 onEnter={() => {
-                    DevelopmentProvider.dev
-                        .setUserTagRating({
-                            user_id: userIdSetUserTagRating,
-                            tag: tagSetUserTagRating,
-                            rating: ratingSetUserTagRating,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.dev.setUserTagRating({
+                                user_id: userIdSetUserTagRating,
+                                tag: tagSetUserTagRating,
+                                rating: ratingSetUserTagRating,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -181,10 +190,12 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Drop user tags rating"
                 onEnter={() => {
-                    DevelopmentProvider.dev
-                        .dropUserTagsRating({
-                            user_id: userIdDropUserTagsRating,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.dev.dropUserTagsRating({
+                                user_id: userIdDropUserTagsRating,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -195,11 +206,13 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Set mem rating"
                 onEnter={() => {
-                    DevelopmentProvider.dev
-                        .setMemRating({
-                            mem_id: memIdSetMemRating,
-                            rating: ratingSetMemRating,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.dev.setMemRating({
+                                mem_id: memIdSetMemRating,
+                                rating: ratingSetMemRating,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -210,11 +223,13 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Set user rating"
                 onEnter={() => {
-                    DevelopmentProvider.dev
-                        .setUserRating({
-                            user_id: userIdSetUserRating,
-                            rating: ratingSetUserRating,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.dev.setUserRating({
+                                user_id: userIdSetUserRating,
+                                rating: ratingSetUserRating,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -225,8 +240,8 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Clean DB"
                 onEnter={() => {
-                    DevelopmentProvider.dev
-                        .cleanDb()
+                    developmentConnectionTracker
+                        .makeRequest(() => DevelopmentProvider.dev.cleanDb())
                         .then((res) => {
                             props.setOutput(res);
                         })

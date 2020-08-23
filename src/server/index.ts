@@ -9,7 +9,7 @@ import config from './config';
 import routes from '../routes/routes';
 import auth from './routers/auth';
 import engine from './routers/engine';
-import {needDeveloperAccess} from "./passports/validateAccessLevel";
+import { needDeveloperAccess } from './passports/validateAccessLevel';
 
 const port = process.env.PORT || config.server.port;
 const app = express();

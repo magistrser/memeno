@@ -1,4 +1,7 @@
-import {AccessLevel, accessLevelToNumber} from "../db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel";
+import {
+    AccessLevel,
+    accessLevelToNumber,
+} from '../db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
 
 function checkAccessLevel(level, needLevel) {
     return accessLevelToNumber(level) >= accessLevelToNumber(needLevel);
@@ -6,9 +9,9 @@ function checkAccessLevel(level, needLevel) {
 
 function needAccess(req, res, next, needLevel) {
     if (checkAccessLevel(req.user.access_level, needLevel)) {
-        next()
+        next();
     } else {
-        res.send(403, 'Forbidden');
+        res.status(403).send('Forbidden');
     }
 }
 

@@ -3,6 +3,7 @@ import InputLine from '../../components/development/InputLine';
 import DevelopmentProvider from '../../../providers/DevelopmentProvider';
 import { AuthType } from '../../../server/db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import { AccessLevel } from '../../../server/db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
+import developmentConnectionTracker from '../developmentConnectionTracker';
 
 interface Props {
     setOutput: (output: any) => void;
@@ -79,8 +80,12 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Create user"
                 onEnter={() => {
-                    DevelopmentProvider.users
-                        .createNewUser({ auth_type: AuthType[authType] })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.users.createNewUser({
+                                auth_type: AuthType[authType],
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -91,8 +96,12 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Get User"
                 onEnter={() => {
-                    DevelopmentProvider.users
-                        .getUser({ user_id: userIdGetUser })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.users.getUser({
+                                user_id: userIdGetUser,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -103,12 +112,14 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Rate User Tags"
                 onEnter={() => {
-                    DevelopmentProvider.users
-                        .rateTags({
-                            user_id: userIdRateTags,
-                            tags: tagsRateTags.split(';'),
-                            like: likeRateTags === 1,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.users.rateTags({
+                                user_id: userIdRateTags,
+                                tags: tagsRateTags.split(';'),
+                                like: likeRateTags === 1,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -119,11 +130,13 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Set Access Level"
                 onEnter={() => {
-                    DevelopmentProvider.users
-                        .setAccessLevel({
-                            user_id: userIdSetAccessLevel,
-                            access_level: accessLevelSetAccessLevel as AccessLevel,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.users.setAccessLevel({
+                                user_id: userIdSetAccessLevel,
+                                access_level: accessLevelSetAccessLevel as AccessLevel,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })
@@ -134,10 +147,12 @@ const Index: React.FC<Props> = (props) => {
             <InputLine
                 label="Get Access Level"
                 onEnter={() => {
-                    DevelopmentProvider.users
-                        .getAccessLevel({
-                            user_id: userIdGetAccessLevel,
-                        })
+                    developmentConnectionTracker
+                        .makeRequest(() =>
+                            DevelopmentProvider.users.getAccessLevel({
+                                user_id: userIdGetAccessLevel,
+                            })
+                        )
                         .then((res) => {
                             props.setOutput(res);
                         })

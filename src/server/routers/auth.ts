@@ -4,6 +4,7 @@ import passport from 'passport';
 import routes from '../../routes/routes';
 import { Auth } from '../../routes/auth';
 import { IGetUserAuthInfoRequest } from '../types';
+import safeRoute from '../utils/safeRoute';
 
 const router = express.Router();
 
@@ -47,10 +48,10 @@ router.get(routes.server.auth.fail, (req, res) => {
 
 router[Auth.IsAuth.Type](
     Auth.IsAuth.Route,
-    (req: IGetUserAuthInfoRequest, res) => {
+    safeRoute(async (req: IGetUserAuthInfoRequest, res) => {
         const isAuth: Auth.IsAuth.Res = req.isAuthenticated();
         res.json(isAuth);
-    }
+    })
 );
 
 export default router;

@@ -1,9 +1,10 @@
 import { series } from 'nps-utils';
 
+const envDev = 'cross-env MODE=DEV';
+
 const nodemonServer = 'nodemon';
 const clientWebpackProd = 'webpack --mode production';
-const clientWebpackDev =
-    'cross-env MODE=DEV webpack --mode development --devtool inline-source-map';
+const clientWebpackDev = `${envDev} webpack --mode development --devtool inline-source-map`;
 const devClientWebpack = 'webpack --config webpack.dev-client.config.js';
 
 export default {
