@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MainPageRouter from '../../components/MainPageRouter';
 import routes from '../../../routes/routes';
-import DevPage from '../DevPage';
+import DevPage from '../pages/DevPage';
 import developmentConnectionTracker from '../developmentConnectionTracker';
 import WaitingConnectionWrapper from '../../components/WaitingConnectionWrapper';
 

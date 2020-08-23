@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import DevMenu from '../../components/development/DevMenu';
-import routes from '../../../routes/routes';
+import DevMenu from '../../../components/development/DevMenu';
+import routes from '../../../../routes/routes';
 import './index.less';
-import { MenuCategory } from '../../../routes/development/MenuCategory';
+import { MenuCategory } from '../../../../routes/development/MenuCategory';
 import { useParams } from 'react-router-dom';
-import UsersController from '../UsersController';
-import DevController from '../DevController';
-import MemesController from '../MemesController';
-import ResponseOutput from '../../components/development/ResponseOutput';
-import DevelopmentProvider from '../../../providers/DevelopmentProvider';
-import developmentConnectionTracker from '../developmentConnectionTracker';
+import UsersController from './controllers/UsersController';
+import DevController from './controllers/DevController';
+import MemesController from './controllers/MemesController';
+import ResponseOutput from '../../../components/development/ResponseOutput';
+import DevelopmentProvider from '../../../../providers/DevelopmentProvider';
+import developmentConnectionTracker from '../../developmentConnectionTracker';
 
 const Index: React.FC = () => {
     const { menu } = useParams() as { menu: MenuCategory };

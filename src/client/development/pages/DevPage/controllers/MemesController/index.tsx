@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import InputLine from '../../components/development/InputLine';
-import DevelopmentProvider from '../../../providers/DevelopmentProvider';
-import readFileText from '../../utils/files/readTextFile';
-import readBinaryFile from '../../utils/files/readBinaryFile';
-import developmentConnectionTracker from '../developmentConnectionTracker';
+import InputLine from '../../../../../components/development/InputLine';
+import DevelopmentProvider from '../../../../../../providers/DevelopmentProvider';
+import readFileText from '../../../../../utils/files/readTextFile';
+import readBinaryFile from '../../../../../utils/files/readBinaryFile';
+import developmentConnectionTracker from '../../../../developmentConnectionTracker';
 
 function separateMemAndTagsFiles(files: File[]) {
     let tagsFiles = {};

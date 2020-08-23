@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import InputLine from '../../components/development/InputLine';
-import DevelopmentProvider from '../../../providers/DevelopmentProvider';
-import { AuthType } from '../../../server/db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
-import { AccessLevel } from '../../../server/db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
-import developmentConnectionTracker from '../developmentConnectionTracker';
+import InputLine from '../../../../../components/development/InputLine';
+import DevelopmentProvider from '../../../../../../providers/DevelopmentProvider';
+import developmentConnectionTracker from '../../../../developmentConnectionTracker';
 
 interface Props {
     setOutput: (output: any) => void;
