@@ -9,6 +9,7 @@ import config from '../config';
 import routes from '../routes/routes';
 import auth from './routers/auth';
 import engine from './routers/engine';
+import {needDeveloperAccess} from "./passports/validateAccessLevel";
 
 const port = process.env.PORT || config.server.port;
 const app = express();
@@ -37,14 +38,17 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(
     routes.development.root,
+    needDeveloperAccess,
     express.static(path.join(__dirname, '../../dist-dev-client'))
 );
 app.use(
     routes.development.main,
+    needDeveloperAccess,
     express.static(path.join(__dirname, '../../dist-dev-client'))
 );
 app.use(
     routes.development.login,
+    needDeveloperAccess,
     express.static(path.join(__dirname, '../../dist-dev-client'))
 );
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './index.css';
 import MobilePhoneScreen from '../../components/MobilePhoneScreen';
 import MainPageRouter from '../../components/MainPageRouter';
@@ -20,6 +21,11 @@ const Index: React.FC = () => {
     connectionTracker.setConnectionRestoreHandle(() =>
         setWaitingConnection(false)
     );
+    connectionTracker.setAuthLostHandle(() => {
+        const history = useHistory();
+        const from = { pathname: routes.react.login.noFail };
+        history.replace(from);
+    });
 
     return (
         <Provider store={store}>

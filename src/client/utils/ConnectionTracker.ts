@@ -51,8 +51,19 @@ export class ConnectionTracker implements IConnectionTracker {
             this.handleNetworkError(restartRequestObj);
             return;
         }
+        if (error && error.response && error.response.status === 401) {
+            this.handleAuthLost(restartRequestObj);
+            return;
+        }
 
         this.onUnknownError ? this.onUnknownError() : null;
+        restartRequestObj.reject();
+    }
+
+    handleAuthLost<ResponseType>(
+        restartRequestObj: RestartRequestObj<ResponseType>
+    ): void {
+        this.onAuthLost ? this.onAuthLost() : null;
         restartRequestObj.reject();
     }
 
