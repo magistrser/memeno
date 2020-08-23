@@ -1,5 +1,5 @@
 import Rating from './Rating';
-import { MemClient } from '../../../../../routes/MemClient';
+import { MemClient } from '../../../routes/MemClient';
 
 interface IMemProvider {
     getCurrentMem(): MemClient;

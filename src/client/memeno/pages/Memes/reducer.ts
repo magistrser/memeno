@@ -1,6 +1,6 @@
-import Rating from './MemProvider/Rating';
+import Rating from '../../../utils/MemProvider/Rating';
 import { MemClient } from '../../../../routes/MemClient';
-import { SpecialMemes } from './MemProvider/resources-folder-mem-provider/SpecialMemes';
+import { SpecialMemes } from '../../../utils/MemProvider/resources-folder-mem-provider/SpecialMemes';
 import { Actions } from './actions';
 import { INIT_MEMES_ACTION } from './actions/InitMemes';
 import { SWIPE_MEMES_ACTION } from './actions/SwipeEnd';

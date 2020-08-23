@@ -2,24 +2,26 @@ import Rating from './Rating';
 import IMemProvider from './IMemProvider';
 import axios from 'axios';
 import { SpecialMemes } from './resources-folder-mem-provider/SpecialMemes';
-import { MemClient } from '../../../../../routes/MemClient';
-import { Select } from '../../../../../routes/engine/select';
-import DevelopmentProvider from '../../../../../providers/DevelopmentProvider';
+import { MemClient } from '../../../routes/MemClient';
+import { Select } from '../../../routes/engine/select';
+import DevelopmentProvider from '../../../providers/DevelopmentProvider';
+import connectionTracker, { IConnectionTracker } from '../ConnectionTracker';
 
 class ServerMemProvider implements IMemProvider {
     private memes: MemClient[];
     private readonly memesUpdateThreshold: number;
     private isMemesUpdating: boolean;
-    private isServerError: boolean;
 
     private onWait: () => void;
     private onLoad: (currentMem?: MemClient) => void;
 
-    constructor() {
+    private connectionTracker: IConnectionTracker | null;
+
+    constructor(connectionTracker) {
         this.memes = [];
         this.memesUpdateThreshold = 10;
         this.isMemesUpdating = false;
-        this.isServerError = false;
+        this.connectionTracker = connectionTracker;
     }
 
     init(onWait, onLoad) {
@@ -36,13 +38,18 @@ class ServerMemProvider implements IMemProvider {
         const getTopReq = {
             ignore_memes: this.memes.map((x) => x.mem_id),
         };
-        axios[Select.GetTop.Type]<Select.GetTop.Res>(
-            Select.GetTop.Rout,
-            getTopReq
+        const updateMemesRequest = () =>
+            axios[Select.GetTop.Type]<Select.GetTop.Res>(
+                Select.GetTop.Rout,
+                getTopReq
+            );
+
+        (this.connectionTracker
+            ? this.connectionTracker.makeRequest(updateMemesRequest)
+            : updateMemesRequest()
         )
             .then((res) => {
                 this.isMemesUpdating = false;
-                this.isServerError = false;
 
                 if (isInit) {
                     this.memes = res.data;
@@ -58,9 +65,9 @@ class ServerMemProvider implements IMemProvider {
                 this.memes = this.memes.concat(res.data);
                 this.onLoad();
             })
-            .catch(() => {
-                this.isServerError = true;
+            .catch((error) => {
                 this.isMemesUpdating = false;
+                console.log(error);
             });
     }
 
@@ -73,24 +80,27 @@ class ServerMemProvider implements IMemProvider {
         }
 
         if (this.memes.length == 0) {
-            return this.isServerError
-                ? SpecialMemes.ServerNotRespodMem
-                : SpecialMemes.EndMem;
+            return SpecialMemes.EndMem;
         }
 
         return this.memes[0];
     }
     swapMem(type: Rating) {
         if (this.memes.length > 0) {
-            DevelopmentProvider.memes
-                .rateMem({
+            const updateMemesRequest = () =>
+                DevelopmentProvider.memes.rateMem({
                     mem_id: this.memes[0].mem_id,
                     like: type === Rating.Like,
-                })
-                .catch((error) => {
-                    // todo server error handler
-                    console.log(error);
                 });
+
+            (this.connectionTracker
+                ? this.connectionTracker.makeRequest(updateMemesRequest)
+                : updateMemesRequest()
+            ).catch((error) => {
+                // todo server error handler
+                console.log(error);
+            });
+
             this.memes.shift();
             return;
         }
@@ -101,5 +111,5 @@ class ServerMemProvider implements IMemProvider {
     }
 }
 
-const folderMemProvider = new ServerMemProvider();
+const folderMemProvider = new ServerMemProvider(connectionTracker);
 export default folderMemProvider;
