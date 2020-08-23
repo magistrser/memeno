@@ -1,10 +1,11 @@
-.waiting-connection-main {
+.waiting-connection-wrapper {
     position: relative;
     height: 100%;
 
     display: grid;
-    justify-items: center;
-    align-items: center;
+
+    justify-content: stretch;
+    align-content: stretch;
 }
 
 .waiting-connection-hide {
