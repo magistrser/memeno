@@ -77,6 +77,10 @@ const Index: React.FC<IStaticMem> = (props) => {
     };
 
     useEffect(() => {
+        handleFinalizeSwipe();
+    }, [])
+
+    useEffect(() => {
         if (!isStart) {
             setCurrentMem(props.currentMem);
             setPrevMem(props.prevMem);

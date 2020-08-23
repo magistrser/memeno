@@ -95,7 +95,7 @@ class ServerMemProvider implements IMemProvider {
             (this.connectionTracker
                 ? this.connectionTracker.makeRequest(updateMemesRequest)
                 : updateMemesRequest()
-            ).catch((error) => {});
+            );
 
             this.memes.shift();
             return;
