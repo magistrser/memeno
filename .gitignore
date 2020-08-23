@@ -9,4 +9,5 @@ dist-dev-client
 *.log
 
 pg-docker-server/db/
+mongo-docker-server/db/
 resources/memesWithTags/*

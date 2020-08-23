@@ -12,6 +12,7 @@ export default {
         dev: series(clientWebpackDev, devClientWebpack, nodemonServer),
         development: {
             runPostgres: 'cd pg-docker-server && ./run.sh && cd ..',
+            runMongo: 'cd mongo-docker-server && ./run.sh && cd ..',
             loadMemes: 'npx ts-node ./src/scripts/loadMemesFromFolder.ts',
         },
         prettier: 'prettier --write .',

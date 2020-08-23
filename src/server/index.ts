@@ -3,9 +3,8 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import path from 'path';
 import passport from 'passport';
-
+import store from "./sessions-store";
 import configurePassport from './passports/vkontakte';
-
 import config from '../config';
 import routes from '../routes/routes';
 import auth from './routers/auth';
@@ -14,16 +13,21 @@ import engine from './routers/engine';
 const port = process.env.PORT || config.server.port;
 const app = express();
 
-/* Passport configuration */
 app.use(
     session({
-        secret: 'secret', // TODO: Generate guid or something
+        store,
+        secret: config.sessions.secret,
         resave: true,
-        saveUninitialized: true,
-        // TODO: consider using some type of storage (others do that)
-        // https://stackoverflow.com/questions/29111571/passports-req-isauthenticated-always-returning-false-even-when-i-hardcode-done
+        rolling: true,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: config.sessions.lifeTimeOfSession,
+            httpOnly: false,
+        },
     })
 );
+
+/* Passport configuration */
 configurePassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());

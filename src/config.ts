@@ -7,12 +7,23 @@ const dbName = 'memeno';
 const dbIp = 'localhost';
 const dpPort = 5432;
 
+const mongoUser = 'memeno';
+const mongoPassword = 'mysecretpassword'; // TODO: Generate password
+const mongoIp = 'localhost';
+const mongoPort = 27071;
+
 export default {
     requestType: 'http://',
     db: {
         ip: dbIp,
         port: dpPort,
         address: `postgresql://${dbUser}:${dbPassword}@${dbIp}:${dpPort}/${dbName}`,
+    },
+    sessions: {
+        address: `mongodb://${mongoUser}:${mongoPassword}@${mongoIp}:${mongoPort}`,
+        collection: 'sessions',
+        secret: 'secret', // TODO: Generate guid or something,
+        lifeTimeOfSession: 14 * 24 * 60 * 60 * 1000
     },
     server: {
         ip: serverIp,
