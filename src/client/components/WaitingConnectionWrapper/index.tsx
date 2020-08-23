@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Waiting from '../Waiting';
 import './index.css';
 
 interface Props {
     isWaitingConnection: boolean;
+    waitingChildren: ReactNode;
 }
 
 const Index: React.FC<Props> = (props) => {
@@ -13,7 +14,7 @@ const Index: React.FC<Props> = (props) => {
                 <>
                     <div className="waiting-connection-hide"></div>
                     <div className="waiting-connection-message">
-                        <Waiting message="Connecting..." />
+                        <Waiting>{props.waitingChildren}</Waiting>
                     </div>
                 </>
             ) : null}

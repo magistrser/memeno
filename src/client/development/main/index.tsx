@@ -16,7 +16,12 @@ const Index: React.FC = () => {
 
     return (
         <div className="development">
-            <WaitingConnectionWrapper isWaitingConnection={isWaitingConnection}>
+            <WaitingConnectionWrapper
+                isWaitingConnection={isWaitingConnection}
+                waitingChildren={
+                    <div style={{ color: 'black' }}>Connecting</div>
+                }
+            >
                 <MainPageRouter
                     authPath={routes.development.root}
                     contentPath={routes.development.main}

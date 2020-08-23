@@ -32,6 +32,9 @@ const Index: React.FC = () => {
             <MobilePhoneScreen>
                 <WaitingConnectionWrapper
                     isWaitingConnection={isWaitingConnection}
+                    waitingChildren={
+                        <div style={{ color: '#ffed2b' }}>Connecting</div>
+                    }
                 >
                     <MainPageRouter
                         authPath={routes.root}
