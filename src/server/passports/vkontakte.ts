@@ -1,4 +1,4 @@
-import config from '../../config';
+import config from '../config';
 import routes from '../../routes/routes';
 import { Strategy as VKontakteStrategy } from 'passport-vkontakte';
 import UsersEngine from '../engine/postresql/UsersEngine';

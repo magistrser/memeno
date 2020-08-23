@@ -5,7 +5,7 @@ import path from 'path';
 import passport from 'passport';
 import store from './sessions-store';
 import configurePassport from './passports/vkontakte';
-import config from '../config';
+import config from './config';
 import routes from '../routes/routes';
 import auth from './routers/auth';
 import engine from './routers/engine';

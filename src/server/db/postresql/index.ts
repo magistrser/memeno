@@ -17,7 +17,7 @@ import MemesBaseQueries from './queris/MemesQueries/MemesBaseQueries';
 import MemesTagsQueries from './queris/MemesQueries/MemesTagsQueries';
 import { ITagsBaseQueries } from '../IQueries/ITagsQueries/ITagsBaseQueries';
 import TagsBaseQueries from './queris/TagsQueries/TagsBaseQueries';
-import config from '../../../config';
+import config from '../../config';
 import ISelectionMemesQueries from '../IQueries/ISelectionMemesQueries/ISelectionMemesBaseQueries';
 import SelectionMemesBaseQueries from './queris/SelectionMemesQueries/SelectionMemesBaseQueries';
 import IDevBaseQueries from '../IQueries/IDevQueries/IDevBaseQueries';
