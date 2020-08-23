@@ -1,0 +1,70 @@
+.error-page {
+    display: grid;
+    grid-template-rows: [header-row] 0.12fr [error-row] 0.64fr [copy-row] 0.12fr [return-row] 0.12fr [end-row];
+    justify-content: stretch;
+    height: 100%;
+}
+
+.error-header {
+    grid-area: header-row / 1 / error-row / 2;
+    margin: 2% 2%;
+}
+.error-message {
+    grid-area: error-row / 1 / copy-row / 2;
+    margin: 2% 2%;
+}
+.copy-error-button {
+    grid-area: copy-row / 1 / return-row / 2;
+    margin: 2% 2%;
+}
+.return-button {
+    grid-area: return-row / 1 / end-row / 2;
+    margin: 2% 2%;
+}
+
+.error-header {
+    justify-self: center;
+    align-self: center;
+    color: red;
+}
+
+.error-message {
+    overflow-y: scroll;
+    color: black;
+}
+.error-message::-webkit-scrollbar {
+    width: 5px;
+}
+.error-message::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.error-message::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+@button-background: lightgray;
+
+.button {
+    font-size: 200%;
+    background-color: @button-background;
+    color: #3a3a3a;
+}
+
+.copy-error-button {
+    .button();
+}
+.copy-error-button:active {
+    background-color: gray;
+}
+
+.return-button a {
+    display: grid;
+    align-content: center;
+    height: 100%;
+    text-decoration: none;
+    text-align: center;
+    .button();
+}
+.return-button a:active {
+    background-color: gray;
+}

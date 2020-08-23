@@ -62,7 +62,7 @@ export class ConnectionTracker implements IConnectionTracker {
             return;
         }
 
-        this.onUnknownErrorHandle ? this.onUnknownErrorHandle() : null;
+        this.onUnknownErrorHandle ? this.onUnknownErrorHandle(error) : null;
         restartRequestObj.reject();
     }
 

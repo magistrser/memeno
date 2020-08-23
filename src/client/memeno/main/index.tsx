@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Route } from 'react-router-dom';
 import './index.css';
 import MobilePhoneScreen from '../../components/MobilePhoneScreen';
 import MainPageRouter from '../../components/MainPageRouter';
 import WaitingConnectionWrapper from '../../components/WaitingConnectionWrapper';
-import Memeno from '../pages/Memes';
+import Memes from '../pages/Memes';
+import Error from '../pages/Error';
 import routes from '../../../routes/routes';
 import connectionTracker from '../../utils/ConnectionTracker';
 
@@ -15,17 +16,43 @@ import configureStore from 'ConfigureStoreWebpackResolved';
 
 const store = configureStore();
 
+const WorkPages: React.FC = () => {
+    const history = useHistory();
+    connectionTracker.setAuthLostHandle(() => {
+        const from = { pathname: routes.react.login.noFail };
+        history.replace(from);
+    });
+
+    const [errorMessage, setErrorMessage] = useState('');
+    const handleError = (error?: any) => {
+        setErrorMessage(JSON.stringify(error));
+        const from = { pathname: routes.error };
+        history.replace(from);
+    };
+    connectionTracker.setServerInternalErrorHandle(handleError);
+    connectionTracker.setUnknownErrorHandle(handleError);
+
+    return (
+        <>
+            <Route path={routes.root}>
+                <Memes />
+            </Route>
+            <Route path={routes.error}>
+                <Error
+                    errorMessage={errorMessage}
+                    returnPath={routes.root}
+                />
+            </Route>
+        </>
+    )
+}
+
 const Index: React.FC = () => {
     const [isWaitingConnection, setWaitingConnection] = useState(false);
     connectionTracker.setConnectionLostHandel(() => setWaitingConnection(true));
     connectionTracker.setConnectionRestoreHandle(() =>
         setWaitingConnection(false)
     );
-    connectionTracker.setAuthLostHandle(() => {
-        const history = useHistory();
-        const from = { pathname: routes.react.login.noFail };
-        history.replace(from);
-    });
 
     return (
         <Provider store={store}>
@@ -46,7 +73,7 @@ const Index: React.FC = () => {
                         }
                         serverLoginPath={routes.server.auth.vk.login}
                     >
-                        <Memeno />
+                        <WorkPages/>
                     </MainPageRouter>
                 </WaitingConnectionWrapper>
             </MobilePhoneScreen>

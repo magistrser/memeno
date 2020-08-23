@@ -3,8 +3,8 @@
     src: local('RobotoLight'),
         url('../../resources/roboto.light.ttf') format('ttf');
 }
-.memeno-header {
-    color: #ffed2b;
+.header-component {
+    font-size: 200%;
     font-family: 'RobotoLight';
     margin: auto;
 }

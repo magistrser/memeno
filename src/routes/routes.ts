@@ -3,13 +3,14 @@ import { MenuCategory } from './development/MenuCategory';
 
 const routes = {
     root: '/',
+    login: '/login/:fail',
+    waiting: '/waiting',
+    error: '/error',
     development: {
         root: '/development',
         login: '/development/login/:fail',
         main: '/development/main/:menu',
     },
-    login: '/login/:fail',
-    waiting: '/waiting',
     react: {
         root: '/',
         waiting: '/waiting',

@@ -33,7 +33,7 @@ router[Memes.RateMem.Type](
         };
 
         await MemesEngine.rateMem(rateMem);
-        res.json();
+        res.status(501).json();
     })
 );
 router[Memes.RemoveMem.Type](

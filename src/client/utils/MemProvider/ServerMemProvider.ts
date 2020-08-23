@@ -67,7 +67,6 @@ class ServerMemProvider implements IMemProvider {
             })
             .catch((error) => {
                 this.isMemesUpdating = false;
-                console.log(error);
             });
     }
 
@@ -96,10 +95,7 @@ class ServerMemProvider implements IMemProvider {
             (this.connectionTracker
                 ? this.connectionTracker.makeRequest(updateMemesRequest)
                 : updateMemesRequest()
-            ).catch((error) => {
-                // todo server error handler
-                console.log(error);
-            });
+            ).catch((error) => {});
 
             this.memes.shift();
             return;
