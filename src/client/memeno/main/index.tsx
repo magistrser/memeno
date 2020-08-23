@@ -13,7 +13,6 @@ import connectionTracker from '../../utils/ConnectionTracker';
 // eslint-disable-next-line
 // @ts-ignore
 import configureStore from 'ConfigureStoreWebpackResolved';
-
 const store = configureStore();
 
 const WorkPages: React.FC = () => {
@@ -34,18 +33,15 @@ const WorkPages: React.FC = () => {
 
     return (
         <>
-            <Route path={routes.root}>
+            <Route path={routes.memes}>
                 <Memes />
             </Route>
             <Route path={routes.error}>
-                <Error
-                    errorMessage={errorMessage}
-                    returnPath={routes.root}
-                />
+                <Error errorMessage={errorMessage} returnPath={routes.memes} />
             </Route>
         </>
-    )
-}
+    );
+};
 
 const Index: React.FC = () => {
     const [isWaitingConnection, setWaitingConnection] = useState(false);
@@ -65,7 +61,7 @@ const Index: React.FC = () => {
                 >
                     <MainPageRouter
                         authPath={routes.root}
-                        contentPath={routes.root}
+                        contentPath={routes.memes}
                         loginPath={routes.login}
                         loginNoFailPath={routes.react.login.noFail}
                         loginServerErrorResponse={
@@ -73,7 +69,7 @@ const Index: React.FC = () => {
                         }
                         serverLoginPath={routes.server.auth.vk.login}
                     >
-                        <WorkPages/>
+                        <WorkPages />
                     </MainPageRouter>
                 </WaitingConnectionWrapper>
             </MobilePhoneScreen>

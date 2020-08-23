@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Route } from 'react-router-dom';
 import MainPageRouter from '../../components/MainPageRouter';
 import routes from '../../../routes/routes';
 import DevPage from '../pages/DevPage';
@@ -32,7 +33,9 @@ const Index: React.FC = () => {
                     }
                     serverLoginPath={routes.server.development.auth.vk.login}
                 >
-                    <DevPage />
+                    <Route path={routes.development.main}>
+                        <DevPage />
+                    </Route>
                 </MainPageRouter>
             </WaitingConnectionWrapper>
         </div>

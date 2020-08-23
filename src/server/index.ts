@@ -38,7 +38,6 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(
     routes.development.root,
-    needDeveloperAccess,
     express.static(path.join(__dirname, '../../dist-dev-client'))
 );
 app.use(
@@ -54,6 +53,8 @@ app.use(
 
 app.use(routes.root, express.static(path.join(__dirname, '../../dist')));
 app.use(routes.login, express.static(path.join(__dirname, '../../dist')));
+app.use(routes.error, express.static(path.join(__dirname, '../../dist')));
+app.use(routes.memes, express.static(path.join(__dirname, '../../dist')));
 
 // routers/auth
 app.use(auth);

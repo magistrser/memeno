@@ -6,6 +6,7 @@ const routes = {
     login: '/login/:fail',
     waiting: '/waiting',
     error: '/error',
+    memes: '/memes',
     development: {
         root: '/development',
         login: '/development/login/:fail',

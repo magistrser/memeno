@@ -16,7 +16,7 @@ const Index = ({ children, loginPath, contentPath, errorPath, ...rest }) => {
         axios[Auth.IsAuth.Type]<Auth.IsAuth.Res>(Auth.IsAuth.Route)
             .then((res) => {
                 const { from } =
-                    location.state || res.data == true
+                    location.state || res.data === true
                         ? { from: { pathname: contentPath } }
                         : { from: { pathname: loginPath } };
 

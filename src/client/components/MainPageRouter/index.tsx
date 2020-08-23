@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import AuthRoute from '../AuthRoute';
 import Login from '../Login';
 
@@ -26,7 +26,7 @@ const Index: React.FC<Props> = (props) => {
                     loginPath={props.loginNoFailPath}
                     errorPath={props.loginServerErrorResponse}
                 >
-                    <Route path={props.contentPath}>{props.children}</Route>
+                    {props.children}
                 </AuthRoute>
             </Switch>
         </Router>
