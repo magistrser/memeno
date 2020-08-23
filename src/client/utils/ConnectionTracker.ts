@@ -19,6 +19,7 @@ export interface IConnectionTracker {
     setAuthLostHandle(handle: HandleType): void;
     setAccessDeniedHandle(handle: HandleType): void;
     setServerInternalErrorHandle(handle: HandleType): void;
+    setUnknownErrorHandle(handle: HandleType): void;
 }
 
 export class ConnectionTracker implements IConnectionTracker {
@@ -27,6 +28,7 @@ export class ConnectionTracker implements IConnectionTracker {
     private onAuthLost: HandleType = null;
     private onAccessDenied: HandleType = null;
     private onServerInternalError: HandleType = null;
+    private onUnknownErrorHandle: HandleType = null;
 
     private isConnectionLost = false;
 
@@ -60,6 +62,7 @@ export class ConnectionTracker implements IConnectionTracker {
             return;
         }
 
+        this.onUnknownErrorHandle ? this.onUnknownErrorHandle() : null;
         restartRequestObj.reject();
     }
 
@@ -121,6 +124,9 @@ export class ConnectionTracker implements IConnectionTracker {
     }
     setServerInternalErrorHandle(handle: HandleType): void {
         this.onServerInternalError = handle;
+    }
+    setUnknownErrorHandle(handle: HandleType): void {
+        this.onUnknownErrorHandle = handle;
     }
 }
 

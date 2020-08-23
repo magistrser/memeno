@@ -23,7 +23,6 @@ element {
     align-items: center;
 
     font-size: var(--zoom-font-start-size);
-    color: #ffed2b;
 
     animation-name: zoomIn;
     animation-duration: 3s;

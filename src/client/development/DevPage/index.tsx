@@ -41,13 +41,16 @@ const Index: React.FC = () => {
         }
         setOutput(JSON.stringify(value, null, '\t'));
     };
-    developmentConnectionTracker.setServerInternalErrorHandle((data?: any) => {
+
+    const handleError = (data?: any) => {
         const error = {
             status: data.response.status,
             description: data.response.data,
         };
         setOutputWrapper(`Error:\n${JSON.stringify(error, null, '\t')}`);
-    });
+    };
+    developmentConnectionTracker.setServerInternalErrorHandle(handleError);
+    developmentConnectionTracker.setUnknownErrorHandle(handleError);
 
     const [yourId, setYourId] = useState<number | null>(null);
     useEffect(() => {
