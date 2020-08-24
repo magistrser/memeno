@@ -16,7 +16,7 @@ function separateMemAndTagsFiles(files: File[]) {
             };
             continue;
         }
-        if (files[i].name.endsWith('txt')) {
+        if (files[i].name.endsWith('tags')) {
             tagsFiles = {
                 ...tagsFiles,
                 [files[i].name.split('.')[0]]: files[i],
