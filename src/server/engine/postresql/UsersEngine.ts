@@ -5,6 +5,7 @@ import IUsersEngine, {
     GetUser,
     GetVkUserByUserId,
     GetVkUserByVkId,
+    RateDynamicTags,
     RateTags,
     RemoveUser,
     SetAccessLevel,
@@ -17,6 +18,7 @@ import { db } from '../../db/postresql';
 import { AuthType } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import { VkUser } from '../../db/IQueries/IUsersQueries/IVkUsersQueries/VkUser';
 import { AccessLevel } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
+import { TagId } from '../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag';
 
 const UsersEngine: IUsersEngine = class {
     static addVkUser(req: AddVkUser): Promise<UserId> {
@@ -64,6 +66,30 @@ const UsersEngine: IUsersEngine = class {
             await db.users.usersTagsRatingQueries.updateUserTagRating({
                 ...tag,
                 like,
+            });
+        }
+    }
+    static async rateDynamicTags(req: RateDynamicTags): Promise<void> {
+        for (let i = 0; i < req.tags.length; ++i) {
+            const tag = { tag: req.tags[i], user_id: req.user_id };
+            await db.tags.tagsBaseQueries.addTag(tag);
+            await db.users.usersTagsRatingQueries.addUserTagRating(tag);
+
+            const dbTag = await db.users.usersTagsRatingQueries.getUserTagRating(
+                tag
+            );
+            if (!dbTag) {
+                throw Error('UserTagRating not found after creation.');
+            }
+
+            const value = req.recommendation_system.getValueForDynamicRating(
+                dbTag,
+                req.like
+            );
+            await db.users.usersTagsRatingQueries.updateUserTagDynamicRating({
+                ...tag,
+                value,
+                modulo_constraint: req.recommendation_system.getModuloConstraint(),
             });
         }
     }

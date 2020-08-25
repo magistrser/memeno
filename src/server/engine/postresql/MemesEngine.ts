@@ -7,6 +7,7 @@ import { MemId } from '../../db/IQueries/IMemesQueries/IMemesBaseQueries/Mem';
 import { db } from '../../db/postresql';
 import TagsEngine from './TagsEngine';
 import UsersEngine from './UsersEngine';
+import testRecommendationSystem from '../../RecommendationSystem/TestRecommendationSystem';
 
 const MemesEngine: IMemesEngine = class {
     static addMem(req: AddMem): Promise<MemId> {
@@ -94,6 +95,11 @@ const MemesEngine: IMemesEngine = class {
             const tagsRate = { tags, like: req.like };
             await TagsEngine.rateTags(tagsRate);
             await UsersEngine.rateTags({ ...tagsRate, user_id: req.user_id });
+            await UsersEngine.rateDynamicTags({
+                ...tagsRate,
+                user_id: req.user_id,
+                recommendation_system: testRecommendationSystem,
+            });
         });
     }
 };

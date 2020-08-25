@@ -64,6 +64,63 @@ test('[UsersTagsRatingQueries] updateUserTagRating', async () => {
             );
             expect(userTagRating).not.toBeNull();
             userTagRating ? expect(userTagRating.rating).toBe(1) : null;
+            userTagRating
+                ? expect(userTagRating.rating_update_time).toBeGreaterThan(
+                      userTagRating.last_like_time
+                  )
+                : null;
+
+            await db.users.usersTagsRatingQueries.removeFromUsersTagsRating({
+                user_id,
+            });
+        }, args);
+    });
+});
+
+test('[UsersTagsRatingQueries] updateUserTagDynamicRating', async () => {
+    await UsersQueriesUtils.createUser(async (args) => {
+        await TagsQueriesUtils.createTag(async (args) => {
+            const [user_id, tag] = args;
+            const modulo_constraint = 2;
+
+            await db.users.usersTagsRatingQueries.addUserTagRating({
+                user_id,
+                tag,
+            });
+            for (let i = 0; i < 3; ++i) {
+                await db.users.usersTagsRatingQueries.updateUserTagDynamicRating(
+                    {
+                        user_id,
+                        tag,
+                        value: 1,
+                        modulo_constraint,
+                    }
+                );
+            }
+
+            let userTagRating = await db.users.usersTagsRatingQueries.getUserTagRating(
+                { user_id, tag }
+            );
+            expect(userTagRating).not.toBeNull();
+            userTagRating ? expect(userTagRating.dynamic_rating).toBe(2) : null;
+
+            for (let i = 0; i < 10; ++i) {
+                await db.users.usersTagsRatingQueries.updateUserTagDynamicRating(
+                    {
+                        user_id,
+                        tag,
+                        value: -1,
+                        modulo_constraint,
+                    }
+                );
+            }
+            userTagRating = await db.users.usersTagsRatingQueries.getUserTagRating(
+                { user_id, tag }
+            );
+            expect(userTagRating).not.toBeNull();
+            userTagRating
+                ? expect(userTagRating.dynamic_rating).toBe(-2)
+                : null;
 
             await db.users.usersTagsRatingQueries.removeFromUsersTagsRating({
                 user_id,

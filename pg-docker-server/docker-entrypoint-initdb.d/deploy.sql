@@ -120,7 +120,9 @@ CREATE TABLE users_tags_rating (
   user_id INTEGER NOT NULL,
   tag TEXT NOT NULL,
   rating BIGINT NOT NULL DEFAULT 0,
+  dynamic_rating BIGINT NOT NULL DEFAULT 0,
   rating_update_time BIGINT NOT NULL,
+  last_like_time BIGINT NOT NULL,
   PRIMARY KEY(user_id, tag),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
   FOREIGN KEY(tag) REFERENCES tags(tag)

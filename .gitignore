@@ -10,5 +10,6 @@ logs/*
 *.log
 
 pg-docker-server/db/
+pg-docker-server/logs/
 mongo-docker-server/db/
 resources/memesWithTags/*

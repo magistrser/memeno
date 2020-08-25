@@ -96,7 +96,7 @@ test('[SelectionMemesBaseQueries] getTop', async () => {
                             ratingBarrier: 4,
                             createdAfterDate: 0,
                             count: 3,
-                            ignore_memes: []
+                            ignore_memes: [],
                         };
                         const memes = await db.selectMemes.selectionMemesBaseQueries.getTop(
                             req

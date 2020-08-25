@@ -13,6 +13,7 @@ import {
 import { TagId } from '../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag';
 import { AuthType } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import { AccessLevel } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
+import IRecommendationSystem from '../../RecommendationSystem/IRecommendationSystem';
 
 export type AddVkUser = {
     vk_id: VkUserId;
@@ -38,6 +39,12 @@ export type RateTags = {
     tags: TagId[];
     like: boolean;
 };
+export type RateDynamicTags = {
+    user_id: UserId;
+    tags: TagId[];
+    like: boolean;
+    recommendation_system: IRecommendationSystem;
+};
 export type RemoveUser = {
     user_id: UserId;
 };
@@ -51,6 +58,7 @@ export default interface IUsersEngine {
     createNewUser(req: CreateNewUser): Promise<UserId>;
     getUser(req: GetUser): Promise<User | null>;
     rateTags(req: RateTags): Promise<void>;
+    rateDynamicTags(req: RateDynamicTags): Promise<void>;
     removeUser(req: RemoveUser): Promise<void>;
     setAccessLevel(req: SetAccessLevel): Promise<null>;
     getAccessLevel(req: GetAccessLevel): Promise<AccessLevel | null>;

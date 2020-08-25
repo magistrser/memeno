@@ -65,7 +65,8 @@ test('[MemesEngine] Two users, each add mem, first like mem of second, second di
                     tag: tags2[i],
                 }
             );
-            expect(tagRating.rating).toBe(1);
+            expect(tagRating).not.toBeNull();
+            tagRating ? expect(tagRating.rating).toBe(1) : null;
         }
         for (let i = 0; i < tags1.length; ++i) {
             const tagRating = await db.users.usersTagsRatingQueries.getUserTagRating(
@@ -74,26 +75,31 @@ test('[MemesEngine] Two users, each add mem, first like mem of second, second di
                     tag: tags1[i],
                 }
             );
-            expect(tagRating.rating).toBe(-1);
+            expect(tagRating).not.toBeNull();
+            tagRating ? expect(tagRating.rating).toBe(-1) : null;
         }
 
         const userRating1 = await db.users.usersBaseQueries.getUser({
             user_id: user_id1,
         });
-        expect(userRating1.rating).toBe(-1);
+        expect(userRating1).not.toBeNull();
+        userRating1 ? expect(userRating1.rating).toBe(-1) : null;
         const userRating2 = await db.users.usersBaseQueries.getUser({
             user_id: user_id2,
         });
-        expect(userRating2.rating).toBe(1);
+        expect(userRating2).not.toBeNull();
+        userRating2 ? expect(userRating2.rating).toBe(1) : null;
 
         const memRating1 = await db.memes.memesBaseQueries.getMem({
             mem_id: mem_id1,
         });
-        expect(memRating1.rating).toBe(-1);
+        expect(memRating1).not.toBeNull();
+        memRating1 ? expect(memRating1.rating).toBe(-1) : null;
         const memRating2 = await db.memes.memesBaseQueries.getMem({
             mem_id: mem_id2,
         });
-        expect(memRating2.rating).toBe(1);
+        expect(memRating2).not.toBeNull();
+        memRating2 ? expect(memRating2.rating).toBe(1) : null;
 
         const userUserRating1 = await db.users.usersUsersRatingQueries.getUserUserRating(
             {
@@ -101,14 +107,71 @@ test('[MemesEngine] Two users, each add mem, first like mem of second, second di
                 second_user_id: user_id2,
             }
         );
-        expect(userUserRating1.rating).toBe(1);
+        expect(userUserRating1).not.toBeNull();
+        userUserRating1 ? expect(userUserRating1.rating).toBe(1) : null;
         const userUserRating2 = await db.users.usersUsersRatingQueries.getUserUserRating(
             {
                 user_id: user_id2,
                 second_user_id: user_id1,
             }
         );
-        expect(userUserRating2.rating).toBe(-1);
+        expect(userUserRating2).not.toBeNull();
+        userUserRating2 ? expect(userUserRating2.rating).toBe(-1) : null;
+    });
+});
+
+test('[MemesEngine] Two users, each add mem, dynamic_rating test', async () => {
+    await Utils.createTwoUserWithToMemes(async (part1, part2) => {
+        const [user_id1, tags1, mem_id1] = part1;
+        const [user_id2, tags2, mem_id2] = part2;
+
+        const test = async (
+            ratesCount: number,
+            expectedRating: number,
+            firstUserEvaluate: boolean,
+            secondUserEvaluate: boolean
+        ) => {
+            for (let i = 0; i < ratesCount; ++i) {
+                await MemesEngine.rateMem({
+                    user_id: user_id1,
+                    mem_id: mem_id2,
+                    like: firstUserEvaluate,
+                });
+                await MemesEngine.rateMem({
+                    user_id: user_id2,
+                    mem_id: mem_id1,
+                    like: secondUserEvaluate,
+                });
+            }
+
+            for (let i = 0; i < tags2.length; ++i) {
+                const tagRating = await db.users.usersTagsRatingQueries.getUserTagRating(
+                    {
+                        user_id: user_id1,
+                        tag: tags2[i],
+                    }
+                );
+                expect(tagRating).not.toBeNull();
+                tagRating
+                    ? expect(tagRating.dynamic_rating).toBe(expectedRating)
+                    : null;
+            }
+            for (let i = 0; i < tags1.length; ++i) {
+                const tagRating = await db.users.usersTagsRatingQueries.getUserTagRating(
+                    {
+                        user_id: user_id2,
+                        tag: tags1[i],
+                    }
+                );
+                expect(tagRating).not.toBeNull();
+                tagRating
+                    ? expect(tagRating.dynamic_rating).toBe(-expectedRating)
+                    : null;
+            }
+        };
+
+        await test(20, 10, true, false);
+        await test(5, 5, false, true);
     });
 });
 

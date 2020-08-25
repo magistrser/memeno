@@ -92,10 +92,9 @@ class ServerMemProvider implements IMemProvider {
                     like: type === Rating.Like,
                 });
 
-            (this.connectionTracker
+            this.connectionTracker
                 ? this.connectionTracker.makeRequest(updateMemesRequest)
-                : updateMemesRequest()
-            );
+                : updateMemesRequest();
 
             this.memes.shift();
             return;
