@@ -14,32 +14,27 @@ import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
 import { boolRatingToNumForQuery } from '../../boolRatingToNumForQuery';
 import { AccessLevel } from '../../../IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
-import { VkUser } from '../../../IQueries/IUsersQueries/IVkUsersQueries/VkUser';
 
 export default class UsersBaseQueries implements IUsersBaseQueries {
     constructor(private db: IDatabase<IExtensions>) {}
 
     createNewUser(req: CreateNewUser): Promise<UserId> {
         return this.db.one(
-            'INSERT INTO users(auth_type, rating_update_time) VALUES($1, $2) RETURNING user_id',
-            [req.auth_type, new Date().getTime()],
+            'INSERT INTO users(auth_type, rating_update_time) VALUES(${auth_type}, extract(epoch from now())) RETURNING user_id',
+            req,
             (res) => res.user_id
         );
     }
     updateUserRating(req: UpdateUserRating): Promise<null> {
         return this.db.none(
-            'UPDATE users SET rating = rating + $1, rating_update_time = $2 WHERE user_id = $3',
-            [
-                boolRatingToNumForQuery(req.like),
-                new Date().getTime(),
-                req.user_id,
-            ]
+            'UPDATE users SET rating = rating + ${like}, rating_update_time = extract(epoch from now()) WHERE user_id = ${user_id}',
+            { like: boolRatingToNumForQuery(req.like), user_id: req.user_id }
         );
     }
     getUser(req: GetUser): Promise<User | null> {
         return this.db.oneOrNone(
-            'SELECT * FROM users WHERE user_id = $1',
-            [req.user_id],
+            'SELECT * FROM users WHERE user_id = ${user_id}',
+            req,
             (user) => {
                 if (!user) {
                     return user;
@@ -53,9 +48,10 @@ export default class UsersBaseQueries implements IUsersBaseQueries {
         );
     }
     removeUser(req: RemoveUser): Promise<null> {
-        return this.db.none('DELETE FROM users WHERE user_id = $1', [
-            req.user_id,
-        ]);
+        return this.db.none(
+            'DELETE FROM users WHERE user_id = ${user_id}',
+            req
+        );
     }
     setAccessLevel(req: SetAccessLevel): Promise<null> {
         return this.db.none(

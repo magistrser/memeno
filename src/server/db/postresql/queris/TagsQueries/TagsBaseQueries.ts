@@ -15,20 +15,20 @@ export default class TagsBaseQueries implements ITagsBaseQueries {
 
     addTag(req: AddTag): Promise<null> {
         return this.db.none(
-            'INSERT INTO tags(tag, rating_update_time) VALUES($1, $2) ON CONFLICT (tag) DO NOTHING',
-            [req.tag, new Date().getTime()]
+            'INSERT INTO tags(tag, rating_update_time) VALUES(${tag},  extract(epoch from now())) ON CONFLICT (tag) DO NOTHING',
+            req
         );
     }
     updateTagRating(req: UpdateTagRating): Promise<null> {
         return this.db.none(
-            'UPDATE tags SET rating = rating + $1, rating_update_time = $2 WHERE tag = $3',
-            [boolRatingToNumForQuery(req.like), new Date().getTime(), req.tag]
+            'UPDATE tags SET rating = rating + ${like}, rating_update_time = extract(epoch from now()) WHERE tag = ${tag}',
+            { like: boolRatingToNumForQuery(req.like), tag: req.tag }
         );
     }
     getTag(req: GetTag): Promise<Tag | null> {
         return this.db.oneOrNone(
-            'SELECT * FROM tags WHERE tag = $1',
-            [req.tag],
+            'SELECT * FROM tags WHERE tag = ${tag}',
+            req,
             (tag) => {
                 if (!tag) {
                     return tag;
@@ -42,14 +42,15 @@ export default class TagsBaseQueries implements ITagsBaseQueries {
         );
     }
     removeTag(req: RemoveTag): Promise<null> {
-        return this.db.none('DELETE FROM tags WHERE tag = $1', [req.tag]);
+        return this.db.none('DELETE FROM tags WHERE tag = ${tag}', req);
     }
     removeTagFromMemesTags(req: RemoveTag): Promise<null> {
-        return this.db.none('DELETE FROM memes_tags WHERE tag = $1', [req.tag]);
+        return this.db.none('DELETE FROM memes_tags WHERE tag = ${tag}', req);
     }
     removeTagFromUsersTagsRating(req: RemoveTag): Promise<null> {
-        return this.db.none('DELETE FROM users_tags_rating WHERE tag = $1', [
-            req.tag,
-        ]);
+        return this.db.none(
+            'DELETE FROM users_tags_rating WHERE tag = ${tag}',
+            req
+        );
     }
 }

@@ -13,20 +13,21 @@ export default class UsersMemesQueries implements IUsersMemesQueries {
 
     addUserMem(req: AddUserMem): Promise<null> {
         return this.db.none(
-            'INSERT INTO users_memes(user_id, mem_id) VALUES ($1, $2)',
-            [req.user_id, req.mem_id]
+            'INSERT INTO users_memes(user_id, mem_id) VALUES (${user_id}, ${mem_id})',
+            req
         );
     }
     getUserMemIds(req: GetUserMemIds): Promise<MemId[]> {
         return this.db.map(
-            'SELECT mem_id FROM users_memes WHERE user_id = $1',
-            [req.user_id],
+            'SELECT mem_id FROM users_memes WHERE user_id = ${user_id}',
+            req,
             (obj) => obj.mem_id
         );
     }
     removeFromUsersMemes(req: RemoveFromUsersMemes): Promise<null> {
-        return this.db.none('DELETE FROM users_memes WHERE user_id = $1', [
-            req.user_id,
-        ]);
+        return this.db.none(
+            'DELETE FROM users_memes WHERE user_id = ${user_id}',
+            req
+        );
     }
 }

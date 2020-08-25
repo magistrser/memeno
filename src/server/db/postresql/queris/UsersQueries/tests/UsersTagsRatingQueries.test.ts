@@ -53,6 +53,9 @@ test('[UsersTagsRatingQueries] updateUserTagRating', async () => {
                 tag,
                 like: 1,
             });
+            await new Promise((resolve) => {
+                setTimeout(resolve, 2000);
+            });
             await db.users.usersTagsRatingQueries.updateUserTagRating({
                 user_id,
                 tag,

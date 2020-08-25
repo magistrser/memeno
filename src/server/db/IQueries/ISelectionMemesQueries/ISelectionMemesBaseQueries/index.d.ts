@@ -1,6 +1,6 @@
 import { UserId } from '../../IUsersQueries/IUsersBaseQueries/User';
 import { MemId } from '../../IMemesQueries/IMemesBaseQueries/Mem';
-import IRecommendationSystem from "../../../../recommendation-system/IRecommendationSystem";
+import IRecommendationSystem from '../../../../recommendation-system/IRecommendationSystem';
 
 export type GetAverageTopRating = {
     createdAfterDate: number;
@@ -16,7 +16,7 @@ export type GetTop = {
 export type GetSmartTop = {
     user_id: UserId;
     ignore_memes: MemId[];
-    recommendation_system: IRecommendationSystem,
+    recommendation_system: IRecommendationSystem;
     count: number;
 };
 export type GetTagTop = {

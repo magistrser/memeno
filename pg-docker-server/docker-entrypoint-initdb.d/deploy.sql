@@ -51,7 +51,7 @@ CREATE table tags (
 create table memes (
   mem_id SERIAL NOT NULL PRIMARY KEY,
   mem_data BYTEA NOT NULL,
-  creation_date BIGINT NOT NULL,
+  creation_date BIGINT NOT NULL DEFAULT extract(epoch from now()),
   user_id INTEGER NOT NULL,
   rating BIGINT NOT NULL DEFAULT 0,
   rating_update_time BIGINT NOT NULL,

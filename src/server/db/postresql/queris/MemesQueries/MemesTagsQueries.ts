@@ -12,20 +12,21 @@ export default class MemesTagsQueries implements IMemesTagsQueries {
 
     addMemTag(req: AddMemTag): Promise<null> {
         return this.db.none(
-            'INSERT INTO memes_tags(mem_id, tag) VALUES($1, $2) ON CONFLICT (mem_id, tag) DO NOTHING',
-            [req.mem_id, req.tag]
+            'INSERT INTO memes_tags(mem_id, tag) VALUES(${mem_id}, ${tag}) ON CONFLICT (mem_id, tag) DO NOTHING',
+            req
         );
     }
     getMemTags(req: GetMemTags): Promise<TagId[]> {
         return this.db.map(
-            'SELECT tag FROM memes_tags WHERE mem_id = $1',
-            [req.mem_id],
+            'SELECT tag FROM memes_tags WHERE mem_id = ${mem_id}',
+            req,
             (obj) => obj.tag
         );
     }
     removeMemTags(req: RemoveMemTags): Promise<null> {
-        return this.db.none('DELETE FROM memes_tags WHERE mem_id = $1', [
-            req.mem_id,
-        ]);
+        return this.db.none(
+            'DELETE FROM memes_tags WHERE mem_id = ${mem_id}',
+            req
+        );
     }
 }

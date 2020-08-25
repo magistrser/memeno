@@ -6,7 +6,7 @@ FROM
 (
     SELECT
         user_top_memes_info.mem_id,
-        (extract(epoch from now()) * 1000 - user_top_memes_info.creation_date ) as life_time,
+        (extract(epoch from now()) - user_top_memes_info.creation_date ) as life_time,
         (
             CASE WHEN min_rating < 0
                      then rating + ABS(min_rating) + 1
@@ -48,8 +48,9 @@ FROM
                                        memes.rating_update_time,
                                        memes_tags.tag
                                 FROM memes
-                                         INNER JOIN memes_tags
-                                                    ON memes.mem_id = memes_tags.mem_id
+                                INNER JOIN memes_tags
+                                ON memes.mem_id = memes_tags.mem_id
+                                WHERE mem_id NOT IN (1, 2, 3, 4, 5)
                             ) memes_tags
                                 LEFT JOIN
                                 (

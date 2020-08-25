@@ -17,30 +17,21 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
 
     addMem(req: AddNewMem): Promise<MemId> {
         return this.db.one(
-            'INSERT INTO memes(mem_data, creation_date, user_id, rating_update_time) VALUES($1, $2, $3, $4) RETURNING mem_id',
-            [
-                req.mem_data,
-                new Date().getTime(),
-                req.user_id,
-                new Date().getTime(),
-            ],
+            'INSERT INTO memes(mem_data, user_id, rating_update_time) VALUES(${mem_data}, ${user_id}, extract(epoch from now())) RETURNING mem_id',
+            req,
             (res) => res.mem_id
         );
     }
     updateMemRating(req: UpdateMemRating): Promise<null> {
         return this.db.none(
-            'UPDATE memes SET rating = rating + $1, rating_update_time = $2 WHERE mem_id = $3',
-            [
-                boolRatingToNumForQuery(req.like),
-                new Date().getTime(),
-                req.mem_id,
-            ]
+            'UPDATE memes SET rating = rating + ${like}, rating_update_time = extract(epoch from now()) WHERE mem_id = ${mem_id}',
+            { like: boolRatingToNumForQuery(req.like), mem_id: req.mem_id }
         );
     }
     getMem(req: GetMem): Promise<Mem | null> {
         return this.db.oneOrNone(
-            'SELECT * FROM memes WHERE mem_id = $1',
-            [req.mem_id],
+            'SELECT * FROM memes WHERE mem_id = ${mem_id}',
+            req,
             (mem) => {
                 if (!mem) {
                     return mem;
@@ -56,19 +47,18 @@ export default class MemesBaseQueries implements IMemesBaseQueries {
         );
     }
     removeMem(req: RemoveMem): Promise<null> {
-        return this.db.none('DELETE FROM memes WHERE mem_id = $1', [
-            req.mem_id,
-        ]);
+        return this.db.none('DELETE FROM memes WHERE mem_id = ${mem_id}', req);
     }
     removeFromUsersMemes(req: RemoveMem): Promise<null> {
-        return this.db.none('DELETE FROM users_memes WHERE mem_id = $1', [
-            req.mem_id,
-        ]);
+        return this.db.none(
+            'DELETE FROM users_memes WHERE mem_id = ${mem_id}',
+            req
+        );
     }
     removeFromUsersWatchedMemes(req: RemoveMem): Promise<null> {
         return this.db.none(
-            'DELETE FROM users_watched_memes WHERE mem_id = $1',
-            [req.mem_id]
+            'DELETE FROM users_watched_memes WHERE mem_id = ${mem_id}',
+            req
         );
     }
 }

@@ -14,31 +14,28 @@ export default class VkUserQueries implements IVkUsersQueries {
 
     addVkUserToVkUsers(req: AddVkUserToVkUsers): Promise<null> {
         return this.db.none(
-            'INSERT INTO vk_users(vk_id, user_id, email, full_name, photo_url, url) VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT (vk_id) DO NOTHING',
-            [
-                req.vk_id,
-                req.user_id,
-                req.email,
-                req.full_name,
-                req.photo_url,
-                req.url,
-                new Date().getTime(),
-            ]
+            'INSERT INTO vk_users(vk_id, user_id, email, full_name, photo_url, url) VALUES(${vk_id}, ${user_id}, ${email}, ${full_name}, ${photo_url}, ${url}) ON CONFLICT (vk_id) DO NOTHING',
+            {
+                ...req,
+                email: req.email ? req.email : null,
+                full_name: req.full_name ? req.full_name : null,
+                photo_url: req.photo_url ? req.photo_url : null,
+            }
         );
     }
     getVkUserByVkId(req: GetVkUserByVkId): Promise<VkUser | null> {
-        return this.db.oneOrNone('SELECT * FROM vk_users WHERE vk_id = $1', [
-            req.vk_id,
-        ]);
+        return this.db.oneOrNone(
+            'SELECT * FROM vk_users WHERE vk_id = ${vk_id}',
+            req
+        );
     }
     getVkUserByUserId(req: GetVkUserByUserId): Promise<VkUser | null> {
-        return this.db.oneOrNone('SELECT * FROM vk_users WHERE user_id = $1', [
-            req.user_id,
-        ]);
+        return this.db.oneOrNone(
+            'SELECT * FROM vk_users WHERE user_id = ${user_id}',
+            req
+        );
     }
     removeVkUser(req: RemoveVkUser): Promise<null> {
-        return this.db.none('DELETE FROM vk_users WHERE vk_id = $1', [
-            req.vk_id,
-        ]);
+        return this.db.none('DELETE FROM vk_users WHERE vk_id = ${vk_id}', req);
     }
 }

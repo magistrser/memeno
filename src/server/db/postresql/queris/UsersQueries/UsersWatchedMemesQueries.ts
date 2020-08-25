@@ -14,14 +14,14 @@ export default class UsersWatchedMemesQueries
 
     addUserWatchedMem(req: AddUserWatchedMem): Promise<null> {
         return this.db.none(
-            'INSERT INTO users_watched_memes(user_id, mem_id, is_like, watched_time) VALUES($1, $2, $3, $4) ON CONFLICT (user_id, mem_id) DO NOTHING',
-            [req.user_id, req.mem_id, req.like, new Date().getTime()]
+            'INSERT INTO users_watched_memes(user_id, mem_id, is_like, watched_time) VALUES(${user_id}, ${mem_id}, ${like}, extract(epoch from now())) ON CONFLICT (user_id, mem_id) DO NOTHING',
+            req
         );
     }
     getUserWatchedMemIds(req: GetUserWatchedMemIds): Promise<MemId[]> {
         return this.db.map(
-            'SELECT mem_id FROM users_watched_memes WHERE user_id = $1',
-            [req.user_id],
+            'SELECT mem_id FROM users_watched_memes WHERE user_id = ${user_id}',
+            req,
             (obj) => obj.mem_id
         );
     }
@@ -29,8 +29,8 @@ export default class UsersWatchedMemesQueries
         req: RemoveFromUsersWatchedMemes
     ): Promise<null> {
         return this.db.none(
-            'DELETE FROM users_watched_memes WHERE user_id = $1',
-            [req.user_id]
+            'DELETE FROM users_watched_memes WHERE user_id = ${user_id}',
+            req
         );
     }
 }
