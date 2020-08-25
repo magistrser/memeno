@@ -1,11 +1,12 @@
 SELECT
     smart_prepared_info.mem_id,
-    (rating * tag_avg * (24 * 60 * 60 * 1000) / life_time) as smart_rating
+    (rating * tag_avg * (24 * 60 * 60 * 1000) / life_time) as smart_rating,
+    memes_data.mem_data
 FROM
 (
     SELECT
         user_top_memes_info.mem_id,
-        (extract(epoch from now()) - user_top_memes_info.creation_date ) as life_time,
+        (extract(epoch from now()) * 1000 - user_top_memes_info.creation_date ) as life_time,
         (
             CASE WHEN min_rating < 0
                      then rating + ABS(min_rating) + 1
@@ -69,3 +70,9 @@ FROM
             GROUP BY mem_id, user_id, creation_date, rating, rating_update_time, min_rating
         ) user_top_memes_info
 ) smart_prepared_info
+INNER JOIN
+(
+    SELECT mem_id as memes_mem_id, mem_data FROM memes
+) memes_data
+ON mem_id = memes_data.memes_mem_id
+ORDER BY smart_rating DESC
