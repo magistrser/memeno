@@ -1,9 +1,7 @@
 import 'babel-polyfill';
 
 import { db, pgp } from '../../../index';
-import { AuthType } from '../../../../IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import UsersQueriesUtils from './utils';
-import MemesQueriesUtils from '../../MemesQueries/tests/utils';
 import TagsQueriesUtils from '../../TagsQueries/tests/utils';
 
 test('[UsersTagsRatingQueries] addUserTagRating/getUserTagRating/removeFromUsersTagsRating', async () => {
@@ -64,7 +62,8 @@ test('[UsersTagsRatingQueries] updateUserTagRating', async () => {
             const userTagRating = await db.users.usersTagsRatingQueries.getUserTagRating(
                 { user_id, tag }
             );
-            expect(userTagRating.rating).toBe(1);
+            expect(userTagRating).not.toBeNull();
+            userTagRating ? expect(userTagRating.rating).toBe(1) : null;
 
             await db.users.usersTagsRatingQueries.removeFromUsersTagsRating({
                 user_id,

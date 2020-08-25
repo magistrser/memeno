@@ -3,9 +3,9 @@ import { AuthType } from '../../../../IQueries/IUsersQueries/IUsersBaseQueries/A
 
 export default class UsersQueriesUtils {
     static async createUser(
-        next: (args: any[]) => Promise<null>,
+        next: (args: any[]) => Promise<void>,
         args: any[] = []
-    ): Promise<null> {
+    ): Promise<void> {
         const user_id = await db.users.usersBaseQueries.createNewUser({
             auth_type: AuthType.vk,
         });

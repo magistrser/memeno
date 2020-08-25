@@ -3,7 +3,6 @@ import 'babel-polyfill';
 import UsersQueriesUtils from '../../UsersQueries/tests/utils';
 import MemesQueriesUtils from '../../MemesQueries/tests/utils';
 import { db, pgp } from '../../../index';
-import { UserId } from '../../../../IQueries/IUsersQueries/IUsersBaseQueries/User';
 
 test('[SelectionMemesBaseQueries] getAverageTopRating', async () => {
     await UsersQueriesUtils.createUser(async (args) => {
@@ -97,6 +96,7 @@ test('[SelectionMemesBaseQueries] getTop', async () => {
                             ratingBarrier: 4,
                             createdAfterDate: 0,
                             count: 3,
+                            ignore_memes: []
                         };
                         const memes = await db.selectMemes.selectionMemesBaseQueries.getTop(
                             req
