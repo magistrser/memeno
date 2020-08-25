@@ -1,6 +1,6 @@
 import ISelectionMemesQueries, {
     GetAverageTopRating,
-    GetNew,
+    GetNew, GetSmartTop,
     GetTagTop,
     GetTop,
     MemForClient,
@@ -33,6 +33,22 @@ export default class SelectionMemesBaseQueries
                 ' AND rating >= ${ratingBarrier}' +
                 getFilterForMemesInPull(req.ignore_memes) +
                 ' ORDER BY rating DESC FETCH FIRST ${count} ROWS ONLY',
+            req,
+            (mem) => {
+                return {
+                    mem_id: mem.mem_id,
+                    data: mem.mem_data,
+                };
+            }
+        );
+    }
+    getSmartTop(req: GetSmartTop): Promise<MemForClient[]> {
+        return this.db.map(
+            'SELECT * FROM memes WHERE mem_id NOT IN (SELECT mem_id FROM users_watched_memes WHERE user_id = ${user_id})' +
+            ' AND creation_date > ${createdAfterDate}' +
+            ' AND rating >= ${ratingBarrier}' +
+            getFilterForMemesInPull(req.ignore_memes) +
+            ' ORDER BY rating DESC FETCH FIRST ${count} ROWS ONLY',
             req,
             (mem) => {
                 return {

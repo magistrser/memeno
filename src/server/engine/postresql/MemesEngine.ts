@@ -7,7 +7,7 @@ import { MemId } from '../../db/IQueries/IMemesQueries/IMemesBaseQueries/Mem';
 import { db } from '../../db/postresql';
 import TagsEngine from './TagsEngine';
 import UsersEngine from './UsersEngine';
-import testRecommendationSystem from '../../RecommendationSystem/TestRecommendationSystem';
+import testRecommendationSystem from '../../recommendation-system/TestRecommendationSystem';
 
 const MemesEngine: IMemesEngine = class {
     static addMem(req: AddMem): Promise<MemId> {

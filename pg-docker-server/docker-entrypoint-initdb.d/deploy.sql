@@ -127,3 +127,4 @@ CREATE TABLE users_tags_rating (
   FOREIGN KEY(user_id) REFERENCES users(user_id),
   FOREIGN KEY(tag) REFERENCES tags(tag)
 );
+

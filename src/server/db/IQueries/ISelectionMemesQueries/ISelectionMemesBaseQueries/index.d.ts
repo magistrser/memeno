@@ -1,5 +1,6 @@
 import { UserId } from '../../IUsersQueries/IUsersBaseQueries/User';
 import { MemId } from '../../IMemesQueries/IMemesBaseQueries/Mem';
+import IRecommendationSystem from "../../../../recommendation-system/IRecommendationSystem";
 
 export type GetAverageTopRating = {
     createdAfterDate: number;
@@ -10,6 +11,12 @@ export type GetTop = {
     ignore_memes: MemId[];
     ratingBarrier: number;
     createdAfterDate: number;
+    count: number;
+};
+export type GetSmartTop = {
+    user_id: UserId;
+    ignore_memes: MemId[];
+    recommendation_system: IRecommendationSystem,
     count: number;
 };
 export type GetTagTop = {
@@ -31,6 +38,7 @@ export type MemForClient = {
 export default interface ISelectionMemesQueries {
     getAverageTopRating(req: GetAverageTopRating): Promise<number>;
     getTop(req: GetTop): Promise<MemForClient[]>;
+    getSmartTop(req: GetSmartTop): Promise<MemForClient[]>;
     // getTagTop(req: GetTagTop): Promise<MemForClient[]>;
     // getNew(req: GetNew): Promise<MemForClient[]>;
 }

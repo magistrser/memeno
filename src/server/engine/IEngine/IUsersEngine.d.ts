@@ -13,7 +13,7 @@ import {
 import { TagId } from '../../db/IQueries/ITagsQueries/ITagsBaseQueries/Tag';
 import { AuthType } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AuthType';
 import { AccessLevel } from '../../db/IQueries/IUsersQueries/IUsersBaseQueries/AccessLevel';
-import IRecommendationSystem from '../../RecommendationSystem/IRecommendationSystem';
+import IRecommendationSystem from '../../recommendation-system/IRecommendationSystem';
 
 export type AddVkUser = {
     vk_id: VkUserId;

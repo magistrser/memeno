@@ -4,8 +4,11 @@ class TestRecommendationSystem implements IRecommendationSystem {
     getValueForDynamicRating(tag, like): number {
         return like ? 1 : -1;
     }
-    getModuloConstraint(): number {
+    getDynamicRatingModuloConstraint(): number {
         return 10;
+    }
+    getSmartTopTimeConstant(): number {
+        return 24 * 60 * 60 * 1000;
     }
 }
 

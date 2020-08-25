@@ -89,7 +89,7 @@ const UsersEngine: IUsersEngine = class {
             await db.users.usersTagsRatingQueries.updateUserTagDynamicRating({
                 ...tag,
                 value,
-                modulo_constraint: req.recommendation_system.getModuloConstraint(),
+                modulo_constraint: req.recommendation_system.getDynamicRatingModuloConstraint(),
             });
         }
     }
