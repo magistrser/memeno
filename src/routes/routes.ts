@@ -82,6 +82,7 @@ const routes = {
             select: {
                 average: '/api/engine/select/average',
                 top: '/api/engine/select/top',
+                smartTop: '/api/engine/select/smart-top',
             },
             tags: {
                 add: '/api/engine/tags/add',

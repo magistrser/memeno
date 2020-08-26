@@ -9,6 +9,7 @@ import ISelectionMemesQueries, {
 import { IDatabase } from 'pg-promise';
 import { IExtensions } from '../../index';
 import { MemId } from '../../../IQueries/IMemesQueries/IMemesBaseQueries/Mem';
+import smartTop, { SmartTopParameters } from './smartTop';
 
 function getFilterForMemesInPull(ignore_memes: MemId[]) {
     return ignore_memes.length
@@ -44,13 +45,15 @@ export default class SelectionMemesBaseQueries
         );
     }
     getSmartTop(req: GetSmartTop): Promise<MemForClient[]> {
+        const smartTopParameters: SmartTopParameters = {
+            count: req.recommendation_system.getTopPackCount(),
+            lifeTimeCoefficient: req.recommendation_system.getSmartTopLifeTimeConstant(),
+            dynamicRatingModuloConstraint: req.recommendation_system.getDynamicRatingModuloConstraint(),
+            user_id: req.user_id,
+        };
         return this.db.map(
-            'SELECT * FROM memes WHERE mem_id NOT IN (SELECT mem_id FROM users_watched_memes WHERE user_id = ${user_id})' +
-                ' AND creation_date > ${createdAfterDate}' +
-                ' AND rating >= ${ratingBarrier}' +
-                getFilterForMemesInPull(req.ignore_memes) +
-                ' ORDER BY rating DESC FETCH FIRST ${count} ROWS ONLY',
-            req,
+            smartTop(req.ignore_memes),
+            smartTopParameters,
             (mem) => {
                 return {
                     mem_id: mem.mem_id,

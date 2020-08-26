@@ -17,7 +17,6 @@ export type GetSmartTop = {
     user_id: UserId;
     ignore_memes: MemId[];
     recommendation_system: IRecommendationSystem;
-    count: number;
 };
 export type GetTagTop = {
     user_id: UserId;

@@ -7,8 +7,11 @@ class TestRecommendationSystem implements IRecommendationSystem {
     getDynamicRatingModuloConstraint(): number {
         return 10;
     }
-    getSmartTopTimeConstant(): number {
-        return 24 * 60 * 60 * 1000;
+    getSmartTopLifeTimeConstant(): number {
+        return 24 * 60 * 60;
+    }
+    getTopPackCount(): number {
+        return 10;
     }
 }
 

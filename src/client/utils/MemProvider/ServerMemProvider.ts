@@ -39,8 +39,8 @@ class ServerMemProvider implements IMemProvider {
             ignore_memes: this.memes.map((x) => x.mem_id),
         };
         const updateMemesRequest = () =>
-            axios[Select.GetTop.Type]<Select.GetTop.Res>(
-                Select.GetTop.Rout,
+            axios[Select.GetSmartTop.Type]<Select.GetSmartTop.Res>(
+                Select.GetSmartTop.Rout,
                 getTopReq
             );
 
@@ -71,13 +71,6 @@ class ServerMemProvider implements IMemProvider {
     }
 
     getCurrentMem() {
-        if (
-            this.memes.length < this.memesUpdateThreshold &&
-            !this.isMemesUpdating
-        ) {
-            this.updateMemes();
-        }
-
         if (this.memes.length == 0) {
             return SpecialMemes.EndMem;
         }
@@ -85,23 +78,26 @@ class ServerMemProvider implements IMemProvider {
         return this.memes[0];
     }
     swapMem(type: Rating) {
+        if (
+            this.memes.length < this.memesUpdateThreshold &&
+            !this.isMemesUpdating
+        ) {
+            this.updateMemes();
+        }
+
         if (this.memes.length > 0) {
-            const updateMemesRequest = () =>
+            const rateMemRequest = () =>
                 DevelopmentProvider.memes.rateMem({
                     mem_id: this.memes[0].mem_id,
                     like: type === Rating.Like,
                 });
 
             this.connectionTracker
-                ? this.connectionTracker.makeRequest(updateMemesRequest)
-                : updateMemesRequest();
+                ? this.connectionTracker.makeRequest(rateMemRequest)
+                : rateMemRequest();
 
             this.memes.shift();
             return;
-        }
-
-        if (!this.isMemesUpdating) {
-            this.updateMemes();
         }
     }
 }
