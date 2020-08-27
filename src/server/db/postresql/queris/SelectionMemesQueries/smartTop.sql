@@ -50,15 +50,14 @@ FROM
                                 FROM memes
                                 INNER JOIN memes_tags
                                 ON memes.mem_id = memes_tags.mem_id
-                                WHERE memes.mem_id NOT IN (SELECT mem_id FROM users_watched_memes WHERE user_id = 2)
-                                  AND memes.mem_id NOT IN (145, 2, 3, 4, 5)
+                                WHERE memes.mem_id NOT IN (SELECT mem_id FROM users_watched_memes WHERE user_id = 1)
                             ) memes_tags
                             LEFT JOIN
                             (
                                 SELECT rating as tag_rating,
                                         rating_update_time as tag_rating_update_time,
                                         tag as user_tag_rating
-                                FROM users_tags_rating WHERE user_id = 2
+                                FROM users_tags_rating WHERE user_id = 1
                             ) user_tags
                             ON user_tags.user_tag_rating = memes_tags.tag
                             INNER JOIN
@@ -78,4 +77,3 @@ INNER JOIN
 ) memes_data
 ON mem_id = memes_data.memes_mem_id
 ORDER BY smart_rating DESC
-FETCH FIRST 10 ROWS ONLY

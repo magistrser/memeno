@@ -71,7 +71,7 @@ const memesWithNormalizedRaingAndAverageTagRating = (ignore_memes: MemId[]) =>
     '   (\n' +
     '       CASE WHEN min_rating < 0\n' +
     '               then rating + ABS(min_rating) + 1\n' +
-    '           else rating end\n' +
+    '           else rating + 1 end\n' +
     '   ) as rating,\n' +
     '   (\n' +
     '       CASE WHEN tag_count <> 0\n' +
