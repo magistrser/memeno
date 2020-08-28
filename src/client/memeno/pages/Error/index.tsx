@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.less';
+import './layout.less';
 import { Link } from 'react-router-dom';
 import Header from '../../../components/Header';
 
