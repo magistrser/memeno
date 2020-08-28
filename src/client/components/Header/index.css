@@ -4,7 +4,6 @@
         url('../../resources/roboto.light.ttf') format('ttf');
 }
 .header-component {
-    font-size: 200%;
     font-family: 'RobotoLight';
     margin: auto;
 }

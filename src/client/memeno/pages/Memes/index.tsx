@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './index.css';
+import './index.less';
+import './layout.less';
 import MenuButton from '../../../components/MenuButton';
 import Header from '../../../components/Header';
 import AvatarButton from '../../../components/AvatarButton';
