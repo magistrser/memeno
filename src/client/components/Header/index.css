@@ -1,9 +1,10 @@
-@font-face {
-    font-family: 'RobotoLight';
-    src: local('RobotoLight'),
-        url('../../resources/roboto.light.ttf') format('ttf');
-}
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@700&display=swap');
+
 .header-component {
-    font-family: 'RobotoLight';
     margin: auto;
+
+    font-family: 'El Messiri', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #22304a;
 }

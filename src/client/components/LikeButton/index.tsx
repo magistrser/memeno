@@ -1,6 +1,6 @@
 import React from 'react';
 import '../common/button.css';
-import './index.css';
+import './index.less';
 
 interface ILikeButton {
     onClick: () => void;

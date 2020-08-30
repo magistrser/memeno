@@ -8,5 +8,8 @@
     box-sizing: border-box;
     overflow: hidden;
     height: 100vh;
-    background-color: white;
+
+    border-radius: 30px;
+    background: #efeeee;
+    box-shadow: 20px 20px 60px #ffffff, -20px -20px 60px #cbcaca;
 }

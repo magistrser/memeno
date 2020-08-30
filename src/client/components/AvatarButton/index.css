@@ -1,9 +1,7 @@
 .avatar-button {
-    background-color: yellow;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     border-radius: 50%;
+    background: #efeeee;
+    box-shadow: inset 6px 6px 12px #d0cfcf, inset -6px -6px 12px #ffffff;
 }
 .avatar-button {
     width: 100%;

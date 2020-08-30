@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
-import './index.css';
+import './index.less';
 import './swipe.css';
 
 import Rating from '../../utils/MemProvider/Rating';
