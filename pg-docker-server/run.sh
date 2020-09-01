@@ -1,7 +1,7 @@
 #!/bin/bash
 
 docker run -d \
-  -p 127.0.0.1:5432:5432/tcp \
+  -p 5432:5432/tcp \
   --name memeno-postgres \
   -v "$(pwd)"/db:/var/lib/postgresql/data \
   -v "$(pwd)"/logs:/var/lib/postgresql/logs \
