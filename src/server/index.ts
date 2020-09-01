@@ -66,3 +66,5 @@ app.use('*', (req, res) => {
 });
 
 app.listen(port);
+
+console.log(`[i] Server address: ${config.server.address}`);

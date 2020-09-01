@@ -1,16 +1,16 @@
-const serverIp = process.env.SERVER_ADRESS || 'localhost';
+const serverIp = process.env.SERVER_ADDRESS || 'localhost';
 const serverPort = process.env.SERVER_PORT || 8050;
 
 const dbUser = 'postgres';
 const dbPassword = 'mysecretpassword';
 const dbName = 'memeno';
-const dbIp = process.env.SERVER_ADRESS || 'localhost';
-const dpPort = 5432;
+const dbIp = process.env.POSTGRESQL_ADDRESS || 'localhost';
+const dpPort = process.env.POSTGRESQL_PORT || 5432;
 
 const mongoUser = 'memeno';
 const mongoPassword = 'mysecretpassword'; // TODO: Generate password
-const mongoIp = process.env.SERVER_ADRESS || 'localhost';
-const mongoPort = 27071;
+const mongoIp = process.env.MONGODB_ADDRESS || 'localhost';
+const mongoPort = process.env.MONGODB_PORT || 27071;
 
 export default {
     requestType: 'http://',
