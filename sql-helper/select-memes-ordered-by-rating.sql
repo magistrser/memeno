@@ -1,0 +1,1 @@
+SELECT * FROM public.memes ORDER BY rating DESC;

@@ -69,7 +69,7 @@ const memesWithNormalizedRaingAndAverageTagRating = (ignore_memes: MemId[]) =>
     'SELECT user_top_memes_info.mem_id,\n' +
     '   (extract(epoch from now()) - user_top_memes_info.creation_date ) as life_time,\n' +
     '   (\n' +
-    '       CASE WHEN min_rating < 0\n' +
+    '       CASE WHEN min_rating <= 0\n' +
     '               then rating + ABS(min_rating) + 1\n' +
     '           else rating + 1 end\n' +
     '   ) as rating,\n' +
